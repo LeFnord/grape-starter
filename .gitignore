@@ -5,3 +5,5 @@
 .bundle
 log
 Gemfile.lock
+docker-compose.yml
+Dockerfile

@@ -10,6 +10,7 @@ RSpec::Core::RakeTask.new(:spec)
 
 task :environment do
   ENV['RACK_ENV'] ||= 'development'
+  require File.expand_path('../config/environment', __FILE__)
 end
 
 require 'rubocop/rake_task'
