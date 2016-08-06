@@ -1,16 +1,17 @@
+[![Build Status](https://travis-ci.org/LeFnord/grape-api-starter.svg?branch=master)](https://travis-ci.org/LeFnord/grape-api-starter)
+
 # Grape API on Rack
 
-A [Grape](http://github.com/ruby-grape/grape) API mounted on [Rack](https://github.com/rack/rack).
+A [Grape](http://github.com/ruby-grape/grape) API mounted on [Rack](https://github.com/rack/rack), as starting point for API development with Grape. It also includes [grape-swagger](http://github.com/ruby-grape/grape-swagger) for documentation generating.
 
 ## Run
 
 ```
 $ bundle install
 $ rackup
-
-[2013-06-20 08:57:58] INFO  WEBrick 1.3.1
-[2013-06-20 08:57:58] INFO  ruby 1.9.3 (2013-02-06) [x86_64-darwin11.4.2]
-[2013-06-20 08:57:58] INFO  WEBrick::HTTPServer#start: pid=247 port=9292
+Thin web server (v1.7.0 codename Dunder Mifflin)
+Maximum connections set to 1024
+Listening on localhost:9292, CTRL+C to stop
 ```
 
 ## Rake Tasks
@@ -21,7 +22,7 @@ $ rackup
 rake grape:routes
 ```
 
-### Swagger Documentation
+### OpenApi/Swagger Documentation
 
 ```
 rake grape:swagger

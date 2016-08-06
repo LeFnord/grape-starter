@@ -1,16 +1,17 @@
 # FIXME: change Starter
-module Starter
+module Api
   class Base < Grape::API
     version 'v1', using: :path
-    prefix 'api'
     format :json
 
-    mount ::Starter::Endpoints::Getter
+    mount Endpoints::Root
 
     add_swagger_documentation format: :json,
-                              doc_version: Starter::VERSION,
                               info: {
                                 title: 'Starter API'
-                              }
+                              },
+                              models: [
+                                Entities::ApiError
+                              ]
   end
 end

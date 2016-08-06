@@ -1,6 +1,8 @@
 require 'starter/version'
 
 module Starter
+  APP_CLASS = name
+
   class Printer
     class << self
       def call(_message)
@@ -9,5 +11,5 @@ module Starter
     end
   end
 
-  autoload :Rake, 'starter/rake/swagger'
+  autoload :Rake, 'starter/rake/grape_tasks'
 end

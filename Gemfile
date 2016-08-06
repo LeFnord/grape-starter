@@ -3,17 +3,18 @@ source 'http://rubygems.org'
 ruby '2.3.1'
 
 # TODO: add a tag
-gem 'grape', git: 'git@github.com:ruby-grape/grape.git'
-gem 'grape-entity', git: 'git@github.com:ruby-grape/grape-entity.git'
-gem 'grape-swagger', git: 'git@github.com:ruby-grape/grape-swagger.git'
-gem 'grape-swagger-entity', git: 'git@github.com:ruby-grape/grape-swagger-entity.git'
-
-gem 'json'
+gem 'thin'
 
 gem 'rack'
 gem 'rack-cors'
-
 gem 'mime-types'
+
+gem 'grape'
+gem 'grape-entity'
+gem 'grape-swagger'
+gem 'grape-swagger-entity'
+
+gem 'json'
 
 group :development do
   gem 'pry'

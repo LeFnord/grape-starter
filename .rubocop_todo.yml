@@ -20,16 +20,7 @@ Metrics/LineLength:
 # Offense count: 1
 # Configuration parameters: CountComments.
 Metrics/MethodLength:
-  Max: 11
-
-# Offense count: 4
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles, IndentationWidth.
-# SupportedStyles: with_first_parameter, with_fixed_indentation
-Style/AlignParameters:
-  Exclude:
-    - 'api/endpoints/getter.rb'
-    - 'api/entities/tool.rb'
+  Max: 10
 
 # Offense count: 6
 Style/Documentation:
