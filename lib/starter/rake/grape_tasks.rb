@@ -30,6 +30,7 @@ module Starter
         namespace :grape do
           swagger
           routes
+          validate
         end
       end
 
@@ -37,7 +38,7 @@ module Starter
       #
       # get swagger/OpenAPI documentation
       def swagger
-        desc 'generates swagger documentation (`store=true`, stores to FS)'
+        desc 'generates OpenApi documentation (`store=true`, stores to FS)'
         task swagger: :environment do
           file = File.join(Dir.getwd, file_name)
 
@@ -51,6 +52,18 @@ module Starter
         desc 'shows all routes'
         task routes: :environment do
           print_routes api_routes
+        end
+      end
+
+      def validate
+        desc 'validates the generated OpenApi file'
+        task validate: :environment do
+          ENV['store'] = 'true'
+          ::Rake::Task['grape:swagger'].invoke
+
+          a = system "swagger validate #{file_name}"
+
+          $stdout.puts 'install swagger-cli with `npm install swagger-cli -g`' if a.nil?
         end
       end
 
