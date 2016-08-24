@@ -19,4 +19,3 @@ RuboCop::RakeTask.new(:rubocop)
 task default: [:rubocop, :spec]
 
 require File.expand_path('../config/environment', __FILE__)
-Starter::Rake::GrapeTasks.new

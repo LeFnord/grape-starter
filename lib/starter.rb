@@ -5,8 +5,8 @@ module Starter
 
   class Printer
     class << self
-      def call(_message)
-        message = 'welcome …'
+      def call(message)
+        message.blank? ? "welcome at #{APP_CLASS}" : message
       end
     end
   end

@@ -14,7 +14,7 @@ RSpec.describe Starter::Printer do
       let(:ori_message) { 'somewhere over the rainbow' }
       let(:base_message) { ori_message }
 
-      it { expect(subject).not_to eql ori_message }
+      it { expect(subject).to eql ori_message }
     end
   end
 end
