@@ -1,6 +1,6 @@
-require 'starter/version'
+require 'api/version'
 
-module Starter
+module Api
   APP_CLASS = name
 
   class Printer
@@ -11,5 +11,5 @@ module Starter
     end
   end
 
-  autoload :Rake, 'starter/rake/grape_tasks'
+  autoload :Rake, 'api/rake/grape_tasks'
 end

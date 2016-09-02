@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe Starter::Rake::GrapeTasks do
+RSpec.describe Api::Rake::GrapeTasks do
   subject { described_class.new }
 
   describe '#api_routes' do

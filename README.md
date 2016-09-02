@@ -13,9 +13,6 @@ TODO: describe the reasons and benefits of this gem …
 ```
 $ bundle install
 $ bundle exec rackup
-Thin web server (v1.7.0 codename Dunder Mifflin)
-Maximum connections set to 1024
-Listening on localhost:9292, CTRL+C to stop
 ```
 
 ## Rake Tasks

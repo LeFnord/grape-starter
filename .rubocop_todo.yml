@@ -9,7 +9,7 @@
 # Offense count: 1
 Lint/UselessAssignment:
   Exclude:
-    - 'lib/starter.rb'
+    - 'lib/api.rb'
 
 # Offense count: 1
 # Configuration parameters: AllowHeredoc, AllowURI, URISchemes.
