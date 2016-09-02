@@ -6,7 +6,7 @@ module Api
              success: Entities::Route,
              is_array: true
         get do
-          api_routes = Starter::Rake::GrapeTasks.new.api_routes
+          api_routes = Api::Rake::GrapeTasks.new.api_routes
 
           present :count, api_routes.length
           present :items, api_routes, with: Entities::Route

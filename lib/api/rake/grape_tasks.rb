@@ -2,7 +2,7 @@ require 'rake'
 require 'rake/tasklib'
 require 'rack/test'
 
-module Starter
+module Api
   module Rake
     class GrapeTasks < ::Rake::TaskLib
       include Rack::Test::Methods
@@ -120,4 +120,4 @@ module Starter
   end
 end
 
-Starter::Rake::GrapeTasks.new
+Api::Rake::GrapeTasks.new

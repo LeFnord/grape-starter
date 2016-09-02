@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe Starter::Printer do
+RSpec.describe Api::Printer do
   describe 'welcome' do
     subject { described_class.call(base_message) }
 
