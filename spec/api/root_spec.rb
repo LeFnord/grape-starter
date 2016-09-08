@@ -25,9 +25,6 @@ RSpec.describe Api::Base do
   specify 'has items with values' do
     items.each do |item|
       expect(item.keys).to include(*exposed_keys)
-      exposed_keys.each do |key|
-        expect(item[key]).not_to be_nil
-      end
     end
   end
 end

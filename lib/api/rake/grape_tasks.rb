@@ -28,26 +28,29 @@ module Api
 
       def define_tasks
         namespace :grape do
-          swagger
+          add
           routes
-          validate
         end
       end
 
       # tasks
       #
-      # get swagger/OpenAPI documentation
-      def swagger
-        desc 'generates OpenApi documentation (`store=true`, stores to FS)'
-        task swagger: :environment do
-          file = File.join(Dir.getwd, file_name)
-
-          make_request
-          ENV['store'] ? File.write(file, @swagger) : print(@swagger)
+      # adds a skeleton for a new resource
+      # TODO:
+      # needed files and entries:
+      # - CRUD resource      -> mount in Api::Base
+      # - a related lib file -> require in lib/api.rb
+      def add
+        desc 'add a new resource  …
+          params (usage: key=value):
+          resource - if given only for that it would be generated (required)'
+        task add: :environment do
+          exit unless resource?
+          p "add new resource: #{@resource}"
         end
       end
 
-      # show API routes
+      # gets all api routes
       def routes
         desc 'shows all routes'
         task routes: :environment do
@@ -55,47 +58,14 @@ module Api
         end
       end
 
-      # validates swagger/OpenAPI documentation
-      def validate
-        desc 'validates the generated OpenApi file'
-        task validate: :environment do
-          ENV['store'] = 'true'
-          ::Rake::Task['grape:swagger'].invoke
-
-          a = system "swagger validate #{file_name}"
-
-          $stdout.puts 'install swagger-cli with `npm install swagger-cli -g`' if a.nil?
-        end
-      end
-
       # helper methods
       #
-      def make_request
-        get url_for
-        last_response
-        @swagger = JSON.pretty_generate(
-          JSON.parse(
-            last_response.body, symolize_names: true
-          )
-        )
+      def resource?
+        ENV['resource'] && !ENV['resource'].blank? ? @resource = ENV['resource'] : false
       end
 
-      def url_for
-        swagger_route = api_class.routes[-2]
-        url = '/swagger_doc'
-        url = "/#{swagger_route.version}#{url}" if swagger_route.version
-        url = "/#{swagger_route.prefix}#{url}" if swagger_route.prefix
-        url
-      end
-
-      def file_name
-        'swagger_doc.json'
-      end
-
-      def app
-        api_class.new
-      end
-
+      # for routes task
+      #
       def print_routes(routes_array)
         routes_array.each do |route|
           puts "\t#{route[:verb].ljust(7)}#{route[:path].ljust(42)}#{route[:description]}"
@@ -115,6 +85,10 @@ module Api
         end
 
         path
+      end
+
+      def app
+        api_class.new
       end
     end
   end

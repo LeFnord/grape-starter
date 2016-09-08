@@ -28,3 +28,6 @@ Style/Documentation:
     - 'spec/**/*'
     - 'api/**/*'
     - 'lib/**/*'
+
+Style/AsciiComments:
+  Enabled: false

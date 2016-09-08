@@ -11,7 +11,9 @@ gem 'mime-types'
 
 gem 'grape'
 gem 'grape-entity'
-gem 'grape-swagger'
+# TODO: change back after release
+gem 'grape-swagger', git: 'git@github.com:ruby-grape/grape-swagger.git'
+# gem 'grape-swagger', path: '../grape-swagger'
 gem 'grape-swagger-entity'
 
 gem 'json'

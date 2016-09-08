@@ -23,20 +23,9 @@ $ bundle exec rackup
 rake grape:routes
 ```
 
-### OpenApi/Swagger Documentation
+### OpenApi/Swagger Documentation and Validation
 
-```
-rake grape:swagger
-rake grape:swagger store=true # writes to swagger_doc.json
-```
-
-### OpenApi/Swagger Validation
-
-**requires**: `npm` and `swagger-cli` to be installed
-
-```
-rake grape:validate
-```
+-> moved to [`grape-swagger` Rake Tasks](https://github.com/ruby-grape/grape-swagger#rake-tasks)
 
 ## Contributing
 
