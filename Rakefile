@@ -19,3 +19,5 @@ RuboCop::RakeTask.new(:rubocop)
 task default: [:rubocop, :spec]
 
 require File.expand_path('../config/environment', __FILE__)
+require 'grape-swagger/rake/oapi_tasks'
+GrapeSwagger::Rake::OapiTasks.new(::Api::Base)
