@@ -8,7 +8,7 @@ RSpec.describe Api::Base do
   end
 
   subject(:swagger) do
-    get '/v1/swagger_doc'
+    get '/api/v1/swagger_doc'
     last_response
   end
 

@@ -15,7 +15,7 @@ RSpec.describe Api::Base do
     ]
   end
 
-  subject { get '/v1/root' }
+  subject { get '/api/v1/root' }
   specify { expect(subject.status).to eql 200 }
 
   let(:response) { JSON.parse(subject.body, symbolize_names: true) }

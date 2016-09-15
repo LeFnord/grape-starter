@@ -3,6 +3,8 @@ require 'api/version'
 module Api
   APP_CLASS = name
 
+  # TODO: requirer endpoint classes
+
   class Printer
     class << self
       def call(message)
