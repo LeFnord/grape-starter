@@ -31,3 +31,8 @@ Style/Documentation:
 
 Style/AsciiComments:
   Enabled: false
+
+# Offense count: 3
+Style/AccessorMethodName:
+  Exclude:
+    - 'lib/api/rake/template.rb'

@@ -7,7 +7,7 @@ module Api
     class GrapeTasks < ::Rake::TaskLib
       include Rack::Test::Methods
 
-      attr_reader :swagger
+      attr_reader :resource
 
       def api_class
         Api::Base
@@ -46,7 +46,18 @@ module Api
           resource - if given only for that it would be generated (required)'
         task add: :environment do
           exit unless resource?
-          p "add new resource: #{@resource}"
+          # TODO: steps to create:
+          # - create api file
+          #   - add methods to file
+          #   - mount in base
+          # - create lib file
+          #   - require it
+          #
+          # -> file operations
+          # -> string manipulation
+          # => Builder
+          Builder.call!(resource)
+          $stdout.puts "added new resource: #{resource}"
         end
       end
 
@@ -60,11 +71,13 @@ module Api
 
       # helper methods
       #
+      # ... for `add` task
+      #
       def resource?
         ENV['resource'] && !ENV['resource'].blank? ? @resource = ENV['resource'] : false
       end
 
-      # for routes task
+      # ... for `routes` task
       #
       def print_routes(routes_array)
         routes_array.each do |route|
