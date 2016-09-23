@@ -8,11 +8,41 @@ A [Grape](http://github.com/ruby-grape/grape) API mounted on [Rack](https://gith
 
 TODO: describe the reasons and benefits of this gem …
 
+## Setup
+
+```
+$ git clone git@github.com:LeFnord/grape-api-starter.git
+$ cd grape-api-starter
+$ ./script/setup
+```
+
+## Test
+
+```
+$ ./script/test
+```
+
 ## Run
 
 ```
-$ bundle install
-$ bundle exec rackup
+$ ./script/server
+```
+
+or for production, set `RACK_ENV=production`
+```
+$ RACK_ENV=production ./script/server
+```
+
+## Update
+… dependencies
+```
+$ ./script/update
+```
+
+## Stop
+… would only be used, if server started in production mode
+```
+$ ./script/stop
 ```
 
 ## Rake Tasks

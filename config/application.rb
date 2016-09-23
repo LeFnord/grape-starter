@@ -6,8 +6,8 @@ require 'boot'
 
 Bundler.require :default, ENV['RACK_ENV']
 
-Dir[File.expand_path('../../lib/**/*.rb', __FILE__)].each do |libs|
-  require libs
+Dir[File.expand_path('../../lib/**/*.rb', __FILE__)].each do |lib|
+  require lib
 end
 
 Dir[File.expand_path('../../api/entities/*.rb', __FILE__)].each do |entity|
