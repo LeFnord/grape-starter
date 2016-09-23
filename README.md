@@ -8,7 +8,10 @@ A [Grape](http://github.com/ruby-grape/grape) API mounted on [Rack](https://gith
 
 TODO: describe the reasons and benefits of this gem …
 
-## Setup
+
+## Usage
+
+#### Setup
 
 ```
 $ git clone git@github.com:LeFnord/grape-api-starter.git
@@ -16,13 +19,13 @@ $ cd grape-api-starter
 $ ./script/setup
 ```
 
-## Test
+#### Test
 
 ```
 $ ./script/test
 ```
 
-## Run
+#### Run
 
 ```
 $ ./script/server
@@ -33,33 +36,38 @@ or for production, set `RACK_ENV=production`
 $ RACK_ENV=production ./script/server
 ```
 
-## Update
+#### Update
+
 … dependencies
 ```
 $ ./script/update
 ```
 
-## Stop
+#### Stop
+
 … would only be used, if server started in production mode
 ```
 $ ./script/stop
 ```
 
+
 ## Rake Tasks
 
-### List Routes
+#### List Routes
 
 ```
 rake grape:routes
 ```
 
-### OpenApi/Swagger Documentation and Validation
+#### OpenApi/Swagger Documentation and Validation
 
 -> moved to [`grape-swagger` Rake Tasks](https://github.com/ruby-grape/grape-swagger#rake-tasks)
+
 
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/LeFnord/grape-api-starter.
+
 
 
 ## License
