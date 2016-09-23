@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+[ -z "$DEBUG" ] || set -x
+
+echo "===> Running rubocop..."
+bundle exec rake rubocop
+
+echo "===> Running specs..."
+if [ -n "$1" ]; then
+  bundle exec rake spec "$1"
+else
+  bundle exec rake spec
+fi
