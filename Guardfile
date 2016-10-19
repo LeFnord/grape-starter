@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 guard :bundler do
   require 'guard/bundler'
   require 'guard/bundler/verify'
