@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Templates
   # API template for resource
   def resource_file
