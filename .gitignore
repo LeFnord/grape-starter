@@ -8,3 +8,4 @@ Gemfile.lock
 docker-compose.yml
 Dockerfile
 tmp/
+.rspec
