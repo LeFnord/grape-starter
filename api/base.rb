@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Api
   class Base < Grape::API
     prefix :api
@@ -5,6 +6,7 @@ module Api
     format :json
 
     mount Endpoints::Root
+    # mount Endpoints::Dummy
 
     add_swagger_documentation format: :json,
                               info: {
