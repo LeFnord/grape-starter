@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 source 'http://rubygems.org'
 
 ruby '2.3.1'
@@ -25,6 +26,7 @@ group :development do
   gem 'guard-bundler'
   gem 'guard-rack'
   gem 'rubocop'
+  gem 'awesome_print', require: false
 end
 
 group :test do

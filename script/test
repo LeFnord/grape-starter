@@ -10,8 +10,8 @@ echo "===> Running rubocop..."
 bundle exec rake rubocop
 
 echo "===> Running specs..."
-if [ -n "$1" ]; then
-  bundle exec rake spec "$1"
+if [ $1 ]; then
+  bundle exec rspec $1
 else
-  bundle exec rake spec
+  bundle exec rspec
 fi
