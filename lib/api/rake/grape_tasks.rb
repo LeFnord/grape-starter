@@ -47,17 +47,8 @@ module Api
           resource - if given only for that it would be generated (required)'
         task add: :environment do
           exit unless resource?
-          # TODO: steps to create:
-          # - create api file
-          #   - add methods to file
-          #   - mount in base
-          # - create lib file
-          #   - require it
-          #
-          # -> file operations
-          # -> string manipulation
-          # => Builder
-          Builder.call!(resource)
+          Builder.build(resource)
+          Builder.save_files
           $stdout.puts "added new resource: #{resource}"
         end
       end

@@ -10,7 +10,13 @@ module Api
         def build(resource)
           @resource = resource
           build_name_methods
+
           self
+        end
+
+        def save_files
+          File.open(api_file_name, 'w+') { |file| file.write(resource_file) }
+          File.open(lib_file_name, 'w+') { |file| file.write(resource_lib) }
         end
 
         def resource
@@ -18,10 +24,20 @@ module Api
         end
 
         def endpoints
-          'defining endpoints'
+          enpoint_configuration(4).join("\n\n")
         end
 
         private
+
+        def enpoint_configuration(deep)
+          [
+            create,
+            get_all,
+            get_specific,
+            update_specific,
+            delete_specific
+          ].map { |x| indent(x, deep) }
+        end
 
         def build_name_methods
           Api::Rake::Names.build(@resource).each do |name|
