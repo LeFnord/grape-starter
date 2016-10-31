@@ -21,15 +21,6 @@ end"
 end"
   end
 
-  # TODO: build more use cases
-  def standard_crud
-    create
-    get_all
-    get_specific
-    update_specific
-    delete_specific
-  end
-
   # available APT/HTTP methods
   # POST
   def create
@@ -64,6 +55,10 @@ end"
   # GET/:id
   def get_specific
 "desc 'get #{resource}'
+params do
+  requires :id
+end
+
 get :id do
   # your code goes here
 end"
@@ -81,6 +76,10 @@ end"
   # PUT/:id
   def update_specific
 "desc 'get #{resource}'
+params do
+  requires :id
+end
+
 put :id do
   # your code goes here
 end"
@@ -98,8 +97,19 @@ end"
   # DELETE/:id
   def delete_specific
 "desc 'get #{resource}'
+params do
+  requires :id
+end
+
 delete :id do
   # your code goes here
 end"
+  end
+
+  # helper methods
+  def indent(endpoint, deep)
+    indentation = '  ' * deep
+
+    endpoint.split("\n").map { |x| indentation + x }.join("\n")
   end
 end

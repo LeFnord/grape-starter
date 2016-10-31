@@ -7,9 +7,11 @@ module Api
           @resource = resource
 
           {
+            'singular?': singular?,
             klass_name: klass_name,
             base_file_name: base_file_name,
-            'singular?': singular?
+            api_file_name: api_file_name,
+            lib_file_name: lib_file_name
           }
         end
 
@@ -19,7 +21,15 @@ module Api
         end
 
         def base_file_name
-          @resource.tr('/', '-')
+          @resource.tr('/', '-') + '.rb'
+        end
+
+        def api_file_name
+          File.join(Dir.getwd, 'api', 'endpoints', base_file_name)
+        end
+
+        def lib_file_name
+          File.join(Dir.getwd, 'lib', 'api', base_file_name)
         end
 
         private
