@@ -67,4 +67,20 @@ RSpec.describe Api::Rake::Names do
       specify { expect(subject.base_file_name).to eql 'foo-bar.rb' }
     end
   end
+
+  describe 'capitalized resource' do
+    describe 'Foos' do
+      let(:resource) { 'Foos' }
+      specify { expect(subject.send(:singular?)).to be false }
+      specify { expect(subject.klass_name).to eql 'Foos' }
+      specify { expect(subject.base_file_name).to eql 'foos.rb' }
+    end
+
+    describe 'Foo' do
+      let(:resource) { 'Foo' }
+      specify { expect(subject.send(:singular?)).to be true }
+      specify { expect(subject.klass_name).to eql 'Foo' }
+      specify { expect(subject.base_file_name).to eql 'foo.rb' }
+    end
+  end
 end

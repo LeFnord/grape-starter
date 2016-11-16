@@ -11,7 +11,8 @@ module Api
             klass_name: klass_name,
             base_file_name: base_file_name,
             api_file_name: api_file_name,
-            lib_file_name: lib_file_name
+            lib_file_name: lib_file_name,
+            api_base_file_name: api_base_file_name
           }
         end
 
@@ -21,7 +22,11 @@ module Api
         end
 
         def base_file_name
-          @resource.tr('/', '-') + '.rb'
+          @resource.tr('/', '-').downcase + '.rb'
+        end
+
+        def api_base_file_name
+          File.join(Dir.getwd, 'api', 'base.rb')
         end
 
         def api_file_name

@@ -17,11 +17,6 @@ Metrics/LineLength:
 Metrics/MethodLength:
   Max: 10
 
-# Offense count: 3
-Style/AccessorMethodName:
-  Exclude:
-    - 'lib/api/rake/template.rb'
-
 Style/AsciiComments:
   Enabled: false
 
@@ -31,10 +26,6 @@ Style/Documentation:
     - 'spec/**/*'
     - 'api/**/*'
     - 'lib/**/*'
-
-Style/IndentationWidth:
-  Exclude:
-    - 'lib/api/rake/template.rb'
 
 Style/TrivialAccessors:
   Exclude:

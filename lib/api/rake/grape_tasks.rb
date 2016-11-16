@@ -42,13 +42,11 @@ module Api
       # - CRUD resource      -> mount in Api::Base
       # - a related lib file -> require in lib/api.rb
       def add
-        desc 'add a new resource  …
-          params (usage: key=value):
-          resource - if given only for that it would be generated (required)'
+        desc 'add a new resource given by `resource=name` (required)'
         task add: :environment do
           exit unless resource?
           Builder.build(resource)
-          Builder.save_files
+          Builder.save
           $stdout.puts "added new resource: #{resource}"
         end
       end

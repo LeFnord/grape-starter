@@ -5,11 +5,8 @@ RSpec.describe Api::Rake::Builder do
   subject { described_class.build('foo') }
 
   specify do
-    # ap subject
-    # ap subject.singular?
-    # ap subject.klass_name
-    # ap subject.base_file_name
     # ap subject.resource_file
+    # ap "\n"
     # ap subject.resource_lib
   end
 
@@ -19,9 +16,5 @@ RSpec.describe Api::Rake::Builder do
   specify { expect(subject).to respond_to :resource }
   specify { expect(subject).to respond_to :endpoints }
 
-  describe 'build endpoints' do
-    it 'builds endpoints' do
-      expect(subject.endpoints).to be_a String
-    end
-  end
+  specify { expect(subject.endpoints).to be_a String }
 end
