@@ -6,7 +6,6 @@ module Api
     format :json
 
     mount Endpoints::Root
-    # mount Endpoints::Dummy
 
     add_swagger_documentation format: :json,
                               info: {

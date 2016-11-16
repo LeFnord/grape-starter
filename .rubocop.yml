@@ -6,3 +6,13 @@ AllCops:
     - '**/script/**/*'
   UseCache: true
   TargetRubyVersion: 2.3
+
+Style/AccessorMethodName:
+  Exclude:
+    - 'lib/api/rake/template_files.rb'
+    - 'lib/api/rake/template_endpoints.rb'
+
+Style/IndentationWidth:
+  Exclude:
+    - 'lib/api/rake/template_files.rb'
+    - 'lib/api/rake/template_endpoints.rb'
