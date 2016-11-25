@@ -2,17 +2,29 @@ inherit_from: .rubocop_todo.yml
 
 AllCops:
   Exclude:
+    - '**/bin/**/*'
     - '**/tmp/**/*'
     - '**/script/**/*'
+    - grape-starter.gemspec
   UseCache: true
   TargetRubyVersion: 2.3
 
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
 Style/AccessorMethodName:
   Exclude:
-    - 'lib/api/rake/template_files.rb'
-    - 'lib/api/rake/template_endpoints.rb'
+    - 'lib/starter/builder/template_files.rb'
+    - 'lib/starter/builder/template_endpoints.rb'
 
 Style/IndentationWidth:
   Exclude:
-    - 'lib/api/rake/template_files.rb'
-    - 'lib/api/rake/template_endpoints.rb'
+    - 'lib/starter/builder/template_files.rb'
+    - 'lib/starter/builder/template_endpoints.rb'
+
+Style/Documentation:
+  Exclude:
+    - 'template/**/*'
+    - 'lib/**/*'
+    - 'spec/**/*'

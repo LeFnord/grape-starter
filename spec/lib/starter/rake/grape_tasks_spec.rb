@@ -1,8 +1,17 @@
 # frozen_string_literal: true
+
 require 'spec_helper'
 
-RSpec.describe Api::Rake::GrapeTasks do
-  subject { described_class.new }
+RSpec.describe Starter::Rake::GrapeTasks do
+  let(:app) do
+    Class.new(Grape::API) do
+      get do
+        { foo: 'that is the response' }
+      end
+    end
+  end
+
+  subject { described_class.new(app) }
 
   describe '#api_routes' do
     let(:route_keys) { [:verb, :path, :description] }

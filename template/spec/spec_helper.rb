@@ -1,9 +1,9 @@
 # frozen_string_literal: true
+ENV['RACK_ENV'] ||= 'test'
 
-require 'grape'
+require 'rack/test'
 
-$LOAD_PATH.unshift File.expand_path('../lib', __FILE__)
-require 'starter'
+require File.expand_path('../../config/environment', __FILE__)
 
 RSpec.configure do |config|
   config.color = true
@@ -12,6 +12,5 @@ RSpec.configure do |config|
   config.mock_with :rspec
   config.expect_with :rspec
 
-  config.warnings = true
   config.raise_errors_for_deprecations!
 end

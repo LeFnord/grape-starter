@@ -1,0 +1,73 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
+
+require 'gli'
+require 'starter'
+
+include GLI::App
+
+program_desc 'Create initial grape api skeleton'
+
+version Starter::VERSION
+
+subcommand_option_handling :normal
+arguments :strict
+
+desc 'Create initial grape api skeleton'
+arg_name 'project name'
+
+command :new do |c|
+  c.desc 'overwrites existend directory'
+  c.switch [:f, :force], :negatable => false
+
+  c.action do |_, options, args|
+    dir = args.empty? ? nil : File.join(Dir.getwd, args.first)
+
+    case
+    when args.empty? || dir.nil?
+      $stdout.puts 'no name given: starter new project'
+      exit 0
+    when Dir.exist?(dir) && !options[:force]
+      $stdout.puts 'project exist: -f to overwrite'
+      exit 0
+    end
+
+    $stdout.puts "created: #{args.first}"
+    starter_gem = Gem::Specification.find_by_name('grape-starter').gem_dir
+
+    src = File.join(starter_gem, 'template', '.')
+    FileUtils.copy_entry src, dir
+
+    FileUtils.cd(dir) do
+      # TODO:
+      $stdout.puts `bundle install`
+      $stdout.puts `bundle exec rubocop -a`
+      $stdout.puts `bundle exec`
+      $stdout.puts `git init`
+    end
+  end
+end
+
+pre do |_global, _command, _options, _args|
+  # Pre logic here
+  # Return true to proceed; false to abort and not call the
+  # chosen command
+  # Use skips_pre before a command to skip this block
+  # on that command only
+  true
+end
+
+post do |global, command, options, args|
+  # Post logic here
+  # Use skips_post before a command to skip this
+  # block on that command only
+end
+
+on_error do |_exception|
+  # Error logic here
+  # return false to skip default error handling
+  true
+end
+
+exit run(ARGV)
