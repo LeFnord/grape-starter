@@ -1,0 +1,25 @@
+# frozen_string_literal: true
+source 'http://rubygems.org'
+
+gem 'thin'
+
+gem 'rack'
+gem 'rack-cors'
+gem 'mime-types'
+
+gem 'grape'
+gem 'grape-entity'
+gem 'grape-swagger'
+gem 'grape-swagger-entity'
+
+group :development do
+  gem 'pry'
+  gem 'rake'
+  gem 'rubocop'
+  gem 'grape-starter'
+end
+
+group :test do
+  gem 'rspec'
+  gem 'rack-test'
+end

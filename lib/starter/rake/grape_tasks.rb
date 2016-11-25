@@ -3,19 +3,20 @@ require 'rake'
 require 'rake/tasklib'
 require 'rack/test'
 
-module Api
+module Starter
   module Rake
+    require 'starter/builder'
+
     class GrapeTasks < ::Rake::TaskLib
       include Rack::Test::Methods
 
       attr_reader :resource
+      attr_reader :api_class
 
-      def api_class
-        Api::Base
-      end
+      def initialize(api_class = nil)
+        super()
 
-      def initialize
-        super
+        @api_class = api_class
         define_tasks
       end
 
@@ -96,5 +97,3 @@ module Api
     end
   end
 end
-
-Api::Rake::GrapeTasks.new
