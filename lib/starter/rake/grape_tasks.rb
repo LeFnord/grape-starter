@@ -29,27 +29,7 @@ module Starter
       private
 
       def define_tasks
-        namespace :grape do
-          add
-          routes
-        end
-      end
-
-      # tasks
-      #
-      # adds a skeleton for a new resource
-      # TODO:
-      # needed files and entries:
-      # - CRUD resource      -> mount in Api::Base
-      # - a related lib file -> require in lib/api.rb
-      def add
-        desc 'add a new resource given by `resource=name` (required)'
-        task add: :environment do
-          exit unless resource?
-          Builder.build(resource)
-          Builder.save
-          $stdout.puts "added new resource: #{resource}"
-        end
+        routes
       end
 
       # gets all api routes
@@ -61,14 +41,6 @@ module Starter
       end
 
       # helper methods
-      #
-      # ... for `add` task
-      #
-      def resource?
-        ENV['resource'] && !ENV['resource'].blank? ? @resource = ENV['resource'] : false
-      end
-
-      # ... for `routes` task
       #
       def print_routes(routes_array)
         routes_array.each do |route|
