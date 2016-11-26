@@ -64,7 +64,7 @@ rake grape:routes
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/<name>/<repo>.
+Bug reports and pull requests are welcome on GitHub at https://github.com/name/repo.
 
 
 ## License

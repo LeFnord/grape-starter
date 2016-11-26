@@ -14,21 +14,22 @@ version Starter::VERSION
 subcommand_option_handling :normal
 arguments :strict
 
+desc 'overwrites existend stuff'
+switch [:f, :force], :negatable => false
+
 desc 'Create initial grape api skeleton'
 arg_name 'project name'
 
 command :new do |c|
-  c.desc 'overwrites existend directory'
-  c.switch [:f, :force], :negatable => false
 
-  c.action do |_, options, args|
+  c.action do |global_options, _, args|
     dir = args.empty? ? nil : File.join(Dir.getwd, args.first)
 
     case
     when args.empty? || dir.nil?
       $stdout.puts 'no name given: starter new project'
       exit 0
-    when Dir.exist?(dir) && !options[:force]
+    when Dir.exist?(dir) && !global_options[:force]
       $stdout.puts 'project exist: -f to overwrite'
       exit 0
     end
@@ -48,6 +49,29 @@ command :new do |c|
     end
   end
 end
+
+desc 'Adds a new resource - run from inside the project'
+long_desc "run this command from inside the project
+           hereby the the given resource name
+           can be given in form of
+           'foo(s)', 'foo_bar(s)', foo-bar(s), 'foo/bars'"
+arg_name 'resource'
+command :add do |c|
+  c.action do |global_options, options, args|
+    case
+    when args.empty?
+      $stdout.puts 'no resource given'
+      exit 0
+    end
+
+    args.each do |resource|
+      Starter::Builder.call!(resource)
+      Starter::Builder.save
+      $stdout.puts "added new resource: #{resource}"
+    end
+  end
+end
+
 
 pre do |_global, _command, _options, _args|
   # Pre logic here

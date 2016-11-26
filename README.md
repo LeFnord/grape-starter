@@ -13,15 +13,31 @@ TODO: describe the reasons and benefits of this gem …
 
 ```
 $ gem install grape-starter
-$ grape-starter new awesome_api
-$ cd awesome_api
+$ grape-starter
+NAME
+    grape-starter - Create initial grape api skeleton
+
+SYNOPSIS
+    grape-starter [global options] command [command options] [arguments...]
+
+VERSION
+    0.1.0
+
+GLOBAL OPTIONS
+    -f, --force - overwrites existend stuff
+    --help      - Show this message
+    --version   - Display the program version
+
+COMMANDS
+    add  - Adds a new resource - run from inside the project
+    help - Shows a list of commands or help for one command
+    new  - Create initial grape api skeleton
 ```
 
 
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/LeFnord/grape-starter.
-
 
 
 ## License

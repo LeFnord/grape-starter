@@ -14,7 +14,7 @@ module Starter
     class << self
       attr_reader :resource
 
-      def build(resource)
+      def call!(resource)
         @resource = resource
 
         self
@@ -24,6 +24,7 @@ module Starter
         %w(api_file lib_file).each do |new_file|
           File.open(send("#{new_file}_name"), 'w+') { |file| file.write(send(new_file.strip_heredoc)) }
         end
+
         add_moint_point
       end
 
@@ -32,10 +33,14 @@ module Starter
       end
 
       def endpoint_object
-        enpoint_configuration(crud, 4)
+        enpoint_preparation(endpoint_set, 4)
       end
 
       private
+
+      def endpoint_set
+        singular? ? singular_one : crud
+      end
 
       def add_moint_point
         file = File.read(api_base_file_name)
@@ -45,7 +50,7 @@ module Starter
         File.open(api_base_file_name, 'w') { |f| f.write(file) }
       end
 
-      def enpoint_configuration(set, deep)
+      def enpoint_preparation(set, deep)
         set.map { |x| send(x) }.map { |x| indent(x, deep) }
       end
 
