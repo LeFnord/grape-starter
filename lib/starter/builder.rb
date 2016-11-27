@@ -12,18 +12,22 @@ module Starter
     extend Template::Endpoints
 
     class << self
-      attr_reader :resource, :set
+      attr_reader :resource, :set, :force
 
-      def call!(resource, set = nil)
+      def call!(resource, set = nil, force = false)
         @resource = resource
         @set = set
+        @force = force
 
         self
       end
 
       def save
         %w(api_file lib_file api_spec lib_spec).each do |new_file|
-          File.open(send("#{new_file}_name"), 'w+') { |file| file.write(send(new_file.strip_heredoc)) }
+          new_file_name = "#{new_file}_name"
+          should_raise?(send(new_file_name))
+
+          File.open(send(new_file_name), 'w+') { |file| file.write(send(new_file.strip_heredoc)) }
         end
 
         add_moint_point
@@ -62,6 +66,10 @@ module Starter
         indentation = ' ' * deep
 
         endpoint.split("\n").map { |x| x.prepend(indentation) }.join("\n")
+      end
+
+      def should_raise?(file)
+        raise StandardError, '… resource exists' if File.exist?(file) && !force
       end
     end
   end

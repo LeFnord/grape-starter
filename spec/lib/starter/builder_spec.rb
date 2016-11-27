@@ -2,6 +2,9 @@
 require 'spec_helper'
 
 RSpec.describe Starter::Builder do
+  let(:single) { 'foo' }
+  let(:plural) { 'foos' }
+
   subject { described_class }
 
   specify do
@@ -15,7 +18,7 @@ RSpec.describe Starter::Builder do
   specify { expect(subject).to respond_to :endpoints }
 
   describe 'Names methods' do
-    subject { described_class.call!('foo') }
+    subject { described_class.call! single }
 
     specify { expect(subject.send(:singular?)).to be true }
     specify { expect(subject.klass_name).to eql 'Foo' }
@@ -28,8 +31,6 @@ RSpec.describe Starter::Builder do
   end
 
   describe '#endpoint_set' do
-    let(:single) { 'foo' }
-    let(:plural) { 'foos' }
     let(:set) { subject.send(:endpoint_set) }
 
     describe 'CRUD methods' do
@@ -134,6 +135,38 @@ RSpec.describe Starter::Builder do
           subject { described_class.call! plural, %w(post get delete) }
           specify { expect(set).to eql [:post, :get_all, :get_specific, :delete_specific] }
         end
+      end
+    end
+  end
+
+  describe '#should_raise?' do
+    let(:file) { '/file/path' }
+
+    describe 'force false (default)' do
+      subject { described_class.call! single, ['get'] }
+
+      describe 'file not exist' do
+        specify { expect { subject.send(:should_raise?, file) }.not_to raise_error }
+      end
+
+      describe 'file exist' do
+        before(:each) { allow(File).to receive(:exist?).with(file).and_return true }
+
+        specify { expect { subject.send(:should_raise?, file) }.to raise_error '… resource exists' }
+      end
+    end
+
+    describe 'force true' do
+      subject { described_class.call! single, ['get'], true }
+
+      describe 'file not exist' do
+        specify { expect { subject.send(:should_raise?, file) }.not_to raise_error }
+      end
+
+      describe 'file exist' do
+        before(:each) { allow(File).to receive(:exist?).with(file).and_return true }
+
+        specify { expect { subject.send(:should_raise?, file) }.not_to raise_error }
       end
     end
   end
