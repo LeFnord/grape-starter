@@ -2,12 +2,6 @@
 require 'spec_helper'
 
 RSpec.describe Api::Base do
-  include Rack::Test::Methods
-
-  def app
-    Api::Base
-  end
-
   let(:exposed_keys) do
     [
       :verb,

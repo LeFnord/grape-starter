@@ -12,16 +12,17 @@ module Starter
     extend Template::Endpoints
 
     class << self
-      attr_reader :resource
+      attr_reader :resource, :set
 
-      def call!(resource)
+      def call!(resource, set = nil)
         @resource = resource
+        @set = set
 
         self
       end
 
       def save
-        %w(api_file lib_file).each do |new_file|
+        %w(api_file lib_file api_spec lib_spec).each do |new_file|
           File.open(send("#{new_file}_name"), 'w+') { |file| file.write(send(new_file.strip_heredoc)) }
         end
 
@@ -39,7 +40,10 @@ module Starter
       private
 
       def endpoint_set
-        singular? ? singular_one : crud
+        crud_set = singular? ? singular_one : crud
+        return crud_set if set.nil?
+
+        crud_set.each_with_object([]) { |x, memo| set.map { |y| memo << x if x.to_s.start_with?(y) } }
       end
 
       def add_moint_point

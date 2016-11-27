@@ -1,4 +1,6 @@
 # frozen_string_literal: true
+require 'starter/rake/grape_tasks'
+
 module Api
   module Endpoints
     class Root < Grape::API
@@ -7,14 +9,10 @@ module Api
              success: Entities::Route,
              is_array: true
         get do
-          # api_routes = Api::Rake::GrapeTasks.new.api_routes
-          #
-          # present :count, api_routes.length
-          # present :items, api_routes, with: Entities::Route
-          present :count, 1
-          present :items,
-                  [OpenStruct.new(verb: '', path: '', description: '')],
-                  with: Entities::Route
+          api_routes = Starter::Rake::GrapeTasks.new(::Api::Base).api_routes
+
+          present :count, api_routes.length
+          present :items, api_routes, with: Entities::Route
         end
       end
     end

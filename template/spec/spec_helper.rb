@@ -14,3 +14,9 @@ RSpec.configure do |config|
 
   config.raise_errors_for_deprecations!
 end
+
+include Rack::Test::Methods
+
+def app
+  Api::Base
+end

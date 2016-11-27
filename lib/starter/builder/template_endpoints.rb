@@ -5,28 +5,30 @@ module Starter
     module Endpoints
       def crud
         %i(
-          create
+          post
           get_all
           get_specific
           put_specific
+          patch_specific
           delete_specific
         )
       end
 
       def singular_one
         %i(
-          create
+          post
           get_one
           put_one
+          patch_one
           delete_one
         )
       end
 
       # available APT/HTTP methods
       # POST
-      def create
+      def post
         "
-        desc 'create #{resource}'
+        desc 'create #{resource.singularize}'
         params do
           # TODO: specify the parameters
         end
@@ -38,78 +40,34 @@ module Starter
       # GET
       def get_all
         "
-        desc 'get all of #{resource}',
+        desc 'get all of #{resource.pluralize}',
         is_array: true
         get do
           # your code goes here
         end"
       end
 
-      #
-      # GET
-      def get_one
-        "
-        desc 'get #{resource}'
-        get do
-          # your code goes here
-        end"
-      end
-
-      #
-      # GET/:id
-      def get_specific
-        "
-        desc 'get specific #{resource}'
-        params do
-          requires :id
+      %w(get put patch delete).each do |verb|
+        define_method(:"#{verb}_one") do
+          "
+          desc '#{verb} #{resource.singularize}'
+          #{verb} do
+            # your code goes here
+          end"
         end
-        get :id do
-          # your code goes here
-        end"
       end
 
-      # PUT
-      def put_one
-        "
-        desc 'put #{resource}'
-        put do
-          # your code goes here
-        end"
-      end
-
-      #
-      # PUT/:id
-      def put_specific
-        "
-        desc 'put specific #{resource}'
-        params do
-          requires :id
+      %w(get put patch delete).each do |verb|
+        define_method(:"#{verb}_specific") do
+          "
+          desc '#{verb} specific #{resource.singularize}'
+          params do
+            requires :id
+          end
+          #{verb} :id do
+            # your code goes here
+          end"
         end
-        put :id do
-          # your code goes here
-        end"
-      end
-
-      # DELETE
-      def delete_one
-        "
-        desc 'delete #{resource}'
-        delete do
-          # your code goes here
-        end"
-      end
-
-      #
-      # DELETE/:id
-      def delete_specific
-        "
-        desc 'delete specific #{resource}'
-        params do
-          requires :id
-        end
-        delete :id do
-          # your code goes here
-        end"
       end
     end
   end
