@@ -2,6 +2,8 @@
 # frozen_string_literal: true
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 
+
+require 'pry'
 require 'gli'
 require 'starter'
 
@@ -50,9 +52,9 @@ end
 
 desc 'Adds a new resource - run from inside the project'
 long_desc "run this command from inside the project
-           hereby the the given resource name
-           can be given in form of
-           'foo(s)', 'foo_bar(s)', foo-bar(s), 'foo/bars'"
+hereby the the given resource name
+can be given in form of
+'foo(s)', 'foo_bar(s)', foo-bar(s), 'foo/bars'"
 arg_name 'resource [post* get* put* patch* delete*]'
 command :add do |c|
   c.action do |global_options, options, args|
@@ -60,14 +62,16 @@ command :add do |c|
     when args.empty?
       exit_now! 'no resource given'
     end
-
     resource = args.shift
     verbs = args
-
-    Starter::Builder.call!(resource, verbs)
-    Starter::Builder.save
-    `bundle exec rubocop -a`
-    $stdout.puts "added new resource: #{resource}"
+    begin
+      Starter::Builder.call!(resource, verbs, global_options[:force])
+      Starter::Builder.save
+      `bundle exec rubocop -a`
+      $stdout.puts "added resource: #{resource}"
+    rescue => e
+      exit_now! e
+    end
   end
 end
 
