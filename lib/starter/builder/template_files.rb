@@ -32,6 +32,19 @@ module Starter
         end
         FILE
       end
+
+      def api_spec
+        <<-FILE.strip_heredoc
+        # frozen_string_literal: true
+        require 'spec_helper'
+
+        RSpec.describe Api::#{klass_name} do
+          pending 'write specs'
+        end
+        FILE
+      end
+
+      alias lib_spec api_spec
     end
   end
 end

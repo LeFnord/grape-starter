@@ -2,12 +2,6 @@
 require 'spec_helper'
 
 RSpec.describe Api::Base do
-  include Rack::Test::Methods
-
-  def app
-    Api::Base
-  end
-
   subject(:swagger) do
     get '/api/v1/swagger_doc'
     last_response

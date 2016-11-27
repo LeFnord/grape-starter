@@ -13,7 +13,7 @@ RSpec.describe Starter::Names do
 
       specify { expect(subject.api_file_name).to include 'api/endpoints/foos.rb' }
       specify { expect(subject.lib_file_name).to include 'lib/api/foos.rb' }
-      specify { expect(subject.api_spec_name).to include 'spec/api/endpoints/foos_spec.rb' }
+      specify { expect(subject.api_spec_name).to include 'spec/requests/foos_spec.rb' }
       specify { expect(subject.lib_spec_name).to include 'spec/lib/api/foos_spec.rb' }
     end
 
@@ -25,7 +25,7 @@ RSpec.describe Starter::Names do
 
       specify { expect(subject.api_file_name).to include 'api/endpoints/foo_bars.rb' }
       specify { expect(subject.lib_file_name).to include 'lib/api/foo_bars.rb' }
-      specify { expect(subject.api_spec_name).to include 'spec/api/endpoints/foo_bars_spec.rb' }
+      specify { expect(subject.api_spec_name).to include 'spec/requests/foo_bars_spec.rb' }
       specify { expect(subject.lib_spec_name).to include 'spec/lib/api/foo_bars_spec.rb' }
     end
 
@@ -37,7 +37,7 @@ RSpec.describe Starter::Names do
 
       specify { expect(subject.api_file_name).to include 'api/endpoints/foo-bars.rb' }
       specify { expect(subject.lib_file_name).to include 'lib/api/foo-bars.rb' }
-      specify { expect(subject.api_spec_name).to include 'spec/api/endpoints/foo-bars_spec.rb' }
+      specify { expect(subject.api_spec_name).to include 'spec/requests/foo-bars_spec.rb' }
       specify { expect(subject.lib_spec_name).to include 'spec/lib/api/foo-bars_spec.rb' }
     end
 
@@ -49,7 +49,7 @@ RSpec.describe Starter::Names do
 
       specify { expect(subject.api_file_name).to include 'api/endpoints/foo-bars.rb' }
       specify { expect(subject.lib_file_name).to include 'lib/api/foo-bars.rb' }
-      specify { expect(subject.api_spec_name).to include 'spec/api/endpoints/foo-bars_spec.rb' }
+      specify { expect(subject.api_spec_name).to include 'spec/requests/foo-bars_spec.rb' }
       specify { expect(subject.lib_spec_name).to include 'spec/lib/api/foo-bars_spec.rb' }
     end
   end
@@ -63,7 +63,7 @@ RSpec.describe Starter::Names do
 
       specify { expect(subject.api_file_name).to include 'api/endpoints/foo.rb' }
       specify { expect(subject.lib_file_name).to include 'lib/api/foo.rb' }
-      specify { expect(subject.api_spec_name).to include 'spec/api/endpoints/foo_spec.rb' }
+      specify { expect(subject.api_spec_name).to include 'spec/requests/foo_spec.rb' }
       specify { expect(subject.lib_spec_name).to include 'spec/lib/api/foo_spec.rb' }
     end
 
@@ -75,7 +75,7 @@ RSpec.describe Starter::Names do
 
       specify { expect(subject.api_file_name).to include 'api/endpoints/foo_bar.rb' }
       specify { expect(subject.lib_file_name).to include 'lib/api/foo_bar.rb' }
-      specify { expect(subject.api_spec_name).to include 'spec/api/endpoints/foo_bar_spec.rb' }
+      specify { expect(subject.api_spec_name).to include 'spec/requests/foo_bar_spec.rb' }
       specify { expect(subject.lib_spec_name).to include 'spec/lib/api/foo_bar_spec.rb' }
     end
 
@@ -87,7 +87,7 @@ RSpec.describe Starter::Names do
 
       specify { expect(subject.api_file_name).to include 'api/endpoints/foo-bar.rb' }
       specify { expect(subject.lib_file_name).to include 'lib/api/foo-bar.rb' }
-      specify { expect(subject.api_spec_name).to include 'spec/api/endpoints/foo-bar_spec.rb' }
+      specify { expect(subject.api_spec_name).to include 'spec/requests/foo-bar_spec.rb' }
       specify { expect(subject.lib_spec_name).to include 'spec/lib/api/foo-bar_spec.rb' }
     end
 
@@ -99,7 +99,7 @@ RSpec.describe Starter::Names do
 
       specify { expect(subject.api_file_name).to include 'api/endpoints/foo-bar.rb' }
       specify { expect(subject.lib_file_name).to include 'lib/api/foo-bar.rb' }
-      specify { expect(subject.api_spec_name).to include 'spec/api/endpoints/foo-bar_spec.rb' }
+      specify { expect(subject.api_spec_name).to include 'spec/requests/foo-bar_spec.rb' }
       specify { expect(subject.lib_spec_name).to include 'spec/lib/api/foo-bar_spec.rb' }
     end
   end
@@ -113,7 +113,7 @@ RSpec.describe Starter::Names do
 
       specify { expect(subject.api_file_name).to include 'api/endpoints/foos.rb' }
       specify { expect(subject.lib_file_name).to include 'lib/api/foos.rb' }
-      specify { expect(subject.api_spec_name).to include 'spec/api/endpoints/foos_spec.rb' }
+      specify { expect(subject.api_spec_name).to include 'spec/requests/foos_spec.rb' }
       specify { expect(subject.lib_spec_name).to include 'spec/lib/api/foos_spec.rb' }
     end
 
@@ -125,7 +125,7 @@ RSpec.describe Starter::Names do
 
       specify { expect(subject.api_file_name).to include 'api/endpoints/foo.rb' }
       specify { expect(subject.lib_file_name).to include 'lib/api/foo.rb' }
-      specify { expect(subject.api_spec_name).to include 'spec/api/endpoints/foo_spec.rb' }
+      specify { expect(subject.api_spec_name).to include 'spec/requests/foo_spec.rb' }
       specify { expect(subject.lib_spec_name).to include 'spec/lib/api/foo_spec.rb' }
     end
   end

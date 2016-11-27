@@ -30,7 +30,7 @@ module Starter
 
     # resource spec
     def api_spec_name
-      File.join(Dir.getwd, 'spec', 'api', 'endpoints', base_spec_name)
+      File.join(Dir.getwd, 'spec', 'requests', base_spec_name)
     end
 
     # lib spec
