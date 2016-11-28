@@ -1,38 +1,41 @@
 [![Codeship Status for LeFnord/grape-starter](https://app.codeship.com/projects/91e08e60-9600-0134-5571-4a8607aa1ae3/status?branch=master)](https://app.codeship.com/projects/186901)
 
-# Grape API on Rack
+# Grape Starter
 
-A [Grape](http://github.com/ruby-grape/grape) API mounted on [Rack](https://github.com/rack/rack), as starting point for API development with Grape. It also includes [grape-swagger](http://github.com/ruby-grape/grape-swagger) for documentation generating.
-
-## Why?
-
-TODO: describe the reasons and benefits of this gem …
+Is a tool to help you to build up a skeleton for a [Grape](http://github.com/ruby-grape/grape) API mounted on [Rack](https://github.com/rack/rack) ready to run.
+[grape-swagger](http://github.com/ruby-grape/grape-swagger) would be used to generate a  [OAPI](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md) compatible documentation.
 
 
 ## Usage
 
+#### Install it
 ```
 $ gem install grape-starter
-$ grape-starter
-NAME
-    grape-starter - Create initial grape api skeleton
-
-SYNOPSIS
-    grape-starter [global options] command [command options] [arguments...]
-
-VERSION
-    0.1.0
-
-GLOBAL OPTIONS
-    -f, --force - overwrites existend stuff
-    --help      - Show this message
-    --version   - Display the program version
-
-COMMANDS
-    add  - Adds a new resource - run from inside the project
-    help - Shows a list of commands or help for one command
-    new  - Create initial grape api skeleton
 ```
+
+#### Create a new project
+```
+$ grape-starter new awesome_api
+```
+
+This command creates a folder named `awesome_api` containing a ready to run [Grape](http://github.com/ruby-grape/grape) API, mounted on [Rack](https://github.com/rack/rack).
+
+To run it, go into awesome_api folder, set it up and start the server
+```
+$ cd awesome_api
+$ ./script/server
+```
+the API is now accessible under: [http://localhost:9292/api/v1/root](http://localhost:9292/api/v1/root)
+
+More could be found [README](template/README.md)
+
+#### Add resources
+```
+$ grape-starter add foo
+```
+to add CRUD endpoints for resource foo. For more options, see command help.
+
+This adds endpoint and lib file and belonging specs, and a mount entry in base.rb.
 
 
 ## Contributing

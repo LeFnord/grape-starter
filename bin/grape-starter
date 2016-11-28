@@ -44,7 +44,6 @@ command :new do |c|
       # TODO:
       $stdout.puts `bundle install`
       $stdout.puts `bundle exec rubocop -a`
-      $stdout.puts `bundle exec`
       $stdout.puts `git init`
     end
   end
