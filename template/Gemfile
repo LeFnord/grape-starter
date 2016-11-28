@@ -7,10 +7,10 @@ gem 'rack'
 gem 'rack-cors'
 gem 'mime-types'
 
-gem 'grape'
-gem 'grape-entity'
-gem 'grape-swagger'
-gem 'grape-swagger-entity'
+gem 'grape', '~> 0.18'
+gem 'grape-entity', '~> 0.6'
+gem 'grape-swagger', '~> 0.25'
+gem 'grape-swagger-entity', '~> 0.1.5'
 
 group :development do
   gem 'pry'

@@ -37,7 +37,6 @@ to add CRUD endpoints for resource foo. For more options, see command help.
 
 This adds endpoint and lib file and belonging specs, and a mount entry in base.rb.
 
-
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/LeFnord/grape-starter.
