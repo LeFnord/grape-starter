@@ -12,22 +12,20 @@ module Starter
     extend Template::Endpoints
 
     class << self
-      attr_reader :resource, :set, :force
+      attr_reader :resource, :set, :force, :entity
 
-      def call!(resource, set = nil, force = false)
+      def call!(resource, options = {})
         @resource = resource
-        @set = set
-        @force = force
+        @set = options[:set]
+        @force = options[:force]
+        @entity = options[:entity]
 
         self
       end
 
       def save
-        %w(api_file lib_file api_spec lib_spec).each do |new_file|
-          new_file_name = "#{new_file}_name"
-          should_raise?(send(new_file_name))
-
-          File.open(send(new_file_name), 'w+') { |file| file.write(send(new_file.strip_heredoc)) }
+        files_to_save.each do |new_file|
+          save_file(new_file)
         end
 
         add_moint_point
@@ -43,11 +41,21 @@ module Starter
 
       private
 
-      def endpoint_set
-        crud_set = singular? ? singular_one : crud
-        return crud_set if set.nil?
+      def files_to_save
+        standards = %w(api_file lib_file api_spec lib_spec)
 
-        crud_set.each_with_object([]) { |x, memo| set.map { |y| memo << x if x.to_s.start_with?(y) } }
+        entity ? standards + ['entity_file'] : standards
+      end
+
+      def save_file(new_file)
+        new_file_name = "#{new_file}_name"
+        should_raise?(send(new_file_name))
+
+        File.open(send(new_file_name), 'w+') { |file| file.write(send(new_file.strip_heredoc)) }
+      end
+
+      def should_raise?(file)
+        raise StandardError, '… resource exists' if File.exist?(file) && !force
       end
 
       def add_moint_point
@@ -58,6 +66,13 @@ module Starter
         File.open(api_base_file_name, 'w') { |f| f.write(file) }
       end
 
+      def endpoint_set
+        crud_set = singular? ? singular_one : crud
+        return crud_set if set.nil?
+
+        crud_set.each_with_object([]) { |x, memo| set.map { |y| memo << x if x.to_s.start_with?(y) } }
+      end
+
       def enpoint_preparation(set, deep)
         set.map { |x| send(x) }.map { |x| indent(x, deep) }
       end
@@ -66,10 +81,6 @@ module Starter
         indentation = ' ' * deep
 
         endpoint.split("\n").map { |x| x.prepend(indentation) }.join("\n")
-      end
-
-      def should_raise?(file)
-        raise StandardError, '… resource exists' if File.exist?(file) && !force
       end
     end
   end

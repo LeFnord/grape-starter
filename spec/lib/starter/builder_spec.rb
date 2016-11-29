@@ -67,72 +67,72 @@ RSpec.describe Starter::Builder do
     describe 'methods specified' do
       describe 'POST' do
         describe 'single' do
-          subject { described_class.call! single, ['post'] }
+          subject { described_class.call! single, set: ['post'] }
           specify { expect(set).to eql [:post] }
         end
 
         describe 'plural' do
-          subject { described_class.call! plural, ['post'] }
+          subject { described_class.call! plural, set: ['post'] }
           specify { expect(set).to eql [:post] }
         end
       end
 
       describe 'GET' do
         describe 'single' do
-          subject { described_class.call! single, ['get'] }
+          subject { described_class.call! single, set: ['get'] }
           specify { expect(set).to eql [:get_one] }
         end
 
         describe 'plural' do
-          subject { described_class.call! plural, ['get'] }
+          subject { described_class.call! plural, set: ['get'] }
           specify { expect(set).to eql [:get_all, :get_specific] }
         end
       end
 
       describe 'PUT' do
         describe 'single' do
-          subject { described_class.call! single, ['put'] }
+          subject { described_class.call! single, set: ['put'] }
           specify { expect(set).to eql [:put_one] }
         end
 
         describe 'plural' do
-          subject { described_class.call! plural, ['put'] }
+          subject { described_class.call! plural, set: ['put'] }
           specify { expect(set).to eql [:put_specific] }
         end
       end
 
       describe 'PATCH' do
         describe 'single' do
-          subject { described_class.call! single, ['patch'] }
+          subject { described_class.call! single, set: ['patch'] }
           specify { expect(set).to eql [:patch_one] }
         end
 
         describe 'plural' do
-          subject { described_class.call! plural, ['patch'] }
+          subject { described_class.call! plural, set: ['patch'] }
           specify { expect(set).to eql [:patch_specific] }
         end
       end
 
       describe 'DELETE' do
         describe 'single' do
-          subject { described_class.call! single, ['delete'] }
+          subject { described_class.call! single, set: ['delete'] }
           specify { expect(set).to eql [:delete_one] }
         end
 
         describe 'plural' do
-          subject { described_class.call! plural, ['delete'] }
+          subject { described_class.call! plural, set: ['delete'] }
           specify { expect(set).to eql [:delete_specific] }
         end
       end
 
       describe 'multinple given' do
         describe 'single' do
-          subject { described_class.call! single, %w(post get delete) }
+          subject { described_class.call! single, set: %w(post get delete) }
           specify { expect(set).to eql [:post, :get_one, :delete_one] }
         end
 
         describe 'plural' do
-          subject { described_class.call! plural, %w(post get delete) }
+          subject { described_class.call! plural, set: %w(post get delete) }
           specify { expect(set).to eql [:post, :get_all, :get_specific, :delete_specific] }
         end
       end
@@ -143,7 +143,7 @@ RSpec.describe Starter::Builder do
     let(:file) { '/file/path' }
 
     describe 'force false (default)' do
-      subject { described_class.call! single, ['get'] }
+      subject { described_class.call! single, set: ['get'] }
 
       describe 'file not exist' do
         specify { expect { subject.send(:should_raise?, file) }.not_to raise_error }
@@ -157,7 +157,7 @@ RSpec.describe Starter::Builder do
     end
 
     describe 'force true' do
-      subject { described_class.call! single, ['get'], true }
+      subject { described_class.call! single, set: ['get'], force: true }
 
       describe 'file not exist' do
         specify { expect { subject.send(:should_raise?, file) }.not_to raise_error }
@@ -167,6 +167,26 @@ RSpec.describe Starter::Builder do
         before(:each) { allow(File).to receive(:exist?).with(file).and_return true }
 
         specify { expect { subject.send(:should_raise?, file) }.not_to raise_error }
+      end
+    end
+  end
+
+  describe '#files_to_save' do
+    describe 'standard' do
+      subject { described_class.call! single }
+
+      let(:files) { subject.send(:files_to_save) }
+      specify do
+        expect(files).to eql %w(api_file lib_file api_spec lib_spec)
+      end
+    end
+
+    describe 'standard' do
+      subject { described_class.call! single, entity: true }
+
+      let(:files) { subject.send(:files_to_save) }
+      specify do
+        expect(files).to eql %w(api_file lib_file api_spec lib_spec entity_file)
       end
     end
   end

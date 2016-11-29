@@ -8,7 +8,6 @@ module Starter
       def api_file
         <<-FILE.strip_heredoc
         # frozen_string_literal: true
-
         module Api
           module Endpoints
             class #{klass_name} < Grape::API
@@ -21,11 +20,22 @@ module Starter
         FILE
       end
 
+      def entity_file
+        <<-FILE.strip_heredoc
+        # frozen_string_literal: true
+        module Api
+          module Entities
+            class #{klass_name} < Grape::Entity
+            end
+          end
+        end
+        FILE
+      end
+
       # LIB template for resource
       def lib_file
         <<-FILE.strip_heredoc
         # frozen_string_literal: true
-
         module Api
           class #{klass_name}
           end
@@ -37,7 +47,6 @@ module Starter
         <<-FILE.strip_heredoc
         # frozen_string_literal: true
         require 'spec_helper'
-
         RSpec.describe Api::#{klass_name} do
           pending 'write specs'
         end

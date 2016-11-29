@@ -18,9 +18,30 @@ $ gem install grape-starter
 $ grape-starter new awesome_api
 ```
 
-This command creates a folder named `awesome_api` containing a ready to run [Grape](http://github.com/ruby-grape/grape) API, mounted on [Rack](https://github.com/rack/rack).
+This command creates a folder named `awesome_api` containing a the skeleton. With following structure:
 
-To run it, go into awesome_api folder, set it up and start the server
+```
+├── <Standards>
+├── api
+│   ├── base.rb           # the main API class, all other endpoints would be mounted in it
+│   ├── endpoints         # contains the endpoint file for a resource
+│   │   └── root.rb       # root is always available, it exposes all routes/endpoints, disable by comment out in base.rb
+│   └── entities          # contains the entity representation of the reource, if wanted
+│       └── route.rb
+├── config                # base configuration
+│   └── …
+├── config.ru             # Rack it up
+├── lib                   # contains the additional lib file for a resource
+│   ├── api
+│   │   └── version.rb
+│   └── api.rb
+├── script                # setup / server / test etc.
+│   └── …
+└── spec                  # RSpec
+    └── …
+```
+
+To run it, go into awesome_api folder, start the server
 ```
 $ cd awesome_api
 $ ./script/server
