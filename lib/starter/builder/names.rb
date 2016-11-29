@@ -23,6 +23,11 @@ module Starter
       File.join(Dir.getwd, 'api', 'endpoints', base_file_name)
     end
 
+    # resource file
+    def entity_file_name
+      File.join(Dir.getwd, 'api', 'entities', base_file_name)
+    end
+
     # lib file
     def lib_file_name
       File.join(Dir.getwd, 'lib', 'api', base_file_name)
