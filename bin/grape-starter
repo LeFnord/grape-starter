@@ -17,7 +17,7 @@ subcommand_option_handling :normal
 arguments :strict
 
 desc 'overwrites existend stuff'
-switch [:f, :force], :negatable => false
+switch [:f, :force], negatable: false
 
 desc 'Create initial grape api skeleton'
 arg_name 'project name'
@@ -53,7 +53,7 @@ desc 'Adds a new resource - run from inside the project'
 long_desc "run this command from inside the project
 hereby the the given resource name
 can be given in form of
-'foo(s)', 'foo_bar(s)', foo-bar(s), 'foo/bars'"
+'foo(s)', 'foo_bar(s)', foo-bar(s), 'foo/bar(s)'"
 arg_name 'resource [post* get* put* patch* delete*]'
 command :add do |c|
   c.action do |global_options, options, args|
