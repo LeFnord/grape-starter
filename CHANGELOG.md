@@ -1,5 +1,8 @@
 ### Next
 
+### 0.1.7
+
+
 ### 0.1.6
 
 - corrects adding of endpoints, if no http verb was given
