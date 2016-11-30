@@ -2,6 +2,8 @@
 
 ### 0.1.6
 
+- corrects adding of endpoints, if no http verb was given
+
 ### 0.1.5
 
 - adds flag for entity creating

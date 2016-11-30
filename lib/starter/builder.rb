@@ -68,7 +68,7 @@ module Starter
 
       def endpoint_set
         crud_set = singular? ? singular_one : crud
-        return crud_set if set.nil?
+        return crud_set if set.blank?
 
         crud_set.each_with_object([]) { |x, memo| set.map { |y| memo << x if x.to_s.start_with?(y) } }
       end
