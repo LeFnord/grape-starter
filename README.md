@@ -18,26 +18,26 @@ $ gem install grape-starter
 $ grape-starter new awesome_api
 ```
 
-This command creates a folder named `awesome_api` containing a the skeleton. With following structure:
+This command creates a folder named `awesome_api` containing the skeleton. With following structure:
 
 ```
 ├── <Standards>
 ├── api
-│   ├── base.rb           # the main API class, all other endpoints would be mounted in it
-│   ├── endpoints         # contains the endpoint file for a resource
-│   │   └── root.rb       # root is always available, it exposes all routes/endpoints, disable by comment out in base.rb
-│   └── entities          # contains the entity representation of the reource, if wanted
+│   ├── base.rb        # the main API class, all other endpoints would be mounted in it
+│   ├── endpoints      # contains the endpoint file for a resource
+│   │   └── root.rb    # root is always available, it exposes all routes/endpoints, disable by comment out in base.rb
+│   └── entities       # contains the entity representation of the reource, if wanted
 │       └── route.rb
-├── config                # base configuration
+├── config             # base configuration
 │   └── …
-├── config.ru             # Rack it up
-├── lib                   # contains the additional lib file for a resource
+├── config.ru          # Rack it up
+├── lib                # contains the additional lib file for a resource
 │   ├── api
 │   │   └── version.rb
 │   └── api.rb
-├── script                # setup / server / test etc.
+├── script             # setup / server / test etc.
 │   └── …
-└── spec                  # RSpec
+└── spec               # RSpec
     └── …
 ```
 
@@ -48,7 +48,7 @@ $ ./script/server
 ```
 the API is now accessible under: [http://localhost:9292/api/v1/root](http://localhost:9292/api/v1/root)
 
-More could be found [README](template/README.md)
+More could be found in [README](template/README.md).
 
 #### Add resources
 ```
