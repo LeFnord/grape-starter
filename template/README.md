@@ -1,10 +1,8 @@
+# adept it to your needs
+
 # Grape API on Rack
 
-A [Grape](http://github.com/ruby-grape/grape) API mounted on [Rack](https://github.com/rack/rack), as starting point for API development with Grape. It also includes [grape-swagger](http://github.com/ruby-grape/grape-swagger) for documentation generating.
-
-## Why?
-
-TODO: describe the reasons and benefits of this gem …
+A [Grape](http://github.com/ruby-grape/grape) API mounted on [Rack](https://github.com/rack/rack), starting point for API development with Grape. It also includes [grape-swagger](http://github.com/ruby-grape/grape-swagger) for documentation generating.
 
 
 ## Usage
@@ -31,7 +29,7 @@ $ ./script/server
 
 or for production, set `RACK_ENV=production`
 ```
-$ RACK_ENV=production ./script/server
+$ export RACK_ENV=production ./script/server
 ```
 
 #### Update
