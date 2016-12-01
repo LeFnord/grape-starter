@@ -1,5 +1,7 @@
 [![Codeship Status for LeFnord/grape-starter](https://app.codeship.com/projects/91e08e60-9600-0134-5571-4a8607aa1ae3/status?branch=master)](https://app.codeship.com/projects/186901)
 [![Gem Version](https://badge.fury.io/rb/grape-starter.svg)](https://badge.fury.io/rb/grape-starter)
+[![Inline docs](http://inch-ci.org/github/LeFnord/grape-starter.svg?branch=master)](http://inch-ci.org/github/LeFnord/grape-starter)
+
 # Grape Starter
 
 Is a tool to help you to build up a skeleton for a [Grape](http://github.com/ruby-grape/grape) API mounted on [Rack](https://github.com/rack/rack) ready to run.
