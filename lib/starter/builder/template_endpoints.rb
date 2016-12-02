@@ -64,7 +64,7 @@ module Starter
           params do
             requires :id
           end
-          #{verb} :id do
+          #{verb} ':id' do
             # your code goes here
           end"
         end

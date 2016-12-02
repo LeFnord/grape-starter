@@ -7,13 +7,6 @@ RSpec.describe Starter::Builder do
 
   subject { described_class }
 
-  specify do
-    # require 'pry'; binding.pry
-    # print subject.api_file
-    # print "\n"
-    # print subject.lib_file
-  end
-
   specify { expect(subject).to respond_to :resource }
   specify { expect(subject).to respond_to :endpoints }
 

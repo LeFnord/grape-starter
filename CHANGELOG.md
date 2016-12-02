@@ -2,6 +2,7 @@
 
 ### 0.1.7
 
+- corrects path param for specific endpoints
 
 ### 0.1.6
 
