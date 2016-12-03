@@ -2,8 +2,11 @@
 ENV['RACK_ENV'] ||= 'test'
 
 require 'rack/test'
-
 require File.expand_path('../../config/environment', __FILE__)
+
+grape_starter_gem = Gem::Specification.find_by_name('grape-starter').gem_dir
+
+Dir[grape_starter_gem + '/lib/starter/rspec/**/*.rb'].each { |f| require f }
 
 RSpec.configure do |config|
   config.color = true

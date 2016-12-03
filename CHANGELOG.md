@@ -1,6 +1,6 @@
-### Next
+### 0.1.8
 
-- contributions
+- adds request specs shared examples
 
 ### 0.1.7
 

@@ -29,14 +29,16 @@ module Starter
         end
 
         add_moint_point
+
+        files_to_save.map { |x| send("#{x}_name") }
       end
 
       def endpoints
-        endpoint_object.join("\n\n")
+        content(endpoint_set).join("\n\n")
       end
 
-      def endpoint_object
-        enpoint_preparation(endpoint_set, 4)
+      def endpoint_specs
+        content(endpoint_set.map { |x| "#{x}_spec" }).join("\n")
       end
 
       private
@@ -73,14 +75,8 @@ module Starter
         crud_set.each_with_object([]) { |x, memo| set.map { |y| memo << x if x.to_s.start_with?(y) } }
       end
 
-      def enpoint_preparation(set, deep)
-        set.map { |x| send(x) }.map { |x| indent(x, deep) }
-      end
-
-      def indent(endpoint, deep)
-        indentation = ' ' * deep
-
-        endpoint.split("\n").map { |x| x.prepend(indentation) }.join("\n")
+      def content(set)
+        set.map { |x| send(x) }
       end
     end
   end

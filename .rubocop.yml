@@ -13,10 +13,16 @@ Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
 
+Metrics/LineLength:
+  Max: 120
+
 Style/AccessorMethodName:
   Exclude:
     - 'lib/starter/builder/template_files.rb'
     - 'lib/starter/builder/template_endpoints.rb'
+
+Style/AsciiComments:
+  Enabled: false
 
 Style/IndentationWidth:
   Exclude:

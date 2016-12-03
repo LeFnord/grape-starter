@@ -53,7 +53,7 @@ desc 'Adds a new resource - run from inside the project'
 long_desc "run this command from inside the project
 hereby the the given resource name
 can be given in form of
-'foo(s)', 'foo_bar(s)', foo-bar(s), 'foo/bar(s)'"
+'foo(s)', 'foo_bar(s)''"
 arg_name 'resource [post* get* put* patch* delete*]'
 command :add do |c|
   c.desc 'adds entity file'
@@ -69,8 +69,9 @@ command :add do |c|
     begin
       builder_options = global_options.merge(set: set).merge(options)
       Starter::Builder.call!(resource, builder_options)
-      Starter::Builder.save
-      `bundle exec rubocop -a`
+      created_files = Starter::Builder.save
+
+      `bundle exec rubocop -a #{created_files.join(' ')}`
       $stdout.puts "added resource: #{resource}"
     rescue => e
       exit_now! e

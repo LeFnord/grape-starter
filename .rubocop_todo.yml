@@ -7,15 +7,6 @@
 # versions of RuboCop, may require this file to be generated again.
 
 # Offense count: 1
-# Configuration parameters: AllowHeredoc, AllowURI, URISchemes.
-# URISchemes: http, https
-Metrics/LineLength:
-  Max: 120
-
-# Offense count: 1
 # Configuration parameters: CountComments.
 Metrics/MethodLength:
   Max: 13
-
-Style/AsciiComments:
-  Enabled: false
