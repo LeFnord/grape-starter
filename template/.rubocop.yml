@@ -10,3 +10,6 @@ AllCops:
 Metrics/BlockLength:
   Exclude:
     - 'api/endpoints/**/*'
+
+Metrics/LineLength:
+  Max: 120

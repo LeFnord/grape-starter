@@ -24,7 +24,7 @@ module Starter
         )
       end
 
-      # available APT/HTTP methods
+      # available API/HTTP methods
       # POST
       def post
         "
@@ -66,7 +66,30 @@ module Starter
           end
           #{verb} ':id' do
             # your code goes here
+            present :params, params
           end"
+        end
+      end
+
+      # request specs shared examples
+      #
+      def post_spec
+        "it_behaves_like 'POST', base_path: '/api/v1', resource: '#{resource}'"
+      end
+
+      def get_all_spec
+        "it_behaves_like 'GET all', base_path: '/api/v1', resource: resource"
+      end
+
+      %w(get put patch delete).each do |verb|
+        define_method(:"#{verb}_one_spec") do
+          "it_behaves_like '#{verb.upcase} one', base_path: '/api/v1', resource: '#{resource}'"
+        end
+      end
+
+      %w(get put patch delete).each do |verb|
+        define_method(:"#{verb}_specific_spec") do
+          "it_behaves_like '#{verb.upcase} specific', base_path: '/api/v1', resource: '#{resource}', key: 1"
         end
       end
     end

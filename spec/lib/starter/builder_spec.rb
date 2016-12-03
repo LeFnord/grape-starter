@@ -174,7 +174,7 @@ RSpec.describe Starter::Builder do
       end
     end
 
-    describe 'standard' do
+    describe 'standard plus entity' do
       subject { described_class.call! single, entity: true }
 
       let(:files) { subject.send(:files_to_save) }
