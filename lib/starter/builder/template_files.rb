@@ -52,7 +52,6 @@ module Starter
         require 'spec_helper'
 
         RSpec.describe Api::#{klass_name} do
-          pending 'write specs'
           #{endpoint_specs}
         end
         FILE
