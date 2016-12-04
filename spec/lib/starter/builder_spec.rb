@@ -164,11 +164,11 @@ RSpec.describe Starter::Builder do
     end
   end
 
-  describe '#files_to_save' do
+  describe '#file_list' do
     describe 'standard' do
       subject { described_class.call! single }
 
-      let(:files) { subject.send(:files_to_save) }
+      let(:files) { subject.send(:file_list) }
       specify do
         expect(files).to eql %w(api_file lib_file api_spec lib_spec)
       end
@@ -177,7 +177,7 @@ RSpec.describe Starter::Builder do
     describe 'standard plus entity' do
       subject { described_class.call! single, entity: true }
 
-      let(:files) { subject.send(:files_to_save) }
+      let(:files) { subject.send(:file_list) }
       specify do
         expect(files).to eql %w(api_file lib_file api_spec lib_spec entity_file)
       end

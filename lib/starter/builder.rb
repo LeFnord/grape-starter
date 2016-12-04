@@ -23,14 +23,21 @@ module Starter
         self
       end
 
+      def remove!(resource)
+        @resource = resource
+
+        files_to_remove = file_list.map { |x| send("#{x}_name") }
+        FileUtils.rm files_to_remove
+      end
+
       def save
-        files_to_save.each do |new_file|
+        file_list.each do |new_file|
           save_file(new_file)
         end
 
         add_moint_point
 
-        files_to_save.map { |x| send("#{x}_name") }
+        file_list.map { |x| send("#{x}_name") }
       end
 
       def endpoints
@@ -43,7 +50,7 @@ module Starter
 
       private
 
-      def files_to_save
+      def file_list
         standards = %w(api_file lib_file api_spec lib_spec)
 
         entity ? standards + ['entity_file'] : standards
