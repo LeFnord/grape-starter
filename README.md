@@ -2,6 +2,7 @@
 [![Gem Version](https://badge.fury.io/rb/grape-starter.svg)](https://badge.fury.io/rb/grape-starter)
 [![Inline docs](http://inch-ci.org/github/LeFnord/grape-starter.svg?branch=master)](http://inch-ci.org/github/LeFnord/grape-starter)
 
+
 # Grape Starter
 
 Is a tool to help you to build up a skeleton for a [Grape](http://github.com/ruby-grape/grape) API mounted on [Rack](https://github.com/rack/rack) ready to run.
@@ -14,6 +15,7 @@ Is a tool to help you to build up a skeleton for a [Grape](http://github.com/rub
 ```
 $ gem install grape-starter
 ```
+
 
 #### Create a new project
 ```
@@ -52,6 +54,7 @@ the API is now accessible under: [http://localhost:9292/api/v1/root](http://loca
 
 More could be found in [README](template/README.md).
 
+
 #### Add resources
 ```
 $ grape-starter add foo
@@ -59,6 +62,14 @@ $ grape-starter add foo
 to add CRUD endpoints for resource foo. For more options, see command help.
 
 This adds endpoint and lib file and belonging specs, and a mount entry in base.rb.
+
+
+#### Remove a resource
+```
+$ grape-starter remove foo
+```
+to remove previous generated files for a resource.
+
 
 ## Contributing
 
