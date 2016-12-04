@@ -78,7 +78,7 @@ module Starter
       end
 
       def get_all_spec
-        "it_behaves_like 'GET all', base_path: '/api/v1', resource: resource"
+        "it_behaves_like 'GET all', base_path: '/api/v1', resource: '#{resource}'"
       end
 
       %w(get put patch delete).each do |verb|
