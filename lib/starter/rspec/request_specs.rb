@@ -21,8 +21,6 @@ RSpec.shared_examples 'plural CRUD' do |base_path: '/api/v1', resource: '', key:
   it_behaves_like 'DELETE specific', base_path: base_path, resource: resource, key: key
 end
 
-# singular forms
-#
 RSpec.shared_examples 'POST' do |base_path: '/api/v1', resource: ''|
   let(:route) { "#{base_path}/#{resource}" }
 
@@ -30,6 +28,15 @@ RSpec.shared_examples 'POST' do |base_path: '/api/v1', resource: ''|
   specify { expect(subject.status).to eql 201 }
 end
 
+RSpec.shared_examples 'GET all' do |base_path: '/api/v1', resource: ''|
+  let(:route) { "#{base_path}/#{resource}" }
+
+  subject { get route }
+  specify { expect(subject.status).to eql 200 }
+end
+
+# singular forms
+#
 RSpec.shared_examples 'GET one' do |base_path: '/api/v1', resource: ''|
   let(:route) { "#{base_path}/#{resource}" }
 
@@ -60,22 +67,6 @@ end
 
 # plural forms
 #
-RSpec.shared_examples 'POST' do |base_path: '/api/v1', resource: '', key: nil|
-  let(:route) { "#{base_path}/#{resource}" }
-  let(:specific_route) { "#{route}/#{key}" }
-
-  subject { post route }
-  specify { expect(subject.status).to eql 201 }
-end
-
-RSpec.shared_examples 'GET all' do |base_path: '/api/v1', resource: '', key: nil|
-  let(:route) { "#{base_path}/#{resource}" }
-  let(:specific_route) { "#{route}/#{key}" }
-
-  subject { get route }
-  specify { expect(subject.status).to eql 200 }
-end
-
 RSpec.shared_examples 'GET specific' do |base_path: '/api/v1', resource: '', key: nil|
   let(:route) { "#{base_path}/#{resource}" }
   let(:specific_route) { "#{route}/#{key}" }
