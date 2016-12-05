@@ -23,11 +23,17 @@ module Starter
         self
       end
 
-      def remove!(resource)
+      def remove!(resource, options = {})
         @resource = resource
+        @entity = options[:entity]
 
-        files_to_remove = file_list.map { |x| send("#{x}_name") }
-        FileUtils.rm files_to_remove
+        file_list.map { |x| send("#{x}_name") }.each do |file_to_remove|
+          begin
+            FileUtils.rm file_to_remove
+          rescue => error
+            $stdout.puts error.to_s
+          end
+        end
       end
 
       def save
