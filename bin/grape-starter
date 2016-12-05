@@ -81,14 +81,14 @@ end
 desc 'Removes a resource - run from inside the project'
 arg_name 'resource'
 command :remove do |c|
-  # c.desc 'adds entity file'
-  # c.switch [:e, :entity], negatable: false
+  c.desc 'removes also entity file'
+  c.switch [:e, :entity], negatable: false
 
   c.action do |global_options, options, args|
     exit_now! 'no resource given' if args.empty?
     resource = args.first
 
-    Starter::Builder.remove!(resource)
+    Starter::Builder.remove!(resource, options)
 
     $stdout.puts "removed resource: #{resource}"
   end
