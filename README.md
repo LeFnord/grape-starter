@@ -66,7 +66,7 @@ This adds endpoint and lib file and belonging specs, and a mount entry in base.r
 
 #### Remove a resource
 ```
-$ grape-starter remove foo
+$ grape-starter rm foo
 ```
 to remove previous generated files for a resource.
 
