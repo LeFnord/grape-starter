@@ -37,13 +37,14 @@ module Starter
       end
 
       def save
-        file_list.each do |new_file|
+        created_files = file_list.each_with_object([]) do |new_file, memo|
+          memo << send("#{new_file}_name")
           save_file(new_file)
         end
 
         add_moint_point
 
-        file_list.map { |x| send("#{x}_name") }
+        created_files
       end
 
       def endpoints
