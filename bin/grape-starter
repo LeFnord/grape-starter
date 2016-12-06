@@ -69,7 +69,7 @@ command :add do |c|
       builder_options = global_options.merge(set: set).merge(options)
       Starter::Builder.call!(resource, builder_options)
       created_files = Starter::Builder.save
-
+      p created_files
       `bundle exec rubocop -a #{created_files.join(' ')}`
       $stdout.puts "added resource: #{resource}"
     rescue => e
@@ -80,7 +80,7 @@ end
 
 desc 'Removes a resource - run from inside the project'
 arg_name 'resource'
-command :remove do |c|
+command :rm do |c|
   c.desc 'removes also entity file'
   c.switch [:e, :entity], negatable: false
 

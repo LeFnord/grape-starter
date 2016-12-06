@@ -1,3 +1,9 @@
+### 0.2.2
+
+- renames `remove` to `rm`
+- adds params to POST, PUT and PATCH specs
+- removes duplication and warning
+
 ### 0.2.1
 
 - allows entity removing
