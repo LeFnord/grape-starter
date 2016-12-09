@@ -13,7 +13,14 @@ module Starter
 
     class << self
       attr_reader :resource, :set, :force, :entity
-
+      # would be called on add command
+      #
+      # resource - A String as name
+      # options - A Hash to provide some optional arguments (default: {})
+      #           :set – whitespace separated list of http verbs
+      #                 (default: nil, possible: post, get, put, patch, delete)
+      #           :force - A Boolean, if given existent files should be overwriten (default: nil -> false)
+      #           :entity - A Boolean, if given an entity file would be created (default: nil -> false)
       def call!(resource, options = {})
         @resource = resource
         @set = options[:set]
@@ -23,6 +30,24 @@ module Starter
         self
       end
 
+      # would also be called on add command,
+      # it saves the files
+      def save
+        created_files = file_list.each_with_object([]) do |new_file, memo|
+          memo << send("#{new_file}_name")
+          save_file(new_file)
+        end
+
+        add_mount_point
+
+        created_files
+      end
+
+      # would be called on rm command
+      #
+      # resource - A String, which indicates the resource to remove
+      # options - A Hash to provide some optional arguments (default: {})
+      #           :entity - A Boolean, if given an entity file would also be removed (default: nil -> false)
       def remove!(resource, options = {})
         @resource = resource
         @entity = options[:entity]
@@ -38,21 +63,12 @@ module Starter
         remove_mount_point
       end
 
-      def save
-        created_files = file_list.each_with_object([]) do |new_file, memo|
-          memo << send("#{new_file}_name")
-          save_file(new_file)
-        end
-
-        add_mount_point
-
-        created_files
-      end
-
+      # provides the endpoints for he given resource
       def endpoints
         content(endpoint_set).join("\n\n")
       end
 
+      # privdes the specs for the endpoints of the resource
       def endpoint_specs
         content(endpoint_set.map { |x| "#{x}_spec" }).join("\n")
       end
