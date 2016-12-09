@@ -30,11 +30,12 @@ module Starter
         file_list.map { |x| send("#{x}_name") }.each do |file_to_remove|
           begin
             FileUtils.rm file_to_remove
-            remove_mount_point
           rescue => error
             $stdout.puts error.to_s
           end
         end
+
+        remove_mount_point
       end
 
       def save

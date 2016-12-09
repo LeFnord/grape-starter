@@ -121,17 +121,19 @@ RSpec.describe Starter::Builder do
       "
     end
 
-    let(:moun_point) { "mount Endpoints::#{subject.klass_name}" }
+    before do
+      allow(subject).to receive(:klass_name).and_return('bar')
+    end
 
     describe '#add_to_base' do
       specify do
-        expect(subject.send(:add_to_base, base_without_resource)).to include moun_point
+        expect(subject.send(:add_to_base, base_without_resource)).to include subject.mount_point
       end
     end
 
     describe '#remove_from_base' do
       specify do
-        expect(subject.send(:remove_from_base, base_with_resource)).not_to include moun_point
+        expect(subject.send(:remove_from_base, base_with_resource)).not_to include subject.mount_point
       end
     end
   end
