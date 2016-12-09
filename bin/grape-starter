@@ -49,10 +49,11 @@ command :new do |c|
 end
 
 desc 'Adds a new resource - run from inside the project'
-long_desc "run this command from inside the project
-hereby the the given resource name
-can be given in form of
-'foo(s)', 'foo_bar(s)''"
+long_desc "
+params: \n
+resource - to add, it respects the numerus of it (required)\n
+http_verbs - specify which end-points should be created, if nothings given CRUD would be writen
+"
 arg_name 'resource [post* get* put* patch* delete*]'
 command :add do |c|
   c.desc 'adds entity file'

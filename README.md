@@ -59,7 +59,7 @@ More could be found in [README](template/README.md).
 ```
 $ grape-starter add foo
 ```
-to add CRUD endpoints for resource foo. For more options, see command help.
+to add CRUD endpoints for resource foo. For more options, see `grape-starter add -h`.
 
 This adds endpoint and lib file and belonging specs, and a mount entry in base.rb.
 
