@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+# frozen_string_literal: false
 require 'spec_helper'
 
 RSpec.describe Starter::Builder do
@@ -21,6 +21,119 @@ RSpec.describe Starter::Builder do
     specify { expect(subject.lib_file_name).to include 'lib/api/foo.rb' }
     specify { expect(subject.api_spec_name).to include 'spec/requests/foo_spec.rb' }
     specify { expect(subject.lib_spec_name).to include 'spec/lib/api/foo_spec.rb' }
+  end
+
+  describe '#file_list' do
+    describe 'standard' do
+      subject { described_class.call! single }
+
+      let(:files) { subject.send(:file_list) }
+      specify do
+        expect(files).to eql %w(api_file lib_file api_spec lib_spec)
+      end
+    end
+
+    describe 'standard plus entity' do
+      subject { described_class.call! single, entity: true }
+
+      let(:files) { subject.send(:file_list) }
+      specify do
+        expect(files).to eql %w(api_file lib_file api_spec lib_spec entity_file)
+      end
+    end
+  end
+
+  describe '#should_raise?' do
+    let(:file) { '/file/path' }
+
+    describe 'force false (default)' do
+      subject { described_class.call! single, set: ['get'] }
+
+      describe 'file not exist' do
+        specify { expect { subject.send(:should_raise?, file) }.not_to raise_error }
+      end
+
+      describe 'file exist' do
+        before(:each) { allow(File).to receive(:exist?).with(file).and_return true }
+
+        specify { expect { subject.send(:should_raise?, file) }.to raise_error '… resource exists' }
+      end
+    end
+
+    describe 'force true' do
+      subject { described_class.call! single, set: ['get'], force: true }
+
+      describe 'file not exist' do
+        specify { expect { subject.send(:should_raise?, file) }.not_to raise_error }
+      end
+
+      describe 'file exist' do
+        before(:each) { allow(File).to receive(:exist?).with(file).and_return true }
+
+        specify { expect { subject.send(:should_raise?, file) }.not_to raise_error }
+      end
+    end
+  end
+
+  describe 'manipulating API Base file' do
+    let(:base_without_resource) do
+      "
+      # frozen_string_literal: true
+      module Api
+        class Base < Grape::API
+          prefix :api
+          version 'v1', using: :path
+          format :json
+
+          mount Endpoints::Root
+          add_swagger_documentation format: :json,
+                                    info: {
+                                      title: 'Starter API'
+                                    },
+                                    models: [
+                                      Entities::ApiError
+                                    ]
+        end
+      end
+      "
+    end
+
+    let(:base_with_resource) do
+      "
+      # frozen_string_literal: true
+      module Api
+        class Base < Grape::API
+          prefix :api
+          version 'v1', using: :path
+          format :json
+
+          mount Endpoints::Root
+          mount Endpoints::#{subject.klass_name}
+          add_swagger_documentation format: :json,
+                                    info: {
+                                      title: 'Starter API'
+                                    },
+                                    models: [
+                                      Entities::ApiError
+                                    ]
+        end
+      end
+      "
+    end
+
+    let(:moun_point) { "mount Endpoints::#{subject.klass_name}" }
+
+    describe '#add_to_base' do
+      specify do
+        expect(subject.send(:add_to_base, base_without_resource)).to include moun_point
+      end
+    end
+
+    describe '#remove_from_base' do
+      specify do
+        expect(subject.send(:remove_from_base, base_with_resource)).not_to include moun_point
+      end
+    end
   end
 
   describe '#endpoint_set' do
@@ -128,58 +241,6 @@ RSpec.describe Starter::Builder do
           subject { described_class.call! plural, set: %w(post get delete) }
           specify { expect(set).to eql [:post, :get_all, :get_specific, :delete_specific] }
         end
-      end
-    end
-  end
-
-  describe '#should_raise?' do
-    let(:file) { '/file/path' }
-
-    describe 'force false (default)' do
-      subject { described_class.call! single, set: ['get'] }
-
-      describe 'file not exist' do
-        specify { expect { subject.send(:should_raise?, file) }.not_to raise_error }
-      end
-
-      describe 'file exist' do
-        before(:each) { allow(File).to receive(:exist?).with(file).and_return true }
-
-        specify { expect { subject.send(:should_raise?, file) }.to raise_error '… resource exists' }
-      end
-    end
-
-    describe 'force true' do
-      subject { described_class.call! single, set: ['get'], force: true }
-
-      describe 'file not exist' do
-        specify { expect { subject.send(:should_raise?, file) }.not_to raise_error }
-      end
-
-      describe 'file exist' do
-        before(:each) { allow(File).to receive(:exist?).with(file).and_return true }
-
-        specify { expect { subject.send(:should_raise?, file) }.not_to raise_error }
-      end
-    end
-  end
-
-  describe '#file_list' do
-    describe 'standard' do
-      subject { described_class.call! single }
-
-      let(:files) { subject.send(:file_list) }
-      specify do
-        expect(files).to eql %w(api_file lib_file api_spec lib_spec)
-      end
-    end
-
-    describe 'standard plus entity' do
-      subject { described_class.call! single, entity: true }
-
-      let(:files) { subject.send(:file_list) }
-      specify do
-        expect(files).to eql %w(api_file lib_file api_spec lib_spec entity_file)
       end
     end
   end

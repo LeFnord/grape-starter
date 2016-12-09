@@ -30,6 +30,7 @@ module Starter
         file_list.map { |x| send("#{x}_name") }.each do |file_to_remove|
           begin
             FileUtils.rm file_to_remove
+            remove_mount_point
           rescue => error
             $stdout.puts error.to_s
           end
@@ -42,7 +43,7 @@ module Starter
           save_file(new_file)
         end
 
-        add_moint_point
+        add_mount_point
 
         created_files
       end
@@ -63,23 +64,27 @@ module Starter
         entity ? standards + ['entity_file'] : standards
       end
 
-      def save_file(new_file)
-        new_file_name = "#{new_file}_name"
-        should_raise?(send(new_file_name))
-
-        File.open(send(new_file_name), 'w+') { |file| file.write(send(new_file.strip_heredoc)) }
-      end
-
       def should_raise?(file)
         raise StandardError, '… resource exists' if File.exist?(file) && !force
       end
 
-      def add_moint_point
-        file = File.read(api_base_file_name)
-        occurence = file.scan(/(\s+mount.*?\n)/).last.first
-        replacement = occurence + "    mount Endpoints::#{klass_name}\n"
-        file.sub!(occurence, replacement)
-        File.open(api_base_file_name, 'w') { |f| f.write(file) }
+      def add_mount_point
+        file = read_file(api_base_file_name)
+        add_to_base(file)
+        write_file(api_base_file_name, file)
+      end
+
+      def remove_mount_point
+        file = read_file(api_base_file_name)
+        remove_from_base(file)
+        write_file(api_base_file_name, file)
+      end
+
+      def save_file(new_file)
+        new_file_name = "#{new_file}_name"
+        should_raise?(send(new_file_name))
+
+        write_file(send(new_file_name), send(new_file.strip_heredoc))
       end
 
       def endpoint_set
@@ -87,6 +92,27 @@ module Starter
         return crud_set if set.blank?
 
         crud_set.each_with_object([]) { |x, memo| set.map { |y| memo << x if x.to_s.start_with?(y) } }
+      end
+
+      # manipulating API Base file
+      # … adding
+      def add_to_base(file)
+        occurence = file.scan(/(\s+mount.*?\n)/).last.first
+        replacement = occurence + mount_point
+        file.sub!(occurence, replacement)
+      end
+
+      # … removing
+      def remove_from_base(file)
+        file.sub!(mount_point, '')
+      end
+
+      def read_file(file)
+        File.read(file)
+      end
+
+      def write_file(file, content)
+        File.open(file, 'w') { |f| f.write(content) }
       end
 
       def content(set)

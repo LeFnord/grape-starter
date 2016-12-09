@@ -14,6 +14,10 @@ module Starter
       base_file_name.gsub(/.rb$/, '_spec.rb')
     end
 
+    def mount_point
+      "    mount Endpoints::#{klass_name}\n"
+    end
+
     def api_base_file_name
       File.join(Dir.getwd, 'api', 'base.rb')
     end
