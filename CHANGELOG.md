@@ -1,3 +1,13 @@
+### 0.2.4
+
+- fix: add mount point to api base
+- adds inch.yml
+- improves specs
+
+### 0.2.3
+
+- fix: removes mount point from api base
+
 ### 0.2.2
 
 - renames `remove` to `rm`

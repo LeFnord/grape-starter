@@ -10,3 +10,4 @@ Dockerfile
 tmp/
 .rspec
 pkg/
+template/Gemfile.lock

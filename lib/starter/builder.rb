@@ -114,7 +114,7 @@ module Starter
       # manipulating API Base file
       # … adding
       def add_to_base(file)
-        occurence = file.scan(/(\s+mount.*?\n)/).last.first
+        occurence = file.scan(/(\s+mount\s.*?\n)/).last.first
         replacement = occurence + mount_point
         file.sub!(occurence, replacement)
       end
