@@ -11,7 +11,7 @@ RSpec.describe Starter::Builder do
   specify { expect(subject).to respond_to :endpoints }
 
   describe 'Names methods' do
-    subject { described_class.call! single }
+    subject { described_class.add! single }
 
     specify { expect(subject.send(:singular?)).to be true }
     specify { expect(subject.klass_name).to eql 'Foo' }
@@ -25,7 +25,7 @@ RSpec.describe Starter::Builder do
 
   describe '#file_list' do
     describe 'standard' do
-      subject { described_class.call! single }
+      subject { described_class.add! single }
 
       let(:files) { subject.send(:file_list) }
       specify do
@@ -34,7 +34,7 @@ RSpec.describe Starter::Builder do
     end
 
     describe 'standard plus entity' do
-      subject { described_class.call! single, entity: true }
+      subject { described_class.add! single, entity: true }
 
       let(:files) { subject.send(:file_list) }
       specify do
@@ -47,7 +47,7 @@ RSpec.describe Starter::Builder do
     let(:file) { '/file/path' }
 
     describe 'force false (default)' do
-      subject { described_class.call! single, set: ['get'] }
+      subject { described_class.add! single, set: ['get'] }
 
       describe 'file not exist' do
         specify { expect { subject.send(:should_raise?, file) }.not_to raise_error }
@@ -61,7 +61,7 @@ RSpec.describe Starter::Builder do
     end
 
     describe 'force true' do
-      subject { described_class.call! single, set: ['get'], force: true }
+      subject { described_class.add! single, set: ['get'], force: true }
 
       describe 'file not exist' do
         specify { expect { subject.send(:should_raise?, file) }.not_to raise_error }
@@ -143,7 +143,7 @@ RSpec.describe Starter::Builder do
 
     describe 'CRUD methods' do
       describe 'plural' do
-        subject { described_class.call! plural }
+        subject { described_class.add! plural }
         let(:expected_set) do
           %i(
             post
@@ -158,7 +158,7 @@ RSpec.describe Starter::Builder do
       end
 
       describe 'single' do
-        subject { described_class.call! single }
+        subject { described_class.add! single }
         let(:expected_set) do
           %i(
             post
@@ -175,72 +175,72 @@ RSpec.describe Starter::Builder do
     describe 'methods specified' do
       describe 'POST' do
         describe 'single' do
-          subject { described_class.call! single, set: ['post'] }
+          subject { described_class.add! single, set: ['post'] }
           specify { expect(set).to eql [:post] }
         end
 
         describe 'plural' do
-          subject { described_class.call! plural, set: ['post'] }
+          subject { described_class.add! plural, set: ['post'] }
           specify { expect(set).to eql [:post] }
         end
       end
 
       describe 'GET' do
         describe 'single' do
-          subject { described_class.call! single, set: ['get'] }
+          subject { described_class.add! single, set: ['get'] }
           specify { expect(set).to eql [:get_one] }
         end
 
         describe 'plural' do
-          subject { described_class.call! plural, set: ['get'] }
+          subject { described_class.add! plural, set: ['get'] }
           specify { expect(set).to eql [:get_all, :get_specific] }
         end
       end
 
       describe 'PUT' do
         describe 'single' do
-          subject { described_class.call! single, set: ['put'] }
+          subject { described_class.add! single, set: ['put'] }
           specify { expect(set).to eql [:put_one] }
         end
 
         describe 'plural' do
-          subject { described_class.call! plural, set: ['put'] }
+          subject { described_class.add! plural, set: ['put'] }
           specify { expect(set).to eql [:put_specific] }
         end
       end
 
       describe 'PATCH' do
         describe 'single' do
-          subject { described_class.call! single, set: ['patch'] }
+          subject { described_class.add! single, set: ['patch'] }
           specify { expect(set).to eql [:patch_one] }
         end
 
         describe 'plural' do
-          subject { described_class.call! plural, set: ['patch'] }
+          subject { described_class.add! plural, set: ['patch'] }
           specify { expect(set).to eql [:patch_specific] }
         end
       end
 
       describe 'DELETE' do
         describe 'single' do
-          subject { described_class.call! single, set: ['delete'] }
+          subject { described_class.add! single, set: ['delete'] }
           specify { expect(set).to eql [:delete_one] }
         end
 
         describe 'plural' do
-          subject { described_class.call! plural, set: ['delete'] }
+          subject { described_class.add! plural, set: ['delete'] }
           specify { expect(set).to eql [:delete_specific] }
         end
       end
 
       describe 'multinple given' do
         describe 'single' do
-          subject { described_class.call! single, set: %w(post get delete) }
+          subject { described_class.add! single, set: %w(post get delete) }
           specify { expect(set).to eql [:post, :get_one, :delete_one] }
         end
 
         describe 'plural' do
-          subject { described_class.call! plural, set: %w(post get delete) }
+          subject { described_class.add! plural, set: %w(post get delete) }
           specify { expect(set).to eql [:post, :get_all, :get_specific, :delete_specific] }
         end
       end
