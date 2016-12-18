@@ -2,7 +2,7 @@
 require 'spec_helper'
 
 RSpec.describe Starter::Names do
-  subject { Starter::Builder.call!(resource) }
+  subject { Starter::Builder.add!(resource) }
 
   describe 'plural forms' do
     describe 'foos' do

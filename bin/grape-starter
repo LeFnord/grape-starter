@@ -67,7 +67,7 @@ command :add do |c|
 
     begin
       builder_options = global_options.merge(set: set).merge(options)
-      Starter::Builder.call!(resource, builder_options)
+      Starter::Builder.add!(resource, builder_options)
       created_files = Starter::Builder.save
 
       `bundle exec rubocop -a #{created_files.join(' ')}`

@@ -21,7 +21,7 @@ module Starter
       #                 (default: nil, possible: post, get, put, patch, delete)
       #           :force - A Boolean, if given existent files should be overwriten (default: nil -> false)
       #           :entity - A Boolean, if given an entity file would be created (default: nil -> false)
-      def call!(resource, options = {})
+      def add!(resource, options = {})
         @resource = resource
         @set = options[:set]
         @force = options[:force]
