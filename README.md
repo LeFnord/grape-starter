@@ -1,4 +1,4 @@
-[![Codeship Status for LeFnord/grape-starter](https://app.codeship.com/projects/91e08e60-9600-0134-5571-4a8607aa1ae3/status?branch=master)](https://app.codeship.com/projects/186901)
+[![Build Status](https://travis-ci.org/LeFnord/grape-starter.svg?branch=master)](https://travis-ci.org/LeFnord/grape-starter)
 [![Gem Version](https://badge.fury.io/rb/grape-starter.svg)](https://badge.fury.io/rb/grape-starter)
 [![Inline docs](http://inch-ci.org/github/LeFnord/grape-starter.svg?branch=master)](http://inch-ci.org/github/LeFnord/grape-starter)
 
@@ -6,8 +6,14 @@
 # Grape Starter
 
 Is a tool to help you to build up a skeleton for a [Grape](http://github.com/ruby-grape/grape) API mounted on [Rack](https://github.com/rack/rack) ready to run.
-[grape-swagger](http://github.com/ruby-grape/grape-swagger) would be used to generate a  [OAPI](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md) compatible documentation.
+[grape-swagger](http://github.com/ruby-grape/grape-swagger) would be used to generate a  [OAPI](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md) compatible documentation, which could be shown with [ReDoc](https://github.com/Rebilly/ReDoc).
 
+
+## Why the next one?
+
+- build up a playground for your ideas, prototypes, testing behaviour, whatever …  
+  (I use it to implement specific behaviour and get specs of for [grape-swagger](http://github.com/ruby-grape/grape-swagger))
+- no assumtions about a backend/ORM, ergo no restrictions, only a pure grape/rack skeleton
 
 ## Usage
 
@@ -39,6 +45,8 @@ This command creates a folder named `awesome_api` containing the skeleton. With 
 │   ├── api
 │   │   └── version.rb
 │   └── api.rb
+├── public             # for serving static files
+│   └── redoc.html     # provides the ReDoc generated oapi documentation
 ├── script             # setup / server / test etc.
 │   └── …
 └── spec               # RSpec
@@ -50,7 +58,8 @@ To run it, go into awesome_api folder, start the server
 $ cd awesome_api
 $ ./script/server
 ```
-the API is now accessible under: [http://localhost:9292/api/v1/root](http://localhost:9292/api/v1/root)
+the API is now accessible under: [http://localhost:9292/api/v1/root](http://localhost:9292/api/v1/root)  
+the documentation of it under: [http://localhost:9292/](http://localhost:9292/)
 
 More could be found in [README](template/README.md).
 

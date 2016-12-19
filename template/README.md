@@ -1,6 +1,6 @@
 # adept it to your needs
 
-# Grape API on Rack
+## Your awesome API
 
 A [Grape](http://github.com/ruby-grape/grape) API mounted on [Rack](https://github.com/rack/rack), starting point for API development with Grape. It also includes [grape-swagger](http://github.com/ruby-grape/grape-swagger) for documentation generating.
 
@@ -14,7 +14,6 @@ $ git clone git@github.com:LeFnord/grape-starter.git
 $ cd grape-starter
 $ ./script/setup
 ```
-and go to: [http://localhost:9292](http://localhost:9292)
 
 #### Test
 
@@ -27,6 +26,7 @@ $ ./script/test
 ```
 $ ./script/server
 ```
+and go to: [http://localhost:9292](http://localhost:9292)
 
 or for production, set `RACK_ENV=production`
 ```
@@ -47,18 +47,21 @@ $ ./script/update
 $ ./script/stop
 ```
 
-
 ## Rake Tasks
 
 #### List Routes
 
 ```
-rake grape:routes
+rake routes
 ```
 
 #### OpenApi Documentation and Validation
 
--> see [`grape-swagger` Rake Tasks](https://github.com/ruby-grape/grape-swagger#rake-tasks)
+```
+rake oapi:fetch
+rake oapi:validate
+```
+comming from: [`grape-swagger` Rake Tasks](https://github.com/ruby-grape/grape-swagger#rake-tasks)
 
 
 ## Contributing
