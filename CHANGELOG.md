@@ -1,3 +1,11 @@
+### NEXT
+
+### 0.3.0
+
+- adds redoc oapi documentation viewer
+- default rake task now only spec, rubocop would be done via hound
+- adds hound ci service
+
 ### 0.2.4
 
 - fix: add mount point to api base
