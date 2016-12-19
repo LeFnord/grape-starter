@@ -14,6 +14,7 @@ $ git clone git@github.com:LeFnord/grape-starter.git
 $ cd grape-starter
 $ ./script/setup
 ```
+and go to: [http://localhost:9292](http://localhost:9292)
 
 #### Test
 

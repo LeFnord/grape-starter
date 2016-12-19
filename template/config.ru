@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'rack/cors'
 use Rack::Cors do
   allow do
@@ -6,6 +7,9 @@ use Rack::Cors do
     resource '*', headers: :any, methods: [:get, :post, :put, :delete, :options]
   end
 end
+
+require 'rack/static'
+use Rack::Static, urls: '/', root: 'public', index: 'redoc.html'
 
 require File.expand_path('../config/application', __FILE__)
 

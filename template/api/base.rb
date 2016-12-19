@@ -11,6 +11,7 @@ module Api
                               info: {
                                 title: 'Starter API'
                               },
+                              mount_path: '/oapi',
                               models: [
                                 Entities::ApiError
                               ]
