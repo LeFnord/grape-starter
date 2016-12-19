@@ -100,7 +100,6 @@ module Starter
       def save_file(new_file)
         new_file_name = "#{new_file}_name"
         should_raise?(send(new_file_name))
-
         write_file(send(new_file_name), send(new_file.strip_heredoc))
       end
 
