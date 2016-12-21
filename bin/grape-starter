@@ -19,11 +19,9 @@ arguments :strict
 desc 'overwrites existend stuff'
 switch [:f, :force], negatable: false
 
-desc 'Create initial grape api skeleton'
-arg_name 'project name'
-
+desc 'Creates initial api skeleton'
+arg_name 'awesome_api'
 command :new do |c|
-
   c.action do |global_options, _, args|
     dest = args.empty? ? nil : File.join(Dir.getwd, args.first)
 
@@ -49,12 +47,9 @@ command :new do |c|
   end
 end
 
-desc 'Adds a new resource - run from inside the project'
-long_desc "
-params: \n
-resource - to add, it respects the numerus of it (required)\n
-http_verbs - specify which end-points should be created, if nothings given CRUD would be writen
-"
+desc 'Adds given new resource'
+long_desc "Adds given resource, hereby the numerus of the provided
+resource would be respected to create singular or plural endpoints"
 arg_name 'resource [post* get* put* patch* delete*]'
 command :add do |c|
   c.desc 'adds entity file'
@@ -79,7 +74,7 @@ command :add do |c|
   end
 end
 
-desc 'Removes a resource - run from inside the project'
+desc 'Removes given resource'
 arg_name 'resource'
 command :rm do |c|
   c.desc 'removes also entity file'
