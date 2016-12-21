@@ -25,25 +25,26 @@ arg_name 'project name'
 command :new do |c|
 
   c.action do |global_options, _, args|
-    dir = args.empty? ? nil : File.join(Dir.getwd, args.first)
+    dest = args.empty? ? nil : File.join(Dir.getwd, args.first)
 
     case
-    when args.empty? || dir.nil?
-      exit_now! 'no name given: starter new project'
-    when Dir.exist?(dir) && !global_options[:force]
+    when args.empty? || dest.nil?
+      exit_now! 'no name given: grape-starter new project'
+    when Dir.exist?(dest) && !global_options[:force]
       exit_now! 'project exist: -f to overwrite'
-    end
+    else
+      starter_gem = Gem::Specification.find_by_name('grape-starter').gem_dir
+      src = File.join(starter_gem, 'template', '.')
 
-    $stdout.puts "created: #{args.first}"
-    starter_gem = Gem::Specification.find_by_name('grape-starter').gem_dir
+      Starter::Builder.new!(args.first, src, dest)
+      $stdout.puts "created: #{args.first}"
 
-    src = File.join(starter_gem, 'template', '.')
-    FileUtils.copy_entry src, dir
-
-    FileUtils.cd(dir) do
-      $stdout.puts `bundle install`
-      $stdout.puts `bundle exec rubocop -a`
-      $stdout.puts `git init`
+      # after creating tasks
+      FileUtils.cd(dest) do
+        $stdout.puts `bundle install`
+        $stdout.puts `bundle exec rubocop -a`
+        $stdout.puts `git init`
+      end
     end
   end
 end

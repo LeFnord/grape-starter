@@ -57,7 +57,7 @@ This command creates a folder named `awesome_api` containing the skeleton. With 
 To run it, go into awesome_api folder, start the server
 ```
 $ cd awesome_api
-$ ./script/server
+$ ./script/server *port
 ```
 the API is now accessible under: [http://localhost:9292/api/v1/root](http://localhost:9292/api/v1/root)  
 the documentation of it under: [http://localhost:9292/](http://localhost:9292/)
@@ -89,3 +89,8 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/LeFnor
 ## License
 
 The gem is available as open source under the terms of the [MIT License](LICENSE).
+
+### ToDos
+
+- [x] make scripts more configurable
+- [ ] add logging
