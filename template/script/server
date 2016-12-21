@@ -7,8 +7,14 @@ cd "$(dirname "$0")/.."
 test -z "$RACK_ENV" &&
   RACK_ENV='development'
 
-if [ "$RACK_ENV" = 'production' ]; then
-  bundle exec thin start -p 9292 -e $RACK_ENV --tag api-starter -d --threaded
+if [ $1 ]; then
+  port=$1
 else
-  bundle exec thin start -p 9292 -e $RACK_ENV --tag api-starter -V -D
+  port=9292
+fi
+
+if [ "$RACK_ENV" = 'production' ]; then
+  bundle exec thin start -p $port -e $RACK_ENV --tag {{{grape-starter}}} -d --threaded
+else
+  bundle exec thin start -p $port -e $RACK_ENV --tag {{{grape-starter}}} -V -D
 fi

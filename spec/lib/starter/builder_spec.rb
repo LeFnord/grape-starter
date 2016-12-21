@@ -8,7 +8,16 @@ RSpec.describe Starter::Builder do
   subject { described_class }
 
   specify { expect(subject).to respond_to :resource }
-  specify { expect(subject).to respond_to :endpoints }
+  specify { expect(subject).to respond_to :set }
+  specify { expect(subject).to respond_to :force }
+  specify { expect(subject).to respond_to :entity }
+  specify { expect(subject).to respond_to :destination }
+
+  describe 'public methods' do
+    it { is_expected.to respond_to :new! }
+    it { is_expected.to respond_to :add! }
+    it { is_expected.to respond_to :remove! }
+  end
 
   describe 'Names methods' do
     subject { described_class.add! single }
