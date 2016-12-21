@@ -2,4 +2,5 @@ files:
   excluded:
     - lib/starter/builder/template_endpoints.rb
     - lib/starter/builder/template_files.rb
+    - lib/starter/builder/names.rb
     - lib/starter/rake/grape_tasks.rb

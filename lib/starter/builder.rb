@@ -14,11 +14,7 @@ module Starter
     class << self
       attr_reader :resource, :set, :force, :entity, :destination
 
-      # would be called on new command
-      # it should do following
-      # 1. copying the template to the new destination
-      # 2. replace names in …
-      #   - script/server
+      # would be called from new command
       #
       # name - A String as project name
       # source - A String which provides the template path
@@ -29,10 +25,10 @@ module Starter
 
         FileUtils.copy_entry source, destination
 
-        replace_static(File.join('script','server'))
+        replace_static(File.join('script', 'server'))
       end
 
-      # would be called on add command
+      # would be called from add command
       #
       # resource - A String as name
       # options - A Hash to provide some optional arguments (default: {})
@@ -49,7 +45,8 @@ module Starter
         self
       end
 
-      # it saves the files
+      #
+      # … it saves the files
       def save
         created_files = file_list.each_with_object([]) do |new_file, memo|
           memo << send("#{new_file}_name")
@@ -61,7 +58,7 @@ module Starter
         created_files
       end
 
-      # would be called on rm command
+      # would be called on from command
       #
       # resource - A String, which indicates the resource to remove
       # options - A Hash to provide some optional arguments (default: {})
@@ -86,14 +83,21 @@ module Starter
         content(endpoint_set).join("\n\n")
       end
 
-      # privdes the specs for the endpoints of the resource
+      # provides the specs for the endpoints of the resource
       def endpoint_specs
         content(endpoint_set.map { |x| "#{x}_spec" }).join("\n")
       end
 
       private
 
-      # provides an array of endpoints to for the new resource
+      # get content for and save new resource files
+      def save_file(new_file)
+        new_file_name = "#{new_file}_name"
+        should_raise?(send(new_file_name))
+        write_file(send(new_file_name), send(new_file.strip_heredoc))
+      end
+
+      # provides an array of endpoints for the new resource
       def endpoint_set
         crud_set = singular? ? singular_one : crud
         return crud_set if set.blank?
@@ -108,44 +112,39 @@ module Starter
         entity ? standards + ['entity_file'] : standards
       end
 
-      # raises if resource exist and force == false
+      # raises if resource exist and force false
       def should_raise?(file)
         raise StandardError, '… resource exists' if File.exist?(file) && !force
       end
 
-      # add project name to static files
+      # replace something in exitend files
+      #
+      # will be called on project creation
+      #
+      # … static files such as under script folder,
       def replace_static(file)
         server_file = File.join(destination, file)
 
         file_foo(server_file) { |content| content.gsub!('{{{grape-starter}}}', "API-#{resource}") }
       end
 
+      # will be called an resource creation
+      #
+      # … add it in api base
       def add_mount_point
         file_foo(api_base_file_name) { |content| add_to_base(content) }
       end
 
-      def remove_mount_point
-        file_foo(api_base_file_name) { |content| remove_from_base(content) }
-      end
-
-      def file_foo(file)
-        content = read_file(file)
-        yield content
-        write_file(file, content)
-      end
-
-      def save_file(new_file)
-        new_file_name = "#{new_file}_name"
-        should_raise?(send(new_file_name))
-        write_file(send(new_file_name), send(new_file.strip_heredoc))
-      end
-
-      # manipulating API Base file
       # … adding
       def add_to_base(file)
         occurence = file.scan(/(\s+mount\s.*?\n)/).last.first
         replacement = occurence + mount_point
         file.sub!(occurence, replacement)
+      end
+
+      # … remove it in api base
+      def remove_mount_point
+        file_foo(api_base_file_name) { |content| remove_from_base(content) }
       end
 
       # … removing
@@ -154,12 +153,19 @@ module Starter
       end
 
       # content of the given set of files,
-      # returns an array of string
       def content(set)
         set.map { |x| send(x) }
       end
 
-      # general file
+      # general file stuff
+      #
+      # … reading and writing content
+      def file_foo(file)
+        content = read_file(file)
+        yield content
+        write_file(file, content)
+      end
+
       # … read
       def read_file(file)
         File.read(file)
