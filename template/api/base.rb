@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 module Api
   class Base < Grape::API
+    # !!! a prefix is always required
     prefix :api
     version 'v1', using: :path
     format :json

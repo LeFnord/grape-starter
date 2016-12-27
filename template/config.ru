@@ -12,8 +12,4 @@ end
 
 require File.expand_path('../config/application', __FILE__)
 
-app = App.new
-app.map '/', DocApp.new
-app.map '/api', Api::Base
-
-run app
+run App.new
