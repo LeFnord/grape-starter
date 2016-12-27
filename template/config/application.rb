@@ -22,18 +22,12 @@ end
 require 'base'
 
 require 'rack'
-
 # provides the documentation of the API
 class DocApp
+  attr_reader :env
   def call(env)
-    [200, { 'Content-Type' => 'text/html' }, [re_doc(env)]]
-  end
-
-  def re_doc(env)
-    doc = template.sub('{{{server}}}', env['SERVER_NAME'])
-    doc = doc.sub('{{{port}}}', env['SERVER_PORT'])
-
-    doc
+    @env = env
+    [200, { 'Content-Type' => 'text/html' }, [template]]
   end
 
   def template
@@ -42,18 +36,21 @@ class DocApp
       <head>
         <title>ReDoc API documentation</title>
         <meta name='viewport' content='width=device-width, initial-scale=1'>
-        <style>
-          body {
-            margin: 0;
-            padding: 0;
-          }
-        </style>
+        <style>body {margin: 0;padding: 0;}</style>
       </head>
       <body>
-        <redoc spec-url='http://{{{server}}}:{{{port}}}/api/v1/oapi.json'></redoc>
+        <redoc spec-url='http://#{server}:#{port}/#{Api::Base.prefix}/#{Api::Base.version}/oapi.json'></redoc>
         <script src='https://rebilly.github.io/ReDoc/releases/latest/redoc.min.js'> </script>
       </body>
     </html>"
+  end
+
+  def server
+    @env['SERVER_NAME']
+  end
+
+  def port
+    @env['SERVER_PORT']
   end
 end
 
@@ -63,16 +60,11 @@ class App
     @apps = {}
   end
 
-  def map(route, app)
-    @apps[route] = app
-  end
-
   def call(env)
-    request = Rack::Request.new(env)
-    if env['REQUEST_PATH'].start_with?('/api')
-      @apps['/api'].call(env)
-    elsif @apps[request.path]
-      @apps[request.path].call(env)
+    if env['REQUEST_PATH'].start_with?("/#{Api::Base.prefix}")
+      Api::Base.call(env)
+    else
+      DocApp.new.call(env)
     end
   end
 end
