@@ -1,5 +1,17 @@
 ### NEXT
 
+### 0.4.1
+
+- refactores rack api mounting
+
+### 0.4.0
+
+- adds ruby 2.4.0 support
+
+### 0.3.1
+
+- server command supports port, thin tag would be named after project
+
 ### 0.3.0
 
 - adds redoc oapi documentation viewer
