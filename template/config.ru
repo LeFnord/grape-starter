@@ -1,6 +1,8 @@
-# frozen_string_literal: true
-
+# frozen_string_literal: false
 require 'rack/cors'
+
+use Rack::CommonLogger
+
 use Rack::Cors do
   allow do
     origins '*'
@@ -8,9 +10,10 @@ use Rack::Cors do
   end
 end
 
-require 'rack/static'
-use Rack::Static, urls: '/', root: 'public', index: 'redoc.html'
-
 require File.expand_path('../config/application', __FILE__)
 
-run Api::Base
+app = App.new
+app.map '/', DocApp.new
+app.map '/api', Api::Base
+
+run app

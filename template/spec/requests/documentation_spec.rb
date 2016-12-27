@@ -3,7 +3,7 @@ require 'spec_helper'
 
 RSpec.describe Api::Base do
   subject(:swagger) do
-    get '/api/v1/swagger_doc'
+    get '/api/v1/oapi'
     last_response
   end
 
