@@ -24,13 +24,13 @@ $ ./script/test
 #### Run
 
 ```
-$ ./script/server
+$ ./script/server *port (default: 9292)
 ```
-and go to: [http://localhost:9292](http://localhost:9292)
+and go to: [http://localhost:port](http://localhost:9292)
 
 or for production, set `RACK_ENV=production`
 ```
-$ export RACK_ENV=production ./script/server
+$ RACK_ENV=production ./script/server
 ```
 
 #### Update
