@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env bash -l
 
 set -e
 
@@ -8,13 +8,15 @@ test -z "$RACK_ENV" &&
   RACK_ENV='development'
 
 if [ $1 ]; then
-  port=$1
+  PORT=$1
 else
-  port=9292
+  PORT=9292
 fi
 
+export PORT=$PORT
+
 if [ "$RACK_ENV" = 'production' ]; then
-  bundle exec thin start -p $port -e $RACK_ENV --tag {{{grape-starter}}} -d --threaded
+  bundle exec thin start -p $PORT -e $RACK_ENV --tag {{{grape-starter}}} -d --threaded
 else
-  bundle exec thin start -p $port -e $RACK_ENV --tag {{{grape-starter}}} -V -D
+  bundle exec thin start -p $PORT -e $RACK_ENV --tag {{{grape-starter}}} -D
 fi
