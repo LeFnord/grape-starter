@@ -25,7 +25,10 @@ module Starter
 
         FileUtils.copy_entry source, destination
 
-        replace_static(File.join('script', 'server'))
+        replace_static(File.join('script', 'server'), "API-#{resource}")
+        replace_static(File.join('api', 'base.rb'), ":#{resource}")
+
+        self
       end
 
       # would be called from add command
@@ -122,10 +125,10 @@ module Starter
       # will be called on project creation
       #
       # … static files such as under script folder,
-      def replace_static(file)
+      def replace_static(file, replacement)
         server_file = File.join(destination, file)
 
-        file_foo(server_file) { |content| content.gsub!('{{{grape-starter}}}', "API-#{resource}") }
+        file_foo(server_file) { |content| content.gsub!('{{{grape-starter}}}', replacement) }
       end
 
       # will be called an resource creation

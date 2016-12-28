@@ -1,5 +1,9 @@
 ### NEXT
 
+### 0.4.2
+
+- sets prefix after project name
+
 ### 0.4.1
 
 - refactores rack api mounting

@@ -85,64 +85,85 @@ RSpec.describe Starter::Builder do
   end
 
   describe 'manipulating API Base file' do
-    let(:base_without_resource) do
-      "
-      # frozen_string_literal: true
-      module Api
-        class Base < Grape::API
-          prefix :api
-          version 'v1', using: :path
-          format :json
+    let!(:created_api) { File.join(Dir.getwd, subject.destination) }
+    let(:base) { File.read(File.join(created_api, 'api', 'base.rb')) }
+    subject do
+      starter_gem = Gem::Specification.find_by_name('grape-starter').gem_dir
+      src = File.join(starter_gem, 'template', '.')
+      described_class.new!(plural, src, plural)
+    end
 
-          mount Endpoints::Root
-          add_swagger_documentation format: :json,
-                                    info: {
-                                      title: 'Starter API'
-                                    },
-                                    models: [
-                                      Entities::ApiError
-                                    ]
+    after :each do
+      FileUtils.remove_dir(created_api, true)
+    end
+
+    describe 'set prefix on `new`' do
+      let(:expected_prefix) { "prefix :#{subject.resource}" }
+      specify do
+        expect(base).to include expected_prefix
+      end
+    end
+
+    describe 'add|remove mount_point' do
+      before do
+        allow(subject).to receive(:klass_name).and_return('bar')
+      end
+
+      let(:base_without_resource) do
+        "
+        # frozen_string_literal: true
+        module Api
+          class Base < Grape::API
+            prefix :api
+            version 'v1', using: :path
+            format :json
+
+            mount Endpoints::Root
+            add_swagger_documentation format: :json,
+                                      info: {
+                                        title: 'Starter API'
+                                      },
+                                      models: [
+                                        Entities::ApiError
+                                      ]
+          end
+        end
+        "
+      end
+
+      let(:base_with_resource) do
+        "
+        # frozen_string_literal: true
+        module Api
+          class Base < Grape::API
+            prefix :api
+            version 'v1', using: :path
+            format :json
+
+            mount Endpoints::Root
+            mount Endpoints::#{subject.klass_name}
+            add_swagger_documentation format: :json,
+                                      info: {
+                                        title: 'Starter API'
+                                      },
+                                      models: [
+                                        Entities::ApiError
+                                      ]
+          end
+        end
+        "
+      end
+
+      describe '#add_to_base' do
+        specify do
+          expect(subject.send(:add_to_base, base_without_resource)).to include subject.mount_point
         end
       end
-      "
-    end
 
-    let(:base_with_resource) do
-      "
-      # frozen_string_literal: true
-      module Api
-        class Base < Grape::API
-          prefix :api
-          version 'v1', using: :path
-          format :json
-
-          mount Endpoints::Root
-          mount Endpoints::#{subject.klass_name}
-          add_swagger_documentation format: :json,
-                                    info: {
-                                      title: 'Starter API'
-                                    },
-                                    models: [
-                                      Entities::ApiError
-                                    ]
+      describe '#remove_from_base' do
+        specify do
+          expect(subject.send(:remove_from_base, base_with_resource)).not_to include subject.mount_point
         end
-      end
-      "
-    end
-
-    before do
-      allow(subject).to receive(:klass_name).and_return('bar')
-    end
-
-    describe '#add_to_base' do
-      specify do
-        expect(subject.send(:add_to_base, base_without_resource)).to include subject.mount_point
-      end
-    end
-
-    describe '#remove_from_base' do
-      specify do
-        expect(subject.send(:remove_from_base, base_with_resource)).not_to include subject.mount_point
       end
     end
   end
