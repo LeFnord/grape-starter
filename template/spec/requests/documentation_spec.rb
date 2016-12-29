@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 require 'spec_helper'
 
-RSpec.describe Api::Base do
+RSpec.describe '/{{{grape-starter}}}/v1/oapi' do
   subject(:swagger) do
-    get '/api/v1/oapi'
+    get RSpec.current_example.metadata[:example_group][:full_description]
     last_response
   end
 

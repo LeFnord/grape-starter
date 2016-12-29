@@ -2,7 +2,11 @@
 require 'spec_helper'
 
 RSpec.describe Starter::Names do
-  subject { Starter::Builder.add!(resource) }
+  subject do
+    dummy = Class.new { extend Starter::Names }
+    dummy.instance_variable_set(:@resource, resource)
+    dummy
+  end
 
   describe 'plural forms' do
     describe 'foos' do

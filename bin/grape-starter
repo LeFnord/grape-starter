@@ -22,7 +22,11 @@ switch [:f, :force], negatable: false
 desc 'Creates initial api skeleton'
 arg_name 'awesome_api'
 command :new do |c|
-  c.action do |global_options, _, args|
+  c.flag [:p, :prefix],
+         default_value: 'api',
+         desc: 'sets the prefix of the API (default: api, given: takes this)'
+
+  c.action do |global_options, options, args|
     dest = args.empty? ? nil : File.join(Dir.getwd, args.first)
 
     case
@@ -34,7 +38,7 @@ command :new do |c|
       starter_gem = Gem::Specification.find_by_name('grape-starter').gem_dir
       src = File.join(starter_gem, 'template', '.')
 
-      Starter::Builder.new!(args.first, src, dest)
+      Starter::Builder.new!(args.first, src, dest, options[:p])
       $stdout.puts "created: #{args.first}"
 
       # after creating tasks
@@ -63,8 +67,7 @@ command :add do |c|
 
     begin
       builder_options = global_options.merge(set: set).merge(options)
-      Starter::Builder.add!(resource, builder_options)
-      created_files = Starter::Builder.save
+      created_files = Starter::Builder.add!(resource, builder_options)
 
       `bundle exec rubocop -a #{created_files.join(' ')}`
       $stdout.puts "added resource: #{resource}"

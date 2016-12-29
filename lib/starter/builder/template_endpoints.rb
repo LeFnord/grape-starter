@@ -74,34 +74,34 @@ module Starter
       # request specs shared examples
       #
       def post_spec
-        "it_behaves_like 'POST', base_path: '/api/v1', resource: '#{resource}', params: {}"
+        "it_behaves_like 'POST', params: {}"
       end
 
       def get_all_spec
-        "it_behaves_like 'GET all', base_path: '/api/v1', resource: '#{resource}'"
+        "it_behaves_like 'GET all'"
       end
 
       %w(get delete).each do |verb|
         define_method(:"#{verb}_one_spec") do
-          "it_behaves_like '#{verb.upcase} one', base_path: '/api/v1', resource: '#{resource}'"
+          "it_behaves_like '#{verb.upcase} one'"
         end
       end
 
       %w(put patch).each do |verb|
         define_method(:"#{verb}_one_spec") do
-          "it_behaves_like '#{verb.upcase} one', base_path: '/api/v1', resource: '#{resource}', params: {}"
+          "it_behaves_like '#{verb.upcase} one', params: {}"
         end
       end
 
       %w(get delete).each do |verb|
         define_method(:"#{verb}_specific_spec") do
-          "it_behaves_like '#{verb.upcase} specific', base_path: '/api/v1', resource: '#{resource}', key: 1"
+          "it_behaves_like '#{verb.upcase} specific', key: 1"
         end
       end
 
       %w(put patch).each do |verb|
         define_method(:"#{verb}_specific_spec") do
-          "it_behaves_like '#{verb.upcase} specific', base_path: '/api/v1', resource: '#{resource}', key: 1, params: {}"
+          "it_behaves_like '#{verb.upcase} specific', key: 1, params: {}"
         end
       end
     end
