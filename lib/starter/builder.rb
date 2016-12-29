@@ -3,30 +3,39 @@ require 'active_support/core_ext/string'
 
 module Starter
   require 'starter/builder/names'
+  require 'starter/builder/base_file'
+  require 'starter/builder/file_foo'
   require 'starter/builder/template_files'
   require 'starter/builder/template_endpoints'
 
   class Builder
     extend Starter::Names
+    extend Starter::BaseFile
     extend Template::Files
     extend Template::Endpoints
 
     class << self
-      attr_reader :resource, :set, :force, :entity, :destination
-
+      attr_reader :prefix, :resource, :set, :force, :entity, :destination
+      #
+      # public methods
+      #
+      #
       # would be called from new command
       #
       # name - A String as project name
       # source - A String which provides the template path
       # destination - A String which provides the new project path
-      def new!(name, source, destination)
+      def new!(name, source, destination, prefix = 'api')
+        @prefix = prefix
         @resource = name
         @destination = destination
 
         FileUtils.copy_entry source, destination
 
         replace_static(File.join('script', 'server'), "API-#{resource}")
-        replace_static(File.join('api', 'base.rb'), ":#{resource}")
+        replace_static(File.join('api', 'base.rb'), ":#{prefix}")
+        replace_static(File.join('spec', 'requests', 'root_spec.rb'), prefix)
+        replace_static(File.join('spec', 'requests', 'documentation_spec.rb'), prefix)
 
         self
       end
@@ -45,23 +54,10 @@ module Starter
         @force = options[:force]
         @entity = options[:entity]
 
-        self
+        save_resource
       end
 
-      #
-      # … it saves the files
-      def save
-        created_files = file_list.each_with_object([]) do |new_file, memo|
-          memo << send("#{new_file}_name")
-          save_file(new_file)
-        end
-
-        add_mount_point
-
-        created_files
-      end
-
-      # would be called on from command
+      # would be called on from rm command
       #
       # resource - A String, which indicates the resource to remove
       # options - A Hash to provide some optional arguments (default: {})
@@ -93,13 +89,17 @@ module Starter
 
       private
 
-      # get content for and save new resource files
-      def save_file(new_file)
-        new_file_name = "#{new_file}_name"
-        should_raise?(send(new_file_name))
-        write_file(send(new_file_name), send(new_file.strip_heredoc))
+      # #new! project creation releated helper methods
+      #
+      # replace something in existend files
+      def replace_static(file, replacement)
+        server_file = File.join(destination, file)
+
+        FileFoo.call!(server_file) { |content| content.gsub!('{{{grape-starter}}}', replacement) }
       end
 
+      # #add! a new resource releated helper methods
+      #
       # provides an array of endpoints for the new resource
       def endpoint_set
         crud_set = singular? ? singular_one : crud
@@ -108,6 +108,35 @@ module Starter
         crud_set.each_with_object([]) { |x, memo| set.map { |y| memo << x if x.to_s.start_with?(y) } }
       end
 
+      #
+      # saves all resource related files the files
+      def save_resource
+        created_files = file_list.each_with_object([]) do |new_file, memo|
+          memo << send("#{new_file}_name")
+          save_file(new_file)
+        end
+
+        add_mount_point
+
+        created_files
+      end
+
+      #
+      # saves new resource files
+      def save_file(new_file)
+        new_file_name = "#{new_file}_name"
+        should_raise?(send(new_file_name))
+        FileFoo.write_file(send(new_file_name), send(new_file.strip_heredoc))
+      end
+
+      #
+      # raises if resource exist and force false
+      def should_raise?(file)
+        raise StandardError, '… resource exists' if File.exist?(file) && !force
+      end
+
+      # #add! and #remove! a new resource releated helper methods
+      #
       # provides a file list for the new resource
       def file_list
         standards = %w(api_file lib_file api_spec lib_spec)
@@ -115,68 +144,9 @@ module Starter
         entity ? standards + ['entity_file'] : standards
       end
 
-      # raises if resource exist and force false
-      def should_raise?(file)
-        raise StandardError, '… resource exists' if File.exist?(file) && !force
-      end
-
-      # replace something in exitend files
-      #
-      # will be called on project creation
-      #
-      # … static files such as under script folder,
-      def replace_static(file, replacement)
-        server_file = File.join(destination, file)
-
-        file_foo(server_file) { |content| content.gsub!('{{{grape-starter}}}', replacement) }
-      end
-
-      # will be called an resource creation
-      #
-      # … add it in api base
-      def add_mount_point
-        file_foo(api_base_file_name) { |content| add_to_base(content) }
-      end
-
-      # … adding
-      def add_to_base(file)
-        occurence = file.scan(/(\s+mount\s.*?\n)/).last.first
-        replacement = occurence + mount_point
-        file.sub!(occurence, replacement)
-      end
-
-      # … remove it in api base
-      def remove_mount_point
-        file_foo(api_base_file_name) { |content| remove_from_base(content) }
-      end
-
-      # … removing
-      def remove_from_base(file)
-        file.sub!(mount_point, '')
-      end
-
       # content of the given set of files,
       def content(set)
         set.map { |x| send(x) }
-      end
-
-      # general file stuff
-      #
-      # … reading and writing content
-      def file_foo(file)
-        content = read_file(file)
-        yield content
-        write_file(file, content)
-      end
-
-      # … read
-      def read_file(file)
-        File.read(file)
-      end
-
-      # … write
-      def write_file(file, content)
-        File.open(file, 'w') { |f| f.write(content) }
       end
     end
   end

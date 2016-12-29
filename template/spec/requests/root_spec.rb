@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'spec_helper'
 
-RSpec.describe Api::Base do
+RSpec.describe '/{{{grape-starter}}}/v1/root' do
   let(:exposed_keys) do
     [
       :verb,
@@ -10,7 +10,7 @@ RSpec.describe Api::Base do
     ]
   end
 
-  subject { get '/api/v1/root' }
+  subject { get RSpec.current_example.metadata[:example_group][:full_description] }
   specify { expect(subject.status).to eql 200 }
 
   let(:response) { JSON.parse(subject.body, symbolize_names: true) }

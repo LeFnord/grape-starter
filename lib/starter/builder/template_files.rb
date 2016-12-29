@@ -51,7 +51,7 @@ module Starter
         # frozen_string_literal: true
         require 'spec_helper'
 
-        RSpec.describe Api::#{klass_name} do
+        RSpec.describe '/#{base_prefix}/#{base_version}/#{resource}' do
           #{endpoint_specs}
         end
         FILE

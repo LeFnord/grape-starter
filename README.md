@@ -91,6 +91,3 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/LeFnor
 The gem is available as open source under the terms of the [MIT License](LICENSE).
 
 ### ToDos
-
-- [x] make scripts more configurable
-- [ ] add logging
