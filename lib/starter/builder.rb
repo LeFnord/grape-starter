@@ -124,9 +124,9 @@ module Starter
       #
       # saves new resource files
       def save_file(new_file)
-        new_file_name = "#{new_file}_name"
-        should_raise?(send(new_file_name))
-        FileFoo.write_file(send(new_file_name), send(new_file.strip_heredoc))
+        new_file_name = send("#{new_file}_name")
+        should_raise?(new_file_name)
+        FileFoo.write_file(new_file_name, send(new_file.strip_heredoc))
       end
 
       #

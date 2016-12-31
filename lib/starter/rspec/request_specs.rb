@@ -51,32 +51,28 @@ end
 # plural forms
 #
 RSpec.shared_examples 'GET specific' do |key: nil|
-  let(:route) { route_from_description }
-  let(:specific_route) { "#{route}/#{key}" }
+  let(:specific_route) { "#{route_from_description}/#{key}" }
 
   subject { get specific_route }
   specify { expect(subject.status).to eql 200 }
 end
 
 RSpec.shared_examples 'PUT specific' do |key: nil, params: {}|
-  let(:route) { route_from_description }
-  let(:specific_route) { "#{route}/#{key}" }
+  let(:specific_route) { "#{route_from_description}/#{key}" }
 
   subject { put specific_route, params }
   specify { expect(subject.status).to eql 200 }
 end
 
 RSpec.shared_examples 'PATCH specific' do |key: nil, params: {}|
-  let(:route) { route_from_description }
-  let(:specific_route) { "#{route}/#{key}" }
+  let(:specific_route) { "#{route_from_description}/#{key}" }
 
   subject { patch specific_route, params }
   specify { expect(subject.status).to eql 200 }
 end
 
 RSpec.shared_examples 'DELETE specific' do |key: nil|
-  let(:route) { route_from_description }
-  let(:specific_route) { "#{route}/#{key}" }
+  let(:specific_route) { "#{route_from_description}/#{key}" }
 
   subject { delete specific_route }
   specify { expect(subject.status).to eql 204 }
