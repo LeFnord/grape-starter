@@ -1,5 +1,11 @@
 ### NEXT
 
+### 0.5.0
+
+- simplyfies request specs, **breaking change**: takes route from spec description
+- adds option to set prefix, defaults to api
+- sets prefix after project name
+
 ### 0.4.2
 
 - sets prefix after project name
