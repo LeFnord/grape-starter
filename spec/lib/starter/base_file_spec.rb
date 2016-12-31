@@ -65,13 +65,13 @@ RSpec.describe Starter::BaseFile do
       FileUtils.remove_dir(created_api, true)
     end
 
-    describe 'version' do
+    describe 'base_version' do
       specify do
         expect(subject.base_version).to eql 'v1'
       end
     end
 
-    describe 'version' do
+    describe 'base_prefix' do
       specify do
         expect(subject.base_prefix).to eql 'awesome_api'
       end
