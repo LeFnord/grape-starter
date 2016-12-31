@@ -91,3 +91,6 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/LeFnor
 The gem is available as open source under the terms of the [MIT License](LICENSE).
 
 ### ToDos
+
+- [ ] make usage of [grape_oauth2](https://github.com/nbulaj/grape_oauth2) available
+      - usage of Rack middleware as plug-in system
