@@ -24,7 +24,7 @@ arg_name 'awesome_api'
 command :new do |c|
   c.flag [:p, :prefix],
          default_value: 'api',
-         desc: 'sets the prefix of the API (default: api, given: takes this)'
+         desc: 'sets the prefix of the API'
 
   c.action do |global_options, options, args|
     dest = args.empty? ? nil : File.join(Dir.getwd, args.first)
