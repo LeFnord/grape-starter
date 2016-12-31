@@ -23,18 +23,21 @@ module Starter
       file.sub!(mount_point, '')
     end
 
+    # parses out the prefix from base api file
     def base_prefix
       base_file
 
       base_file.scan(/prefix\s+(:.+)\n/).first.first.delete!(':')
     end
 
+    # parses out the version from base api file
     def base_version
       base_file
 
       base_file.scan(/version\s+(.+),/).first.first.delete!("'")
     end
 
+    # get api base file as string
     def base_file
       file = File.join(Dir.getwd, 'api', 'base.rb')
       FileFoo.read_file(file)
