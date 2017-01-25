@@ -45,7 +45,7 @@ command :new do |c|
       FileUtils.cd(dest) do
         $stdout.puts `bundle install`
         $stdout.puts `bundle exec rubocop -a`
-        $stdout.puts `git init`
+        $stdout.puts `git init; git add .; git commit -m 'initial commit'`
       end
     end
   end
