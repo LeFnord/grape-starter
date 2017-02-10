@@ -66,7 +66,6 @@ module Starter
           end
           #{verb} ':id' do
             # your code goes here
-            present :params, params
           end"
         end
       end
