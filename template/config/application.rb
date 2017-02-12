@@ -9,7 +9,6 @@ require 'rack'
 
 # provides the documentation of the API
 class DocApp
-  attr_reader :env
   def call(env)
     @env = env
     [200, { 'Content-Type' => 'text/html' }, [template]]
@@ -39,7 +38,7 @@ class DocApp
   end
 end
 
-# provides the routing between the API and the html documentation of it
+# provides the routing between the API and the ReDoc documentation of it
 class App
   def initialize
     @apps = {}
