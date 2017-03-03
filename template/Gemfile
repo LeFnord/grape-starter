@@ -6,12 +6,11 @@ gem 'thin'
 gem 'rack'
 gem 'rack-cors'
 
-# TODO: revert to gem after mörge and release
+# FIXME: lock to specific version before you are going into production
 gem 'grape', git: 'git@github.com:ruby-grape/grape.git'
-# gem 'grape', '~> 0.18'
-gem 'grape-entity', '>= 0.6.0'
-gem 'grape-swagger', '>= 0.25.0'
-gem 'grape-swagger-entity', '>= 0.1.5'
+gem 'grape-entity', git: 'git@github.com:ruby-grape/grape-entity.git'
+gem 'grape-swagger', git: 'git@github.com:ruby-grape/grape-swagger.git'
+gem 'grape-swagger-entity', git: 'git@github.com:ruby-grape/grape-swagger-entity.git'
 
 group :development, :test do
   gem 'grape-starter'
