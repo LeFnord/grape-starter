@@ -1,27 +1,28 @@
 # frozen_string_literal: true
+
 module Starter
   module Template
     # defining the endpoints -> http methods of a resource
     module Endpoints
       def crud
-        %i(
+        %i[
           post
           get_all
           get_specific
           put_specific
           patch_specific
           delete_specific
-        )
+        ]
       end
 
       def singular_one
-        %i(
+        %i[
           post
           get_one
           put_one
           patch_one
           delete_one
-        )
+        ]
       end
 
       # available API/HTTP methods
@@ -47,7 +48,7 @@ module Starter
         end"
       end
 
-      %w(get put patch delete).each do |verb|
+      %w[get put patch delete].each do |verb|
         define_method(:"#{verb}_one") do
           "
           desc '#{verb} #{resource.singularize}'
@@ -57,7 +58,7 @@ module Starter
         end
       end
 
-      %w(get put patch delete).each do |verb|
+      %w[get put patch delete].each do |verb|
         define_method(:"#{verb}_specific") do
           "
           desc '#{verb} specific #{resource.singularize}'
@@ -80,25 +81,25 @@ module Starter
         "it_behaves_like 'GET all'"
       end
 
-      %w(get delete).each do |verb|
+      %w[get delete].each do |verb|
         define_method(:"#{verb}_one_spec") do
           "it_behaves_like '#{verb.upcase} one'"
         end
       end
 
-      %w(put patch).each do |verb|
+      %w[put patch].each do |verb|
         define_method(:"#{verb}_one_spec") do
           "it_behaves_like '#{verb.upcase} one', params: {}"
         end
       end
 
-      %w(get delete).each do |verb|
+      %w[get delete].each do |verb|
         define_method(:"#{verb}_specific_spec") do
           "it_behaves_like '#{verb.upcase} specific', key: 1"
         end
       end
 
-      %w(put patch).each do |verb|
+      %w[put patch].each do |verb|
         define_method(:"#{verb}_specific_spec") do
           "it_behaves_like '#{verb.upcase} specific', key: 1, params: {}"
         end

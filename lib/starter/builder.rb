@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'active_support/core_ext/string'
 
 module Starter
@@ -139,7 +140,7 @@ module Starter
       #
       # provides a file list for the new resource
       def file_list
-        standards = %w(api_file lib_file api_spec lib_spec)
+        standards = %w[api_file lib_file api_spec lib_spec]
 
         entity ? standards + ['entity_file'] : standards
       end
