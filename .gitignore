@@ -11,3 +11,6 @@ tmp/
 .rspec
 pkg/
 template/Gemfile.lock
+grape-starter.md
+.Ulysses-Group.plist
+.Ulysses-favorites.plist

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Starter
   module Names
     def klass_name

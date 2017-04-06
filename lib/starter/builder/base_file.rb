@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Starter
   module BaseFile
     # add it in api base

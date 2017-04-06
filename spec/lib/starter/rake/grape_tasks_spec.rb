@@ -14,7 +14,7 @@ RSpec.describe Starter::Rake::GrapeTasks do
   subject { described_class.new(app) }
 
   describe '#api_routes' do
-    let(:route_keys) { [:verb, :path, :description] }
+    let(:route_keys) { %i[verb path description] }
     let(:api_routes) { subject.api_routes }
 
     specify { expect(api_routes).to be_a Array }

@@ -1,4 +1,5 @@
 # frozen_string_literal: false
+
 require 'spec_helper'
 
 RSpec.describe Starter::Builder do
@@ -37,7 +38,7 @@ RSpec.describe Starter::Builder do
       describe 'standard' do
         let(:files) { subject.send(:file_list) }
         specify do
-          expect(files).to eql %w(api_file lib_file api_spec lib_spec)
+          expect(files).to eql %w[api_file lib_file api_spec lib_spec]
         end
       end
 
@@ -46,7 +47,7 @@ RSpec.describe Starter::Builder do
 
         let(:files) { subject.send(:file_list) }
         specify do
-          expect(files).to eql %w(api_file lib_file api_spec lib_spec entity_file)
+          expect(files).to eql %w[api_file lib_file api_spec lib_spec entity_file]
         end
       end
     end
@@ -162,8 +163,8 @@ RSpec.describe Starter::Builder do
       end
 
       describe 'multinple given' do
-        before { subject.instance_variable_set(:@set, %w(post get delete)) }
-        specify { expect(set).to eql [:post, :get_one, :delete_one] }
+        before { subject.instance_variable_set(:@set, %w[post get delete]) }
+        specify { expect(set).to eql %i[post get_one delete_one] }
       end
     end
 
@@ -177,7 +178,7 @@ RSpec.describe Starter::Builder do
 
       describe 'GET' do
         before { subject.instance_variable_set(:@set, ['get']) }
-        specify { expect(set).to eql [:get_all, :get_specific] }
+        specify { expect(set).to eql %i[get_all get_specific] }
       end
 
       describe 'PUT' do
@@ -196,8 +197,8 @@ RSpec.describe Starter::Builder do
       end
 
       describe 'multinple given' do
-        before { subject.instance_variable_set(:@set, %w(post get delete)) }
-        specify { expect(set).to eql [:post, :get_all, :get_specific, :delete_specific] }
+        before { subject.instance_variable_set(:@set, %w[post get delete]) }
+        specify { expect(set).to eql %i[post get_all get_specific delete_specific] }
       end
     end
   end

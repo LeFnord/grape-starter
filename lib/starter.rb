@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'awesome_print'
 
 require 'starter/version'

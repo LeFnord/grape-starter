@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Starter
   class FileFoo
     class << self
