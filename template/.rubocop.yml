@@ -4,8 +4,10 @@ AllCops:
   Exclude:
     - '**/tmp/**/*'
     - '**/script/**/*'
+    - Rakefile
+    - Gemfile
   UseCache: true
-  TargetRubyVersion: 2.3
+  TargetRubyVersion: 2.4
 
 Metrics/BlockLength:
   Exclude:

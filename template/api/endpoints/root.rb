@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'starter/rake/grape_tasks'
 
 module Api
