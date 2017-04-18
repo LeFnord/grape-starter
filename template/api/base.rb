@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Api
   class Base < Grape::API
     # !!! a prefix is always required

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'spec_helper'
 
 RSpec.describe '/{{{grape-starter}}}/v1/oapi' do
