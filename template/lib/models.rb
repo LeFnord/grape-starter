@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'api/version'
+require 'models/version'
 
-module Api
+module Models
   APP_CLASS = name
 end

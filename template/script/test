@@ -6,12 +6,12 @@ cd "$(dirname "$0")/.."
 
 [ -z "$DEBUG" ] || set -x
 
-echo "===> Running rubocop..."
-bundle exec rake rubocop
-
 echo "===> Running specs..."
 if [ $1 ]; then
   bundle exec rspec $1
 else
   bundle exec rspec
 fi
+
+echo "===> Running rubocop..."
+bundle exec rake rubocop
