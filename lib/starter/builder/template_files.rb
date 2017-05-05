@@ -40,7 +40,7 @@ module Starter
         <<-FILE.strip_heredoc
         # frozen_string_literal: true
 
-        module Api
+        module Models
           class #{klass_name}
           end
         end
@@ -63,7 +63,7 @@ module Starter
         # frozen_string_literal: true
         require 'spec_helper'
 
-        RSpec.describe Api::#{klass_name} do
+        RSpec.describe Models::#{klass_name} do
           pending 'write specs'
         end
         FILE
