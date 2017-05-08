@@ -29,9 +29,9 @@ RSpec.describe Starter::Builder do
       specify { expect(subject.base_file_name).to eql 'foo.rb' }
 
       specify { expect(subject.api_file_name).to include 'api/endpoints/foo.rb' }
-      specify { expect(subject.lib_file_name).to include 'lib/api/foo.rb' }
+      specify { expect(subject.lib_file_name).to include 'lib/models/foo.rb' }
       specify { expect(subject.api_spec_name).to include 'spec/requests/foo_spec.rb' }
-      specify { expect(subject.lib_spec_name).to include 'spec/lib/api/foo_spec.rb' }
+      specify { expect(subject.lib_spec_name).to include 'spec/lib/models/foo_spec.rb' }
     end
 
     describe '#file_list' do

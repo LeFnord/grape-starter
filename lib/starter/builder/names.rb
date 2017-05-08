@@ -35,7 +35,7 @@ module Starter
 
     # lib file
     def lib_file_name
-      File.join(Dir.getwd, 'lib', 'api', base_file_name)
+      File.join(Dir.getwd, 'lib', 'models', base_file_name)
     end
 
     # resource spec
@@ -45,7 +45,7 @@ module Starter
 
     # lib spec
     def lib_spec_name
-      File.join(Dir.getwd, 'spec', 'lib', 'api', base_spec_name)
+      File.join(Dir.getwd, 'spec', 'lib', 'models', base_spec_name)
     end
 
     private

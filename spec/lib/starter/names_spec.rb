@@ -17,9 +17,9 @@ RSpec.describe Starter::Names do
       specify { expect(subject.base_file_name).to eql 'foos.rb' }
 
       specify { expect(subject.api_file_name).to end_with '/api/endpoints/foos.rb' }
-      specify { expect(subject.lib_file_name).to end_with '/lib/api/foos.rb' }
+      specify { expect(subject.lib_file_name).to end_with '/lib/models/foos.rb' }
       specify { expect(subject.api_spec_name).to end_with '/spec/requests/foos_spec.rb' }
-      specify { expect(subject.lib_spec_name).to end_with '/spec/lib/api/foos_spec.rb' }
+      specify { expect(subject.lib_spec_name).to end_with '/spec/lib/models/foos_spec.rb' }
     end
 
     describe 'foo_bars' do
@@ -29,9 +29,9 @@ RSpec.describe Starter::Names do
       specify { expect(subject.base_file_name).to eql 'foo_bars.rb' }
 
       specify { expect(subject.api_file_name).to end_with '/api/endpoints/foo_bars.rb' }
-      specify { expect(subject.lib_file_name).to end_with '/lib/api/foo_bars.rb' }
+      specify { expect(subject.lib_file_name).to end_with '/lib/models/foo_bars.rb' }
       specify { expect(subject.api_spec_name).to end_with '/spec/requests/foo_bars_spec.rb' }
-      specify { expect(subject.lib_spec_name).to end_with '/spec/lib/api/foo_bars_spec.rb' }
+      specify { expect(subject.lib_spec_name).to end_with '/spec/lib/models/foo_bars_spec.rb' }
     end
 
     describe 'foo-bars' do
@@ -41,9 +41,9 @@ RSpec.describe Starter::Names do
       specify { expect(subject.base_file_name).to eql 'foo-bars.rb' }
 
       specify { expect(subject.api_file_name).to end_with '/api/endpoints/foo-bars.rb' }
-      specify { expect(subject.lib_file_name).to end_with '/lib/api/foo-bars.rb' }
+      specify { expect(subject.lib_file_name).to end_with '/lib/models/foo-bars.rb' }
       specify { expect(subject.api_spec_name).to end_with '/spec/requests/foo-bars_spec.rb' }
-      specify { expect(subject.lib_spec_name).to end_with '/spec/lib/api/foo-bars_spec.rb' }
+      specify { expect(subject.lib_spec_name).to end_with '/spec/lib/models/foo-bars_spec.rb' }
     end
 
     describe 'foo/bars' do
@@ -53,9 +53,9 @@ RSpec.describe Starter::Names do
       specify { expect(subject.base_file_name).to eql 'foo-bars.rb' }
 
       specify { expect(subject.api_file_name).to end_with '/api/endpoints/foo-bars.rb' }
-      specify { expect(subject.lib_file_name).to end_with '/lib/api/foo-bars.rb' }
+      specify { expect(subject.lib_file_name).to end_with '/lib/models/foo-bars.rb' }
       specify { expect(subject.api_spec_name).to end_with '/spec/requests/foo-bars_spec.rb' }
-      specify { expect(subject.lib_spec_name).to end_with '/spec/lib/api/foo-bars_spec.rb' }
+      specify { expect(subject.lib_spec_name).to end_with '/spec/lib/models/foo-bars_spec.rb' }
     end
   end
 
@@ -67,9 +67,9 @@ RSpec.describe Starter::Names do
       specify { expect(subject.base_file_name).to eql 'foo.rb' }
 
       specify { expect(subject.api_file_name).to end_with '/api/endpoints/foo.rb' }
-      specify { expect(subject.lib_file_name).to end_with '/lib/api/foo.rb' }
+      specify { expect(subject.lib_file_name).to end_with '/lib/models/foo.rb' }
       specify { expect(subject.api_spec_name).to end_with '/spec/requests/foo_spec.rb' }
-      specify { expect(subject.lib_spec_name).to end_with '/spec/lib/api/foo_spec.rb' }
+      specify { expect(subject.lib_spec_name).to end_with '/spec/lib/models/foo_spec.rb' }
     end
 
     describe 'foo_bar' do
@@ -79,9 +79,9 @@ RSpec.describe Starter::Names do
       specify { expect(subject.base_file_name).to eql 'foo_bar.rb' }
 
       specify { expect(subject.api_file_name).to end_with '/api/endpoints/foo_bar.rb' }
-      specify { expect(subject.lib_file_name).to end_with '/lib/api/foo_bar.rb' }
+      specify { expect(subject.lib_file_name).to end_with '/lib/models/foo_bar.rb' }
       specify { expect(subject.api_spec_name).to end_with '/spec/requests/foo_bar_spec.rb' }
-      specify { expect(subject.lib_spec_name).to end_with '/spec/lib/api/foo_bar_spec.rb' }
+      specify { expect(subject.lib_spec_name).to end_with '/spec/lib/models/foo_bar_spec.rb' }
     end
 
     describe 'foo-bar' do
@@ -91,9 +91,9 @@ RSpec.describe Starter::Names do
       specify { expect(subject.base_file_name).to eql 'foo-bar.rb' }
 
       specify { expect(subject.api_file_name).to end_with '/api/endpoints/foo-bar.rb' }
-      specify { expect(subject.lib_file_name).to end_with '/lib/api/foo-bar.rb' }
+      specify { expect(subject.lib_file_name).to end_with '/lib/models/foo-bar.rb' }
       specify { expect(subject.api_spec_name).to end_with '/spec/requests/foo-bar_spec.rb' }
-      specify { expect(subject.lib_spec_name).to end_with '/spec/lib/api/foo-bar_spec.rb' }
+      specify { expect(subject.lib_spec_name).to end_with '/spec/lib/models/foo-bar_spec.rb' }
     end
 
     describe 'foo/bar' do
@@ -103,9 +103,9 @@ RSpec.describe Starter::Names do
       specify { expect(subject.base_file_name).to eql 'foo-bar.rb' }
 
       specify { expect(subject.api_file_name).to end_with '/api/endpoints/foo-bar.rb' }
-      specify { expect(subject.lib_file_name).to end_with '/lib/api/foo-bar.rb' }
+      specify { expect(subject.lib_file_name).to end_with '/lib/models/foo-bar.rb' }
       specify { expect(subject.api_spec_name).to end_with '/spec/requests/foo-bar_spec.rb' }
-      specify { expect(subject.lib_spec_name).to end_with '/spec/lib/api/foo-bar_spec.rb' }
+      specify { expect(subject.lib_spec_name).to end_with '/spec/lib/models/foo-bar_spec.rb' }
     end
   end
 
@@ -117,9 +117,9 @@ RSpec.describe Starter::Names do
       specify { expect(subject.base_file_name).to eql 'foos.rb' }
 
       specify { expect(subject.api_file_name).to end_with '/api/endpoints/foos.rb' }
-      specify { expect(subject.lib_file_name).to end_with '/lib/api/foos.rb' }
+      specify { expect(subject.lib_file_name).to end_with '/lib/models/foos.rb' }
       specify { expect(subject.api_spec_name).to end_with '/spec/requests/foos_spec.rb' }
-      specify { expect(subject.lib_spec_name).to end_with '/spec/lib/api/foos_spec.rb' }
+      specify { expect(subject.lib_spec_name).to end_with '/spec/lib/models/foos_spec.rb' }
     end
 
     describe 'Foo' do
@@ -129,9 +129,9 @@ RSpec.describe Starter::Names do
       specify { expect(subject.base_file_name).to eql 'foo.rb' }
 
       specify { expect(subject.api_file_name).to end_with '/api/endpoints/foo.rb' }
-      specify { expect(subject.lib_file_name).to end_with '/lib/api/foo.rb' }
+      specify { expect(subject.lib_file_name).to end_with '/lib/models/foo.rb' }
       specify { expect(subject.api_spec_name).to end_with '/spec/requests/foo_spec.rb' }
-      specify { expect(subject.lib_spec_name).to end_with '/spec/lib/api/foo_spec.rb' }
+      specify { expect(subject.lib_spec_name).to end_with '/spec/lib/models/foo_spec.rb' }
     end
   end
 end
