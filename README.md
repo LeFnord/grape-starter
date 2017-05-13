@@ -12,9 +12,8 @@ Is a tool to help you to build up a skeleton for a [Grape](http://github.com/rub
 
 ## Why the next one?
 
-- build up a playground for your ideas, prototypes, testing behaviour, whatever …  
-  (I use it to implement specific behaviour and get specs of for [grape-swagger](http://github.com/ruby-grape/grape-swagger))
-- no assumtions about a backend/ORM, ergo no restrictions, only a pure grape/rack skeleton
+- build up a playground for your ideas, prototypes, testing behaviour … whatever
+- no assumtions about a backend/ORM, ergo no restrictions, only a pure grape/rack skeleton with a nice documentation
 
 ## Usage
 
@@ -36,16 +35,16 @@ This command creates a folder named `awesome_api` containing the skeleton. With 
 ├── api
 │   ├── base.rb        # the main API class, all other endpoints would be mounted in it
 │   ├── endpoints      # contains the endpoint file for a resource
-│   │   └── root.rb    # root is always available, it exposes all routes/endpoints, disable by comment out in base.rb
+│   │   └── root.rb    # root is always available, it exposes all routes/endpoints, disable by comment it out in base.rb
 │   └── entities       # contains the entity representation of the reource, if wanted
 │       └── route.rb
 ├── config             # base configuration
 │   └── …
 ├── config.ru          # Rack it up
 ├── lib                # contains the additional lib file for a resource
-│   ├── api
+│   ├── models
 │   │   └── version.rb
-│   └── api.rb
+│   └── models.rb
 ├── public             # for serving static files
 │   └── redoc.html     # provides the ReDoc generated oapi documentation
 ├── script             # setup / server / test etc.
@@ -89,8 +88,3 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/LeFnor
 ## License
 
 The gem is available as open source under the terms of the [MIT License](LICENSE).
-
-### ToDos
-
-- [ ] make usage of [grape_oauth2](https://github.com/nbulaj/grape_oauth2) available
-      - usage of Rack middleware as plug-in system

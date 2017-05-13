@@ -6,14 +6,14 @@ module Starter
   require 'starter/builder/names'
   require 'starter/builder/base_file'
   require 'starter/builder/file_foo'
-  require 'starter/builder/template_files'
-  require 'starter/builder/template_endpoints'
+  require 'starter/builder/templates/files'
+  require 'starter/builder/templates/endpoints'
 
   class Builder
-    extend Starter::Names
-    extend Starter::BaseFile
-    extend Template::Files
-    extend Template::Endpoints
+    extend Names
+    extend BaseFile
+    extend Templates::Files
+    extend Templates::Endpoints
 
     class << self
       attr_reader :prefix, :resource, :set, :force, :entity, :destination

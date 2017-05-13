@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Starter
-  module Template
+  module Templates
     # defining the endpoints -> http methods of a resource
     module Endpoints
       def crud
