@@ -12,6 +12,9 @@
 Metrics/LineLength:
   Max: 120
 
+Metrics/AbcSize:
+  Max: 20
+
 # Offense count: 1
 # Configuration parameters: CountComments.
 Metrics/MethodLength:

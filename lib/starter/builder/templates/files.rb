@@ -3,7 +3,7 @@
 require 'active_support/core_ext/string'
 
 module Starter
-  module Template
+  module Templates
     module Files
       # API template for resource
       def api_file

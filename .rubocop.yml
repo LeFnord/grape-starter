@@ -19,16 +19,16 @@ Metrics/LineLength:
 
 Style/AccessorMethodName:
   Exclude:
-    - 'lib/starter/builder/template_files.rb'
-    - 'lib/starter/builder/template_endpoints.rb'
+    - 'lib/starter/builder/templates/files.rb'
+    - 'lib/starter/builder/templates/endpoints.rb'
 
 Style/AsciiComments:
   Enabled: false
 
 Style/IndentationWidth:
   Exclude:
-    - 'lib/starter/builder/template_files.rb'
-    - 'lib/starter/builder/template_endpoints.rb'
+    - 'lib/starter/builder/templates/files.rb'
+    - 'lib/starter/builder/templates/endpoints.rb'
 
 Style/Documentation:
   Exclude:
