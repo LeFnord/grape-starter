@@ -50,6 +50,7 @@ module Starter
       def api_spec
         <<-FILE.strip_heredoc
         # frozen_string_literal: true
+
         require 'spec_helper'
 
         RSpec.describe '/#{base_prefix}/#{base_version}/#{resource}' do
@@ -61,6 +62,7 @@ module Starter
       def lib_spec
         <<-FILE.strip_heredoc
         # frozen_string_literal: true
+
         require 'spec_helper'
 
         RSpec.describe Models::#{klass_name} do
