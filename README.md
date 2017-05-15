@@ -27,6 +27,12 @@ $ gem install grape-starter
 ```
 $ grape-starter new awesome_api
 ```
+with following options:
+```
+-f, --force                # overwrites existend project
+-p foobar, --prefix=foobar # provide a prefix under which the API can be accessed, default: api
+-o sequel, --orm=sequel    # create also needed files and folders for the specified ORM
+```
 
 This command creates a folder named `awesome_api` containing the skeleton. With following structure:
 
@@ -68,8 +74,11 @@ More could be found in [README](template/README.md).
 ```
 $ grape-starter add foo
 ```
+with following options:
+```
+-e, --entity # a grape entity file will also be created
+```
 to add CRUD endpoints for resource foo. For more options, see `grape-starter add -h`.
-
 This adds endpoint and lib file and belonging specs, and a mount entry in base.rb.
 
 

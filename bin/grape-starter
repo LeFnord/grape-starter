@@ -25,9 +25,9 @@ command :new do |c|
   c.flag [:p, :prefix],
          default_value: 'api',
          desc: 'sets the prefix of the API'
-  c.flag [:orm],
+  c.flag [:o, :orm],
          default_value: 'sequel',
-         desc: 'prepares for the given ORM (Sequel or ActiveRecord)'
+         desc: 'prepares for the given ORM (Sequel, …)'
 
   c.action do |global_options, options, args|
     dest = args.empty? ? nil : File.join(Dir.getwd, args.first)

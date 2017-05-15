@@ -91,7 +91,7 @@ RSpec.describe Starter::Builder do
       subject do
         starter_gem = Gem::Specification.find_by_name('grape-starter').gem_dir
         src = File.join(starter_gem, 'template', '.')
-        described_class.new!(plural, src, plural, 'awesome_api')
+        described_class.new!(plural, src, plural, p: 'awesome_api')
       end
 
       after do

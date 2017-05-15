@@ -1,71 +1,44 @@
 # frozen_string_literal: true
 
 module Starter
-  require 'starter/builder/template_files'
-
   class Orms
     class << self
-      def build(destination, orm)
-        build_initializer(destination, orm)
-        build_config(destination, orm)
-        # add Rake tasks
+      def build(dest, orm)
+        case orm
+        when 'sequel'
+          require 'starter/builder/templates/sequel'
+          extend(::Starter::Templates::Sequel)
+        else
+          return
+        end
+
+        build_initializer(File.join(dest, 'config', 'initializer'))
+        build_config(File.join(dest, 'config'))
+        append_to_file(File.join(dest, 'Rakefile'), rakefile)
+        append_to_file(File.join(dest, 'Gemfile'), gemfile)
+        prepare_for_migrations(File.join(dest, 'db'))
       end
 
       private
 
-      def build_initializer(dest, orm)
-        new_dest = File.join(dest, 'config', 'initializer')
-        new_file = send("#{orm}_initializer")
-        FileUtils.mkdir_p(new_dest) unless Dir.exist?(new_dest)
-        FileFoo.write_file(File.join(new_dest, 'database.rb'), new_file)
+      def build_initializer(new_dest)
+        FileUtils.mkdir_p(new_dest)
+        FileFoo.write_file(File.join(new_dest, 'database.rb'), initializer)
       end
 
-      def build_config(dest, orm)
-        new_dest = File.join(dest, 'config')
-        new_file = send("#{orm}_config")
-        FileFoo.write_file(File.join(new_dest, 'database.yml'), new_file)
+      def build_config(new_dest)
+        FileFoo.write_file(File.join(new_dest, 'database.yml'), config)
       end
 
-      # templates for ORMs
-      def sequel_initializer
-        <<-FILE.strip_heredoc
-        # frozen_string_literal: true
-
-        require 'yaml'
-
-        # load Sequel Configuration
-        settings = YAML.load_file('config/db.yml')
-        DB = Sequel.connect(settings[ENV['RACK_ENV']])
-        FILE
+      def append_to_file(file_name, content)
+        original = FileFoo.read_file(file_name)
+        FileFoo.write_file(file_name, "#{original}\n\n#{content}")
       end
 
-      def sequel_config
-        <<-FILE.strip_heredoc
-        # Sequel Database Configuration
-        development:
-          adapter: 'sqlite'
-          host: localhost
-          port: 27017
-          database: "db/development.sqlite3"
-          username:
-          password:
-
-        test:
-          adapter: 'sqlite'
-          host: localhost
-          port: 27017
-          database: "db/test.sqlite3"
-          username:
-          password:
-
-        production:
-          adapter: 'sqlite'
-          host: localhost
-          port: 27017
-          database: "db/production.sqlite3"
-          username:
-          password:
-        FILE
+      def prepare_for_migrations(new_dest)
+        migrations = File.join(new_dest, 'migrations')
+        FileUtils.mkdir_p(migrations)
+        `touch #{migrations}/.keep`
       end
     end
   end
