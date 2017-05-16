@@ -3,6 +3,8 @@
 require 'active_support/core_ext/string'
 
 module Starter
+  require 'starter/builder/orms'
+
   require 'starter/builder/names'
   require 'starter/builder/base_file'
   require 'starter/builder/file_foo'
@@ -26,8 +28,8 @@ module Starter
       # name - A String as project name
       # source - A String which provides the template path
       # destination - A String which provides the new project path
-      def new!(name, source, destination, prefix = 'api')
-        @prefix = prefix
+      def new!(name, source, destination, options = {})
+        @prefix = options[:p] || 'api'
         @resource = name
         @destination = destination
 
@@ -38,6 +40,7 @@ module Starter
         replace_static(File.join('spec', 'requests', 'root_spec.rb'), prefix)
         replace_static(File.join('spec', 'requests', 'documentation_spec.rb'), prefix)
 
+        Orms.build(destination, options[:orm]) if options[:orm]
         self
       end
 
