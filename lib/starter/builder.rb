@@ -3,8 +3,9 @@
 require 'active_support/core_ext/string'
 
 module Starter
-  require 'starter/builder/orms'
+  require 'starter/config'
 
+  require 'starter/builder/orms'
   require 'starter/builder/names'
   require 'starter/builder/base_file'
   require 'starter/builder/file_foo'
