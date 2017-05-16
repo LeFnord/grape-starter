@@ -25,6 +25,9 @@ command :new do |c|
   c.flag [:p, :prefix],
          default_value: 'api',
          desc: 'sets the prefix of the API'
+  c.flag [:o, :orm],
+         default_value: 'sequel',
+         desc: 'prepares for the given ORM (Sequel, …)'
 
   c.action do |global_options, options, args|
     dest = args.empty? ? nil : File.join(Dir.getwd, args.first)
@@ -38,7 +41,7 @@ command :new do |c|
       starter_gem = Gem::Specification.find_by_name('grape-starter').gem_dir
       src = File.join(starter_gem, 'template', '.')
 
-      Starter::Builder.new!(args.first, src, dest, options[:p])
+      Starter::Builder.new!(args.first, src, dest, options)
       $stdout.puts "created: #{args.first}"
 
       # after creating tasks
