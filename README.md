@@ -13,7 +13,7 @@ Is a tool to help you to build up a skeleton for a [Grape](http://github.com/rub
 ## Why the next one?
 
 - build up a playground for your ideas, prototypes, testing behaviour … whatever
-- no assumtions about a backend/ORM, ergo no restrictions, only a pure grape/rack skeleton with a nice documentation
+- ~~no assumtions about~~ you can choose, if you want to use a backend/ORM, ergo no restrictions, only a pure grape/rack skeleton with a nice documentation
 
 ## Usage
 
@@ -59,6 +59,25 @@ This command creates a folder named `awesome_api` containing the skeleton. With 
     └── …
 ```
 
+… using `--orm` flag adds follwing files and directories to above project structure:
+```
+├── .config
+├── config
+│   …
+│   ├── database.yml
+│   └── initializer
+│       └── database.rb
+…
+├── db
+│   └── migrations
+…
+```
+
+Don't forget to adapt the `config/database.yml` to your needs
+and also to check the Gemfile for the right gems.
+
+In `.config` the choosen ORM would be stored.
+
 To run it, go into awesome_api folder, start the server
 ```
 $ cd awesome_api
@@ -91,8 +110,43 @@ to remove previous generated files for a resource.
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/LeFnord/grape-starter.
+Any contributions are welcome on GitHub at https://github.com/LeFnord/grape-starter.
 
+### Adding a new ORM template
+
+To add an new ORM, it needs following steps:
+
+1. A template class, with predefined methods …
+
+  ```ruby
+  module Starter
+    module Templates
+      module <YOUR NAME>
+        def initializer
+          # provide your string
+        end
+
+        def config
+          # provide your string
+        end
+
+        def rakefile
+          # provide your string
+        end
+
+        def gemfile
+          # provide your string
+        end
+      end
+    end
+  end
+  ```
+
+  see as example [sequel.rb](lib/starter/builder/templates/sequel.rb), there the return value of each method would be written into the
+  corresponding file (see: [orms.rb](lib/starter/builder/orms.rb)).
+
+2. An additional switch in the [`Starter::Orms.build`](https://github.com/LeFnord/grape-starter/blob/67738438ba9278b280a6eac402096fcb74526ab3/lib/starter/builder/orms.rb#L7-L13) method to choose the template.
+3. An entry in the description of the [`add` command](https://github.com/LeFnord/grape-starter/blob/master/bin/grape-starter#L30), when it would be called with `-h`
 
 ## License
 
