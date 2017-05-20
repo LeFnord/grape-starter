@@ -1,12 +1,27 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-
 RSpec.describe Starter::Names do
   subject do
     dummy = Class.new { extend Starter::Names }
     dummy.instance_variable_set(:@resource, resource)
     dummy
+  end
+
+  describe 'child class of an ORM' do
+    after(:each) do
+      config_file = File.join(Dir.getwd, '.config')
+      FileUtils.rm(config_file) if File.exist?(config_file)
+    end
+
+    let(:resource) { 'foo' }
+    describe 'sequel class' do
+      before do
+        Starter::Config.save(content: { orm: 'sequel' })
+      end
+
+      specify { expect(subject.lib_klass_name).to eql 'Foo < Sequel::Model' }
+    end
   end
 
   describe 'plural forms' do

@@ -3,8 +3,6 @@
 require 'active_support/core_ext/string'
 
 module Starter
-  require 'starter/config'
-
   require 'starter/builder/orms'
   require 'starter/builder/names'
   require 'starter/builder/base_file'
@@ -114,7 +112,7 @@ module Starter
       end
 
       #
-      # saves all resource related files the files
+      # saves all resource related files
       def save_resource
         created_files = file_list.each_with_object([]) do |new_file, memo|
           memo << send("#{new_file}_name")
