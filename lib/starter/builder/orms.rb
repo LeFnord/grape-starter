@@ -12,7 +12,7 @@ module Starter
           return
         end
 
-        build_initializer(File.join(dest, 'config', 'initializer'))
+        build_initializer(File.join(dest, 'config', 'initializers'))
         build_config(File.join(dest, 'config'))
         append_to_file(File.join(dest, 'Rakefile'), rakefile)
         append_to_file(File.join(dest, 'Gemfile'), gemfile)

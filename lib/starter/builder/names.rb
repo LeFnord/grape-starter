@@ -7,6 +7,17 @@ module Starter
       singular? ? for_klass.classify : for_klass.classify.pluralize
     end
 
+    def lib_klass_name
+      case ::Starter::Config.read[:orm]
+      when 'sequel'
+        require 'starter/builder/templates/sequel'
+        extend(::Starter::Templates::Sequel)
+        "#{klass_name} < #{model_klass}"
+      else
+        klass_name
+      end
+    end
+
     def base_file_name
       @resource.tr('/', '-').downcase + '.rb'
     end

@@ -14,7 +14,7 @@ gem 'grape-swagger', git: 'git@github.com:ruby-grape/grape-swagger.git'
 gem 'grape-swagger-entity', git: 'git@github.com:ruby-grape/grape-swagger-entity.git'
 
 group :development, :test do
-  gem 'grape-starter'
+  gem 'grape-starter', git: 'git@github.com:LeFnord/grape-starter.git'
   gem 'pry'
   gem 'rack-test'
   gem 'rake'

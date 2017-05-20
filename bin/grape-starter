@@ -46,9 +46,9 @@ command :new do |c|
 
       # after creating tasks
       FileUtils.cd(dest) do
-        $stdout.puts `bundle install`
-        $stdout.puts `bundle exec rubocop -a`
-        $stdout.puts `git init; git add .; git commit -m 'initial commit'`
+        system('bundle install')
+        `bundle exec rubocop -a`
+        system("git init; git add .; git commit -m 'initial commit'")
       end
     end
   end

@@ -65,7 +65,7 @@ This command creates a folder named `awesome_api` containing the skeleton. With 
 ├── config
 │   …
 │   ├── database.yml
-│   └── initializer
+│   └── initializers
 │       └── database.rb
 …
 ├── db
@@ -122,6 +122,10 @@ To add an new ORM, it needs following steps:
   module Starter
     module Templates
       module <YOUR NAME>
+        def model_klass
+          # the class, from which self inherit, e.g. 'Sequel::Model'
+        end
+
         def initializer
           # provide your string
         end

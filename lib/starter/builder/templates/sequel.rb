@@ -3,6 +3,10 @@
 module Starter
   module Templates
     module Sequel
+      def model_klass
+        'Sequel::Model'
+      end
+
       def initializer
         <<-FILE.strip_heredoc
         # frozen_string_literal: true

@@ -19,7 +19,7 @@ module Starter
       FileFoo.call!(api_base_file_name) { |content| remove_from_base(content) }
     end
 
-    # removes mount point form base class
+    # removes mount point from base class
     def remove_from_base(file)
       file.sub!(mount_point, '')
     end
