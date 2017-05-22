@@ -13,6 +13,10 @@ module Starter
         require 'starter/builder/templates/sequel'
         extend(::Starter::Templates::Sequel)
         "#{klass_name} < #{model_klass}"
+      when 'activerecord'
+        require 'starter/builder/templates/activerecord'
+        extend(::Starter::Templates::ActiveRecord)
+        "#{klass_name} < #{model_klass}"
       else
         klass_name
       end

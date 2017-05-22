@@ -8,6 +8,11 @@ module Starter
         when 'sequel'
           require 'starter/builder/templates/sequel'
           extend(::Starter::Templates::Sequel)
+        when 'activerecord'
+          require 'starter/builder/templates/activerecord'
+          extend(::Starter::Templates::ActiveRecord)
+          # Fixes pooling
+          add_middleware(dest, 'ActiveRecord::Rack::ConnectionManagement')
         else
           return
         end
@@ -29,6 +34,12 @@ module Starter
 
       def build_config(dest)
         FileFoo.write_file(File.join(dest, 'database.yml'), config)
+      end
+
+      # adds a middleware to config.ru
+      def add_middleware(dest, middleware)
+        replacement = "use #{middleware}\n\n\\1"
+        FileFoo.call!(File.join(dest, 'config.ru')) { |content| content.sub!(/^(run.+)$/, replacement) }
       end
 
       def append_to_file(file_name, content)
