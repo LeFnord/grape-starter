@@ -26,7 +26,7 @@ $ ./script/test
 ```
 $ ./script/server *port (default: 9292)
 ```
-and go to: [http://localhost:port/](http://localhost:9292/)
+and go to: [http://localhost:port/doc](http://localhost:9292/doc)
 to access the OAPI documentation.
 
 For production, set `RACK_ENV=production`

@@ -46,10 +46,12 @@ class App
   end
 
   def call(env)
-    if env['REQUEST_PATH'].start_with?("/#{Api::Base.prefix}")
+    if Api::Base.recognize_path(env['REQUEST_PATH'])
       Api::Base.call(env)
-    else
+    elsif env['REQUEST_PATH'] == '/doc'
       DocApp.new.call(env)
+    else
+      [403, { 'Content-Type': 'text/plain' }, ['403 Forbidden']]
     end
   end
 end
