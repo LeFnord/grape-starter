@@ -17,7 +17,7 @@ module Starter
     extend Templates::Endpoints
 
     class << self
-      attr_reader :prefix, :resource, :set, :force, :entity, :destination
+      attr_reader :prefix, :resource, :set, :force, :entity, :destination, :orm
       #
       # public methods
       #
@@ -56,6 +56,7 @@ module Starter
         @set = options[:set]
         @force = options[:force]
         @entity = options[:entity]
+        @orm = options[:orm]
 
         save_resource
       end
