@@ -15,12 +15,29 @@ RSpec.describe Starter::Names do
     end
 
     let(:resource) { 'foo' }
-    describe 'sequel class' do
-      before do
-        Starter::Config.save(content: { orm: 'sequel' })
-      end
 
-      specify { expect(subject.lib_klass_name).to eql 'Foo < Sequel::Model' }
+    describe 'orm option not given' do
+      before { Starter::Config.save(content: { orm: 'some orm' }) }
+
+      specify { expect(subject.lib_klass_name).to eql 'Foo' }
+    end
+
+    describe 'orm option is false' do
+      before { subject.instance_variable_set(:@orm, false) }
+
+      before { Starter::Config.save(content: { orm: 'some orm' }) }
+
+      specify { expect(subject.lib_klass_name).to eql 'Foo' }
+    end
+
+    describe 'orm option is true' do
+      before { subject.instance_variable_set(:@orm, true) }
+
+      describe 'sets Sequel::Model' do
+        before { Starter::Config.save(content: { orm: 'sequel' }) }
+
+        specify { expect(subject.lib_klass_name).to eql 'Foo < Sequel::Model' }
+      end
     end
   end
 
