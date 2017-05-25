@@ -84,7 +84,7 @@ $ cd awesome_api
 $ ./script/server *port
 ```
 the API is now accessible under: [http://localhost:9292/api/v1/root](http://localhost:9292/api/v1/root)  
-the documentation of it under: [http://localhost:9292/](http://localhost:9292/).
+the documentation of it under: [http://localhost:9292/doc](http://localhost:9292/doc).
 
 More could be found in [README](template/README.md).
 
