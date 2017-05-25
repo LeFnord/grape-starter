@@ -1,5 +1,14 @@
 ### NEXT
 
+- [212e6…](https://github.com/LeFnord/grape-starter/commit/212e6245e10598efe286143dac39f46134c58c54) - makes mounting of doc more secure
+- [f3bb6…](https://github.com/LeFnord/grape-starter/commit/f3bb63fdee79df4552316524b1ac3adaebab811a) - adds orm option so that the `add` resource command can optional use configured ORM
+- [af138…](https://github.com/LeFnord/grape-starter/commit/af1388ae6479b81646c56ac55f856ea275dc9817) - resource respects configured orm
+- [5ac74…](https://github.com/LeFnord/grape-starter/commit/5ac747a7fb44d97eedbeba1e7a11e475846d7743) - improve README
+- [eb33c…](https://github.com/LeFnord/grape-starter/commit/eb33c910c623b34db54ccb64ee59af4c639029e4) - adds base storing of configuration
+- [751aa…](https://github.com/LeFnord/grape-starter/commit/751aa8ae929bed0ff66ac9830468279238bec252) - adding option to add Sequel support
+- [354e6…](https://github.com/LeFnord/grape-starter/commit/354e63abd77751fe0f3a1b405bb49ab754ab1522) - re-organizing of template files
+- [6e33e…](https://github.com/LeFnord/grape-starter/commit/6e33e8137aa293eef66913c50010c53d284a0d8d) - Add awesome_print dependency ([@terry90](https://github.com/terry90))
+
 ### 0.6.0
 
 **breaking changes** renames all api stuff under lib to models (includes, of course, the namespace):
