@@ -1,5 +1,9 @@
 ### NEXT
 
+- contributions
+
+### 0.7.0
+
 - [212e6…](https://github.com/LeFnord/grape-starter/commit/212e6245e10598efe286143dac39f46134c58c54) - makes mounting of doc more secure
 - [f3bb6…](https://github.com/LeFnord/grape-starter/commit/f3bb63fdee79df4552316524b1ac3adaebab811a) - adds orm option so that the `add` resource command can optional use configured ORM
 - [af138…](https://github.com/LeFnord/grape-starter/commit/af1388ae6479b81646c56ac55f856ea275dc9817) - resource respects configured orm
