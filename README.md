@@ -91,14 +91,30 @@ More could be found in [README](template/README.md).
 
 #### Add resources
 ```
-$ grape-starter add foo
+$ grape-starter add foo [http methods]
 ```
-with following options:
+This adds endpoint and lib file and belonging specs, and a mount entry in base.rb.
+
+Using it with following options:
 ```
 -e, --entity # a grape entity file will also be created
+-o, --orm    # sets the parent class of libe file (e.g: `Foo < Sequel::Model` for Sequel)
 ```
-to add CRUD endpoints for resource foo. For more options, see `grape-starter add -h`.
-This adds endpoint and lib file and belonging specs, and a mount entry in base.rb.
+to add CRUD endpoints for resource foo. By given http methods only this one would be generated.
+For available methods see: [`Templates::Endpoints`](https://github.com/LeFnord/grape-starter/blob/d7bb6c4946dc27fcafa5a75435b45bfe2b7277f0/lib/starter/builder/templates/endpoints.rb#L7-L26).
+
+Example:
+```
+grape-starter add foo post get
+```
+will use `post` and `get_one` to create the `post` and `get` endpoint, it would be respected, if it is the singular or plural form of it, so the plural form would look like:
+```
+grape-starter add foos post get
+```
+this will use `post`, `get_all` and `get_specific` to create the `post`, `get` and `get :id` endpoints.
+
+If the `orm` switch `true`, the lib class would be created as child class of a specific ORM class,
+so for example for Sequel, it would be wirtten: `Foo < Sequel::Model` instead of `Foo`, hereby the using ORM would be taken from the configuration, which was stored by project creation.
 
 
 #### Remove a resource
