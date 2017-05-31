@@ -55,26 +55,46 @@ RSpec.describe Starter::BaseFile do
       FileUtils.cd(created_api)
     end
 
-    subject do
-      starter_gem = Gem::Specification.find_by_name('grape-starter').gem_dir
-      src = File.join(starter_gem, 'template', '.')
-      Starter::Builder.new!(plural, src, plural, p: 'awesome_api')
-    end
-
     after do
       FileUtils.cd('..')
       FileUtils.remove_dir(created_api, true)
     end
 
-    describe 'base_version' do
-      specify do
-        expect(subject.base_version).to eql 'v1'
+    describe 'prefix not given' do
+      before(:each) do
+        FileUtils.rm(File.join(created_api, '.config')) if File.exist?(File.join(created_api, '.config'))
+      end
+
+      subject do
+        starter_gem = Gem::Specification.find_by_name('grape-starter').gem_dir
+        src = File.join(starter_gem, 'template', '.')
+        Starter::Builder.new!(plural, src, plural, p: nil)
+      end
+
+      describe 'base_prefix' do
+        specify do
+          expect(subject.base_prefix).to eql nil
+        end
       end
     end
 
-    describe 'base_prefix' do
-      specify do
-        expect(subject.base_prefix).to eql 'awesome_api'
+    describe 'prefix given' do
+      subject do
+        starter_gem = Gem::Specification.find_by_name('grape-starter').gem_dir
+        src = File.join(starter_gem, 'template', '.')
+        Starter::Builder.new!(plural, src, plural, p: 'awesome_api')
+      end
+
+      describe 'base_version' do
+        specify do
+          expect(subject.base_version).to eql 'v1'
+        end
+      end
+
+      describe 'base_prefix' do
+        specify do
+          expect(subject.base_prefix).to eql 'awesome_api'
+        end
       end
     end
   end

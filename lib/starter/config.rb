@@ -10,7 +10,8 @@ module Starter
       end
 
       def save(dest: Dir.getwd, content: nil)
-        return if content.nil? || content.empty?
+        return if content.nil? || content.empty? || !content.is_a?(Hash)
+        content = read.merge(content)
         File.open(File.join(dest, '.config'), 'w') { |f| f.write(YAML.dump(content)) }
       end
     end
