@@ -28,19 +28,27 @@ module Starter
       # source - A String which provides the template path
       # destination - A String which provides the new project path
       def new!(name, source, destination, options = {})
-        @prefix = options[:p] || 'api'
         @resource = name
         @destination = destination
+        @prefix = options[:p] # can be nil
 
         FileUtils.copy_entry source, destination
 
-        replace_static(File.join('script', 'server'), "API-#{resource}")
-        replace_static(File.join('api', 'base.rb'), ":#{prefix}")
-        replace_static(File.join('spec', 'requests', 'root_spec.rb'), prefix)
-        replace_static(File.join('spec', 'requests', 'documentation_spec.rb'), prefix)
+        config_static.each do |config|
+          replace_static(File.join(config[:file]), config[:pattern])
+        end
 
         Orms.build(destination, options[:orm]) if options[:orm]
         self
+      end
+
+      def config_static
+        [
+          { file: %w[script server], pattern: "API-#{resource}" },
+          { file: %w[api base.rb], pattern: prefix ? "prefix :#{prefix}" : nil },
+          { file: %w[spec requests root_spec.rb], pattern: prefix ? "/#{prefix}" : nil },
+          { file: %w[spec requests documentation_spec.rb], pattern: prefix ? "/#{prefix}" : nil }
+        ]
       end
 
       # would be called from add command
@@ -99,7 +107,7 @@ module Starter
       def replace_static(file, replacement)
         server_file = File.join(destination, file)
 
-        FileFoo.call!(server_file) { |content| content.gsub!('{{{grape-starter}}}', replacement) }
+        FileFoo.call!(server_file) { |content| content.gsub!('{{{grape-starter}}}', replacement.to_s) }
       end
 
       # #add! a new resource releated helper methods

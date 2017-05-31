@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe '/{{{grape-starter}}}/v1/root' do
+RSpec.describe '{{{grape-starter}}}/v1/root' do
   let(:exposed_keys) do
     %i[
       verb

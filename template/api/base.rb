@@ -2,9 +2,7 @@
 
 module Api
   class Base < Grape::API
-    # !!! a prefix is always required
-    # would be set after project name, to provide a namespace
-    prefix {{{grape-starter}}}
+    {{{grape-starter}}}
     version 'v1', using: :path
     format :json
 
