@@ -23,7 +23,6 @@ desc 'Creates initial api skeleton'
 arg_name 'awesome_api'
 command :new do |c|
   c.flag [:p, :prefix],
-         default_value: 'api',
          desc: 'sets the prefix of the API'
   c.flag [:o, :orm],
          default_value: 'sequel',
