@@ -31,7 +31,7 @@ with following options:
 ```
 -f, --force                # overwrites existend project
 -p foobar, --prefix=foobar # provide a prefix under which the API can be accessed, default: api
--o sequel, --orm=sequel    # create also needed files and folders for the specified ORM
+-o sequel, --orm=sequel    # create files for the specified ORM, default: sequel, available: activerecord
 ```
 
 This command creates a folder named `awesome_api` containing the skeleton. With following structure:
