@@ -4,11 +4,11 @@ module Starter
   class Orms
     class << self
       def build(dest, orm)
-        case orm
+        case orm.downcase
         when 'sequel'
           require 'starter/builder/templates/sequel'
           extend(::Starter::Templates::Sequel)
-        when 'activerecord'
+        when 'activerecord', 'ar'
           require 'starter/builder/templates/activerecord'
           extend(::Starter::Templates::ActiveRecord)
           # Fixes pooling
@@ -22,7 +22,7 @@ module Starter
         append_to_file(File.join(dest, 'Rakefile'), rakefile)
         append_to_file(File.join(dest, 'Gemfile'), gemfile)
         prepare_for_migrations(File.join(dest, 'db'))
-        Starter::Config.save(dest: dest, content: { orm: orm })
+        Starter::Config.save(dest: dest, content: { orm: orm.downcase })
       end
 
       private
