@@ -3,7 +3,9 @@
 require 'spec_helper'
 
 RSpec.describe Starter::Config do
-  let(:config_file) { subject::CONFIG_FILE }
+  before { subject.instance_variable_set(:@dest, Dir.getwd) }
+
+  let(:config_file) { subject.config_file }
   let(:dest) { Dir.getwd }
   let(:content) { { orm: 'sequel' } }
 
@@ -91,6 +93,19 @@ RSpec.describe Starter::Config do
 
         specify do
           expect(return_value).to eql content
+        end
+      end
+
+      describe 'append data' do
+        let(:new_data) { { bar: 'foo' } }
+
+        before do
+          subject.save(content: content)
+          subject.save(content: new_data)
+        end
+
+        specify do
+          expect(return_value).to eql content.merge(new_data)
         end
       end
     end

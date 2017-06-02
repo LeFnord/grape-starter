@@ -25,7 +25,6 @@ command :new do |c|
   c.flag [:p, :prefix],
          desc: 'sets the prefix of the API'
   c.flag [:o, :orm],
-         default_value: 'sequel',
          desc: 'prepares for the given ORM (Sequel -> sequel, ActiveRecord -> ar)'
 
   c.action do |global_options, options, args|
