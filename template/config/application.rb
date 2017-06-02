@@ -16,6 +16,7 @@ class DocApp
   end
 
   def template
+    prefix = Api::Base.prefix ? "/#{Api::Base.prefix}" : ''
     "<!DOCTYPE html>
     <html>
       <head>
@@ -24,7 +25,7 @@ class DocApp
         <style>body {margin: 0;padding: 0;}</style>
       </head>
       <body>
-        <redoc spec-url='http://#{server}:#{port}/#{Api::Base.prefix}/#{Api::Base.version}/oapi.json'></redoc>
+        <redoc spec-url='http://#{server}:#{port}#{prefix}/#{Api::Base.version}/oapi.json'></redoc>
         <script src='https://rebilly.github.io/ReDoc/releases/latest/redoc.min.js'> </script>
       </body>
     </html>"
