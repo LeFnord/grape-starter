@@ -2,6 +2,10 @@
 
 - contributions
 
+### 0.8.1
+
+- [6b16c…](https://github.com/LeFnord/grape-starter/commit/6b16c0bf38e4cad8d486e805269157dcbaefbb64) - removes default ORM value, minor corrections
+
 ### 0.8.0
 
 - [#15](https://github.com/LeFnord/grape-starter/pull/15), [2af09…](https://github.com/LeFnord/grape-starter/commit/2af09dddf97f756e96c80c745ee68aad5ab4ccc3) **breaking change** prefix option on create is optional, no default
