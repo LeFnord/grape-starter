@@ -16,6 +16,10 @@ module Starter
         # load Sequel Configuration
         settings = YAML.load_file('config/database.yml')
         DB = Sequel.connect(settings[ENV['RACK_ENV']])
+
+        # FIXME: maybe remove it later …
+        #   see: https://groups.google.com/forum/#!topic/sequel-talk/QIIv5qoltjs
+        Sequel::Model.require_valid_table = false
         FILE
       end
 
