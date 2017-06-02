@@ -2,17 +2,23 @@
 
 module Starter
   class Config
-    CONFIG_FILE = File.join(Dir.getwd, '.config')
     class << self
-      def read
-        return {} unless File.exist?(CONFIG_FILE)
-        YAML.load_file(CONFIG_FILE)
+      def read(dest: Dir.getwd)
+        @dest = dest
+        return {} unless File.exist?(config_file)
+        YAML.load_file(config_file)
       end
 
       def save(dest: Dir.getwd, content: nil)
+        @dest = dest
         return if content.nil? || content.empty? || !content.is_a?(Hash)
-        content = read.merge(content)
-        File.open(File.join(dest, '.config'), 'w') { |f| f.write(YAML.dump(content)) }
+        existent = File.exist?(config_file) ? YAML.load_file(config_file) : {}
+        content = existent.merge(content)
+        File.open(config_file, 'w') { |f| f.write(YAML.dump(content)) }
+      end
+
+      def config_file
+        File.join(@dest, '.config')
       end
     end
   end

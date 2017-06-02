@@ -39,7 +39,7 @@ module Starter
         end
 
         Orms.build(destination, options[:orm]) if options[:orm]
-        Starter::Config.save(content: { prefix: prefix })
+        Starter::Config.save(dest: destination, content: { prefix: prefix })
 
         self
       end

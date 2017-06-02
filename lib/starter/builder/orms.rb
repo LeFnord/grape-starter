@@ -22,6 +22,7 @@ module Starter
         append_to_file(File.join(dest, 'Rakefile'), rakefile)
         append_to_file(File.join(dest, 'Gemfile'), gemfile)
         prepare_for_migrations(File.join(dest, 'db'))
+
         Starter::Config.save(dest: dest, content: { orm: orm.downcase })
       end
 

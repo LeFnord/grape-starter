@@ -26,10 +26,7 @@ module Starter
 
     # parses out the prefix from base api file
     def base_prefix
-      base_file
-      scan = base_file.scan(/prefix\s+(:.+)\n/)
-      scan.first.first.delete!(':') unless scan.empty?
-      # Starter::Config.read[:prefix]
+      Starter::Config.read[:prefix]
     end
 
     # parses out the version from base api file
