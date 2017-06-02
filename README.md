@@ -30,8 +30,8 @@ $ grape-starter new awesome_api
 with following options:
 ```
 -f, --force                # overwrites existend project
--p foobar, --prefix=foobar # provide a prefix under which the API can be accessed, default: api
--o sequel, --orm=sequel    # create files for the specified ORM, default: sequel, available: activerecord
+-p foobar, --prefix=foobar # sets the prefix of the API (default: none)
+-o sequel, --orm=sequel    # create files for the specified ORM, available: sequel, activerecord (ar) (default: none)
 ```
 
 This command creates a folder named `awesome_api` containing the skeleton. With following structure:
@@ -52,7 +52,7 @@ This command creates a folder named `awesome_api` containing the skeleton. With 
 │   │   └── version.rb
 │   └── models.rb
 ├── public             # for serving static files
-│   └── redoc.html     # provides the ReDoc generated oapi documentation
+│   └── …
 ├── script             # setup / server / test etc.
 │   └── …
 └── spec               # RSpec
