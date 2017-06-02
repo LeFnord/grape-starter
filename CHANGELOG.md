@@ -2,6 +2,11 @@
 
 - contributions
 
+### 0.8.0
+
+- [#15](https://github.com/LeFnord/grape-starter/pull/15), [2af09…](https://github.com/LeFnord/grape-starter/commit/2af09dddf97f756e96c80c745ee68aad5ab4ccc3) **breaking change** prefix option on create is optional, no default
+- [#12](https://github.com/LeFnord/grape-starter/pull/12) - Add base configuration for ActiveRecord - ([@terry90](https://github.com/terry90))
+
 ### 0.7.0
 
 - [212e6…](https://github.com/LeFnord/grape-starter/commit/212e6245e10598efe286143dac39f46134c58c54) - makes mounting of doc more secure
