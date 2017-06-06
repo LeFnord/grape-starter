@@ -2,6 +2,10 @@
 
 - contributions
 
+### 0.8.3
+
+- [3fe13](https://github.com/LeFnord/grape-starter/commit/3fe134c6ce0666dfd86165b5d2c1a219a4629862) - improves sequel rake tasks
+
 ### 0.8.2
 
 - [48458…](https://github.com/LeFnord/grape-starter/commit/48458938a341660453052660448a058aee0f8e81) - handles Sequel deprecation warning
