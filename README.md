@@ -165,8 +165,8 @@ To add an new ORM, it needs following steps:
   see as example [sequel.rb](lib/starter/builder/templates/sequel.rb), there the return value of each method would be written into the
   corresponding file (see: [orms.rb](lib/starter/builder/orms.rb)).
 
-2. An additional switch in the [`Starter::Orms.build`](https://github.com/LeFnord/grape-starter/blob/67738438ba9278b280a6eac402096fcb74526ab3/lib/starter/builder/orms.rb#L7-L13) method to choose the template.
-3. An entry in the description of the [`add` command](https://github.com/LeFnord/grape-starter/blob/master/bin/grape-starter#L30), when it would be called with `-h`
+2. An additional switch in the [`Starter::Orms.build`](https://github.com/LeFnord/grape-starter/blob/ef45133e6d2254efee06ae4f17ede2fc5c06bebb/lib/starter/builder/orms.rb#L7-L18) and [`Starter::Names.lib_klass_name`](https://github.com/LeFnord/grape-starter/blob/ef45133e6d2254efee06ae4f17ede2fc5c06bebb/lib/starter/builder/names.rb#L13-L24) methods to choose the right template.
+3. An entry in the description of the [`new` command](https://github.com/LeFnord/grape-starter/blob/fa62c8a2ff72f984144b2336859d3e0b397398bd/bin/grape-starter#L28), when it would be called with `-h`
 
 ## License
 
