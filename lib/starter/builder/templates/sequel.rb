@@ -56,10 +56,38 @@ module Starter
         <<-FILE.strip_heredoc
         # Sequel migration tasks
         namespace :db do
+          Sequel.extension(:migration)
+
+          desc "Prints current schema version"
+          task version: :connect do
+            version = if DB.tables.include?(:schema_info)
+              DB[:schema_info].first[:version]
+            end || 0
+
+            $stdout.print 'Schema Version: '
+            $stdout.print version
+            $stdout.print "\n"
+          end
+
           desc 'Run all migrations in db/migrations'
           task migrate: :connect do
-            Sequel.extension(:migration)
             Sequel::Migrator.apply(DB, 'db/migrations')
+            Rake::Task['db:version'].execute
+          end
+
+          desc "Perform rollback to specified target or full rollback as default"
+          task :rollback, [:target] => :connect do |t, args|
+            args.with_defaults(:target => 0)
+
+            Sequel::Migrator.run(DB, 'db/migrations', :target => args[:target].to_i)
+            Rake::Task['db:version'].execute
+          end
+
+          desc "Perform migration reset (full rollback and migration)"
+          task reset: :connect do
+            Sequel::Migrator.run(DB, 'db/migrations', target: 0)
+            Sequel::Migrator.run(DB, 'db/migrations')
+            Rake::Task['db:version'].execute
           end
 
           task connect: :environment do
