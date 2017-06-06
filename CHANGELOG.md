@@ -2,6 +2,10 @@
 
 - contributions
 
+### 0.8.2
+
+- [48458…](https://github.com/LeFnord/grape-starter/commit/48458938a341660453052660448a058aee0f8e81) - handles Sequel deprecation warning
+
 ### 0.8.1
 
 - [6b16c…](https://github.com/LeFnord/grape-starter/commit/6b16c0bf38e4cad8d486e805269157dcbaefbb64) - removes default ORM value, minor corrections
