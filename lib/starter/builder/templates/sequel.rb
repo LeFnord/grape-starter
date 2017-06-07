@@ -17,9 +17,23 @@ module Starter
         settings = YAML.load_file('config/database.yml')
         DB = Sequel.connect(settings[ENV['RACK_ENV']])
 
+        env = ENV['RACK_ENV'] || 'development'
+
+        logger = if %w[development test].include? env
+                   log_dir = File.join(Dir.getwd, 'log')
+                   log_file = File.join(log_dir, 'db.log')
+                   FileUtils.mkdir(log_dir) unless Dir.exist?(log_dir)
+                   Logger.new(File.open(log_file, 'a'))
+                 else
+                   Logger.new($stdout)
+                 end
+
+        DB.loggers << logger
+
         # FIXME: maybe remove it later …
         #   see: https://groups.google.com/forum/#!topic/sequel-talk/QIIv5qoltjs
         Sequel::Model.require_valid_table = false
+        Sequel::Model.plugin :force_encoding, 'UTF-8'
         FILE
       end
 
@@ -60,13 +74,10 @@ module Starter
 
           desc "Prints current schema version"
           task version: :connect do
-            version = if DB.tables.include?(:schema_info)
-              DB[:schema_info].first[:version]
-            end || 0
+            version = DB.tables.include?(:schema_info) ? DB[:schema_info].first[:version] : 0
 
             $stdout.print 'Schema Version: '
-            $stdout.print version
-            $stdout.print "\n"
+            $stdout.puts version
           end
 
           desc 'Run all migrations in db/migrations'
