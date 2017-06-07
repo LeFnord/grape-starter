@@ -2,23 +2,25 @@
 
 require 'rake'
 
-require 'rspec/core'
-require 'rspec/core/rake_task'
-
-RSpec::Core::RakeTask.new(:spec)
+require File.expand_path('../config/environment', __FILE__)
 
 task :environment do
   ENV['RACK_ENV'] ||= 'development'
-  require File.expand_path('../config/environment', __FILE__)
 end
 
+# rspec tasks
+require 'rspec/core'
+require 'rspec/core/rake_task'
+RSpec::Core::RakeTask.new(:spec)
+
+# rubocop tasks
 require 'rubocop/rake_task'
 RuboCop::RakeTask.new(:rubocop)
 
 task default: [:spec, :rubocop]
 
-require File.expand_path('../config/environment', __FILE__)
 
+# grape-swagger tasks
 require 'grape-swagger/rake/oapi_tasks'
 GrapeSwagger::Rake::OapiTasks.new(::Api::Base)
 

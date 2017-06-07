@@ -1,7 +1,7 @@
 # frozen_string_literal: false
 
 require 'rack/cors'
-require_relative 'config/application'
+require_relative 'config/environment'
 
 use Rack::CommonLogger
 

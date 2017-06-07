@@ -10,8 +10,7 @@ AllCops:
   TargetRubyVersion: 2.4
 
 Metrics/BlockLength:
-  Exclude:
-    - 'api/endpoints/**/*'
+  Enabled: false
 
 Metrics/LineLength:
   Max: 120
