@@ -2,6 +2,14 @@
 
 - contributions
 
+### 0.8.4
+
+- [d8e13](https://github.com/LeFnord/grape-starter/commit/1f5faef958799704163b7db25db07c569cad8e13) -
+  fixes error on configuration
+
+- [6baba](https://github.com/LeFnord/grape-starter/commit/e00433dee97509e71c1685a0da9134ce2a66baba) -  
+  minor re-working of Rakefile and initializer templates
+
 ### 0.8.3
 
 - [3fe13](https://github.com/LeFnord/grape-starter/commit/3fe134c6ce0666dfd86165b5d2c1a219a4629862) - improves sequel rake tasks
