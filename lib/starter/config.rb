@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'yaml'
+
 module Starter
   class Config
     class << self
