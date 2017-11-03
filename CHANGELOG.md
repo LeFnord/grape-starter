@@ -2,6 +2,12 @@
 
 - contributions
 
+### 0.8.5
+
+- [cbea8](https://github.com/LeFnord/grape-starter/commit/fa5edb5dc7e0883ff099e297e9cbd5bd5ebcbea8) - DRYs up template code; passes rubocop 0.51.0
+
+- [6bbe7](https://github.com/LeFnord/grape-starter/commit/a224b5d8dfa001cb1e8dec3b1a1e28fc9826bbe7) - avoids overriding of dev db by running specs; fixes syntox error
+
 ### 0.8.4
 
 - [d8e13](https://github.com/LeFnord/grape-starter/commit/1f5faef958799704163b7db25db07c569cad8e13) -
