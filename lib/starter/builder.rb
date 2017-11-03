@@ -83,7 +83,7 @@ module Starter
         file_list.map { |x| send("#{x}_name") }.each do |file_to_remove|
           begin
             FileUtils.rm file_to_remove
-          rescue => error
+          rescue StandardError => error
             $stdout.puts error.to_s
           end
         end

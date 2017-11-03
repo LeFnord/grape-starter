@@ -37,35 +37,6 @@ module Starter
         FILE
       end
 
-      def config
-        <<-FILE.strip_heredoc
-        # Sequel Database Configuration
-        development:
-          adapter: 'sqlite'
-          host: localhost
-          port: 27017
-          database: "db/development.sqlite3"
-          username:
-          password:
-
-        test:
-          adapter: 'sqlite'
-          host: localhost
-          port: 27017
-          database: "db/test.sqlite3"
-          username:
-          password:
-
-        production:
-          adapter: 'sqlite'
-          host: localhost
-          port: 27017
-          database: "db/production.sqlite3"
-          username:
-          password:
-        FILE
-      end
-
       def rakefile
         <<-FILE.strip_heredoc
         # Sequel migration tasks

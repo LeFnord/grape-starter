@@ -26,6 +26,35 @@ module Starter
         Starter::Config.save(dest: dest, content: { orm: orm.downcase })
       end
 
+      def config
+        <<-FILE.strip_heredoc
+        # ActiveRecord Database Configuration
+        development:
+          adapter: 'sqlite3'
+          host: localhost
+          port: 27017
+          database: "db/development.sqlite3"
+          username:
+          password:
+
+        test:
+          adapter: 'sqlite3'
+          host: localhost
+          port: 27017
+          database: "db/test.sqlite3"
+          username:
+          password:
+
+        production:
+          adapter: 'sqlite3'
+          host: localhost
+          port: 27017
+          database: "db/production.sqlite3"
+          username:
+          password:
+        FILE
+      end
+
       private
 
       def build_initializer(dest)

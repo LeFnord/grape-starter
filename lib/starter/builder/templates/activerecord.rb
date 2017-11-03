@@ -46,42 +46,13 @@ module Starter
                 end
 
                 return response
-              rescue Exception
+              rescue StandardError
                 ActiveRecord::Base.clear_active_connections!
                 raise
               end
             end
           end
         end
-        FILE
-      end
-
-      def config # TODO: Dry (Same config for Sequel)
-        <<-FILE.strip_heredoc
-        # ActiveRecord Database Configuration
-        development:
-          adapter: 'sqlite3'
-          host: localhost
-          port: 27017
-          database: "db/development.sqlite3"
-          username:
-          password:
-
-        test:
-          adapter: 'sqlite3'
-          host: localhost
-          port: 27017
-          database: "db/test.sqlite3"
-          username:
-          password:
-
-        production:
-          adapter: 'sqlite3'
-          host: localhost
-          port: 27017
-          database: "db/production.sqlite3"
-          username:
-          password:
         FILE
       end
 
