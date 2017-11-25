@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ['LeFnord']
   spec.email         = ['pscholz.le@gmail.com']
 
-  spec.summary       = 'Create a Grape Rack skeleton'
+  spec.summary       = 'Creates a Grape Rack skeleton'
   spec.description   = 'CLI to create a API skeleton based on Grape and Rack'
   spec.homepage      = 'https://github.com/LeFnord/grape-starter'
   spec.license       = 'MIT'
@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.required_ruby_version = '>= 2.2.6'
+  spec.required_ruby_version = '>= 2.3'
 
   spec.add_dependency 'gli', '~> 2.16'
   spec.add_dependency 'activesupport', '~> 5.1'
