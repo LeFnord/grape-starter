@@ -4,6 +4,7 @@ module Starter
   class Orms
     class << self
       def build(dest, orm)
+        @orm = orm
         case orm.downcase
         when 'sequel'
           require 'starter/builder/templates/sequel'
@@ -30,7 +31,7 @@ module Starter
         <<-FILE.strip_heredoc
         # ActiveRecord Database Configuration
         development:
-          adapter: 'sqlite3'
+          adapter: '#{adapter}'
           host: localhost
           port: 27017
           database: "db/development.sqlite3"
@@ -38,7 +39,7 @@ module Starter
           password:
 
         test:
-          adapter: 'sqlite3'
+          adapter: '#{adapter}'
           host: localhost
           port: 27017
           database: "db/test.sqlite3"
@@ -46,7 +47,7 @@ module Starter
           password:
 
         production:
-          adapter: 'sqlite3'
+          adapter: '#{adapter}'
           host: localhost
           port: 27017
           database: "db/production.sqlite3"
@@ -56,6 +57,10 @@ module Starter
       end
 
       private
+
+      def adapter
+        @orm == 'sequel' ? 'sqlite' : 'sqlite3'
+      end
 
       def build_initializer(dest)
         FileUtils.mkdir_p(dest)
