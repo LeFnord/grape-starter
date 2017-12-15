@@ -24,8 +24,8 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = '>= 2.3'
 
-  spec.add_dependency 'gli', '~> 2.16'
+  spec.add_dependency 'gli', '~> 2.17'
   spec.add_dependency 'activesupport', '~> 5.1'
-  spec.add_dependency 'rubocop', '~> 0.49'
+  spec.add_dependency 'rubocop', '~> 0.52'
   spec.add_dependency 'awesome_print', '~> 1.7'
 end

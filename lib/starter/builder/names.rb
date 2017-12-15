@@ -9,7 +9,7 @@ module Starter
 
     def lib_klass_name
       return klass_name unless @orm
-
+      # rubocop:disable Style/MixinUsage
       case ::Starter::Config.read[:orm]
       when 'sequel'
         require 'starter/builder/templates/sequel'
@@ -22,6 +22,7 @@ module Starter
       else
         klass_name
       end
+      # rubocop:enable Style/MixinUsage
     end
 
     def base_file_name
