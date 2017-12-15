@@ -5,6 +5,7 @@ module Starter
     class << self
       def build(dest, orm)
         @orm = orm
+        # rubocop:disable Style/MixinUsage
         case orm.downcase
         when 'sequel'
           require 'starter/builder/templates/sequel'
@@ -17,6 +18,7 @@ module Starter
         else
           return
         end
+        # rubocop:enable Style/MixinUsage
 
         build_initializer(File.join(dest, 'config', 'initializers'))
         build_config(File.join(dest, 'config'))

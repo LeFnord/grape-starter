@@ -10,6 +10,11 @@ AllCops:
   UseCache: true
   TargetRubyVersion: 2.4
 
+Layout/IndentationWidth:
+  Exclude:
+    - 'lib/starter/builder/templates/files.rb'
+    - 'lib/starter/builder/templates/endpoints.rb'
+
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
@@ -17,18 +22,13 @@ Metrics/BlockLength:
 Metrics/LineLength:
   Max: 120
 
-Style/AccessorMethodName:
+Naming/AccessorMethodName:
   Exclude:
     - 'lib/starter/builder/templates/files.rb'
     - 'lib/starter/builder/templates/endpoints.rb'
 
 Style/AsciiComments:
   Enabled: false
-
-Style/IndentationWidth:
-  Exclude:
-    - 'lib/starter/builder/templates/files.rb'
-    - 'lib/starter/builder/templates/endpoints.rb'
 
 Style/Documentation:
   Exclude:
