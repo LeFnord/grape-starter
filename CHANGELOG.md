@@ -2,6 +2,16 @@
 
 - contributions
 
+### 0.8.7
+
+- [c7cb2](https://github.com/LeFnord/grape-starter/commit/4be5bd9b7c06611e096d6eaa23d7168136bc7cb2) - updates dependencies; makes rubocop happy
+- [d9c6f](https://github.com/LeFnord/grape-starter/commit/2f97247767c3e76c4c33da50eec2ad160bed9c6f) - minor dependencies updates
+
+### 0.8.6
+
+- [362c9](https://github.com/LeFnord/grape-starter/commit/56035384befacb877e89e8a04f7bc62c9e7362c9) - fixes a sequel configuration bug with sqlite3
+- [21892](https://github.com/LeFnord/grape-starter/commit/4e249978af71abba35e00b0d4e85ec6ffaa21892) - upgrades minimum ruby version to 2.3
+
 ### 0.8.5
 
 - [cbea8](https://github.com/LeFnord/grape-starter/commit/fa5edb5dc7e0883ff099e297e9cbd5bd5ebcbea8) - DRYs up template code; passes rubocop 0.51.0
