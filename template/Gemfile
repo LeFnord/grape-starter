@@ -8,13 +8,13 @@ gem 'rack'
 gem 'rack-cors'
 
 # FIXME: lock to specific version before you are going into production
-gem 'grape', git: 'git@github.com:ruby-grape/grape.git'
-gem 'grape-entity', git: 'git@github.com:ruby-grape/grape-entity.git'
-gem 'grape-swagger', git: 'git@github.com:ruby-grape/grape-swagger.git'
-gem 'grape-swagger-entity', git: 'git@github.com:ruby-grape/grape-swagger-entity.git'
+gem 'grape'
+gem 'grape-entity'
+gem 'grape-swagger'
+gem 'grape-swagger-entity'
 
 group :development, :test do
-  gem 'grape-starter', git: 'git@github.com:LeFnord/grape-starter.git'
+  gem 'grape-starter'
   gem 'pry'
   gem 'rack-test'
   gem 'rake'
