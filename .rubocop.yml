@@ -5,7 +5,8 @@ AllCops:
     - '**/bin/**/*'
     - '**/tmp/**/*'
     - '**/script/**/*'
-    - '**/template/**/*'
+    # - '**/template/**/*'
+    - '**/template/api/**'
     - grape-starter.gemspec
   UseCache: true
   TargetRubyVersion: 2.4

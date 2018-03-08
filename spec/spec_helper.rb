@@ -2,7 +2,7 @@
 
 require 'grape'
 
-$LOAD_PATH.unshift File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift File.expand_path('lib', __dir__)
 require 'starter'
 
 RSpec.configure do |config|
@@ -12,6 +12,6 @@ RSpec.configure do |config|
   config.mock_with :rspec
   config.expect_with :rspec
 
-  # config.warnings = true
+  config.warnings = true
   config.raise_errors_for_deprecations!
 end
