@@ -8,7 +8,6 @@ Gemfile.lock
 docker-compose.yml
 Dockerfile
 tmp/
-.rspec
 pkg/
 template/Gemfile.lock
 grape-starter.md

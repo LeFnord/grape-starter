@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
 RSpec.describe Starter::Rake::GrapeTasks do
   let(:app) do
     Class.new(Grape::API) do
