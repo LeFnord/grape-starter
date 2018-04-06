@@ -7,11 +7,16 @@ before_install:
   - gem install bundler
 
 rvm:
-  - 2.5.0
-  - 2.4.3
-  - ruby-head
+  - 2.5.1
+  - 2.4.4
 
 matrix:
   fast_finish: true
+
+  include:
+    - rvm: ruby-head
+    - rvm: 2.3.7
+
   allow_failures:
     - rvm: ruby-head
+    - rvm: 2.3.7

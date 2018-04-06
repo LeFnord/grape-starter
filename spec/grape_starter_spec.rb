@@ -37,6 +37,7 @@ RSpec.describe 'grape-starter' do
       command 'grape-starter add -h'
 
       its(:stdout) { is_expected.to include '-e, --entity' }
+      its(:stdout) { is_expected.to include '-m, --migration' }
       its(:stdout) { is_expected.to include '-o, --orm' }
     end
   end

@@ -61,6 +61,8 @@ command :add do |c|
            desc: 'adds entity file'
   c.switch [:o, :orm], negatable: false,
            desc: 'inherit from ORM'
+  c.switch [:m, :migration], negatable: false,
+           desc: 'create also migration file'
 
   c.action do |global_options, options, args|
     exit_now! 'no resource given' if args.empty?
