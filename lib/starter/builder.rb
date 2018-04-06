@@ -27,6 +27,9 @@ module Starter
       # name - A String as project name
       # source - A String which provides the template path
       # destination - A String which provides the new project path
+      # options - A Hash to provide some optional arguments (default: {})
+      #   :prefix - Sets the Prefix for the API
+      #   :orm - Sets and creates ORM specific files
       def new!(name, source, destination, options = {})
         @resource = name
         @destination = destination
@@ -44,23 +47,15 @@ module Starter
         self
       end
 
-      def config_static
-        [
-          { file: %w[script server], pattern: "API-#{resource}" },
-          { file: %w[api base.rb], pattern: prefix ? "prefix :#{prefix}" : nil },
-          { file: %w[spec requests root_spec.rb], pattern: prefix ? "/#{prefix}" : nil },
-          { file: %w[spec requests documentation_spec.rb], pattern: prefix ? "/#{prefix}" : nil }
-        ]
-      end
-
       # would be called from add command
       #
       # resource - A String as name
       # options - A Hash to provide some optional arguments (default: {})
-      #           :set – whitespace separated list of http verbs
-      #                 (default: nil, possible: post get put patch delete)
-      #           :force - A Boolean, if given existent files should be overwriten (default: false)
-      #           :entity - A Boolean, if given an entity file would be created (default: false)
+      #   :set – Whitespace separated list of http verbs
+      #          (default: nil, possible: post get put patch delete)
+      #   :force - A Boolean, if given existent files should be overwriten (default: false)
+      #   :entity - A Boolean, if given an entity file would be created (default: false)
+      #   :orm - A Boolean, if given the created lib/model file will be inherited orm specific (default: false)
       def add!(resource, options = {})
         @resource = resource
         @set = options[:set]
@@ -75,7 +70,7 @@ module Starter
       #
       # resource - A String, which indicates the resource to remove
       # options - A Hash to provide some optional arguments (default: {})
-      #           :entity - A Boolean, if given an entity file would also be removed (default: nil -> false)
+      #   :entity - A Boolean, if given an entity file would also be removed (default: nil -> false)
       def remove!(resource, options = {})
         @resource = resource
         @entity = options[:entity]
@@ -105,7 +100,18 @@ module Starter
 
       # #new! project creation releated helper methods
       #
-      # replace something in existend files
+      # defines static files to be created
+      def config_static
+        [
+          { file: %w[script server], pattern: "API-#{resource}" },
+          { file: %w[api base.rb], pattern: prefix ? "prefix :#{prefix}" : nil },
+          { file: %w[spec requests root_spec.rb], pattern: prefix ? "/#{prefix}" : nil },
+          { file: %w[spec requests documentation_spec.rb], pattern: prefix ? "/#{prefix}" : nil }
+        ]
+      end
+
+      #
+      # replace something in static files
       def replace_static(file, replacement)
         server_file = File.join(destination, file)
 
