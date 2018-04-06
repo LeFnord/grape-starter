@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
 RSpec.describe Starter::Names do
   subject do
     dummy = Class.new { extend Starter::Names }

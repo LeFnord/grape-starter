@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
 RSpec.describe Starter::Config do
   before { subject.instance_variable_set(:@dest, Dir.getwd) }
 
