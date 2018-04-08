@@ -7,7 +7,6 @@ gem 'thin'
 gem 'rack'
 gem 'rack-cors'
 
-# FIXME: lock to specific version before you are going into production
 gem 'grape'
 gem 'grape-entity'
 gem 'grape-swagger'

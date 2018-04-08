@@ -86,6 +86,19 @@ module Starter
         gem 'sqlite3'
         FILE
       end
+
+      def migration(klass_name, resource)
+        <<-FILE.strip_heredoc
+        class Create#{klass_name} < ActiveRecord::Migration[5.1]
+          def change
+            create_table :#{resource} do |t|
+
+              t.timestamps
+            end
+          end
+        end
+        FILE
+      end
     end
   end
 end

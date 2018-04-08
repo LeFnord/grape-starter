@@ -41,8 +41,12 @@ module Starter
           replace_static(File.join(config[:file]), config[:pattern])
         end
 
+        Starter::Config.save(
+          dest: destination,
+          content: { prefix: prefix, orm: options[:orm].to_s }
+        )
+
         Orms.build(destination, options[:orm]) if options[:orm]
-        Starter::Config.save(dest: destination, content: { prefix: prefix })
 
         self
       end
@@ -63,6 +67,7 @@ module Starter
         @entity = options[:entity]
         @orm = options[:orm]
 
+        Orms.add_migration(klass_name, resource.downcase) if @orm
         save_resource
       end
 
