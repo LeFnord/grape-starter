@@ -86,6 +86,21 @@ module Starter
         gem 'sqlite3'
         FILE
       end
+
+      def migration(_klass_name, resource)
+        <<-FILE.strip_heredoc
+        Sequel.migration do
+          change do
+            create_table :#{resource} do
+              primary_key :id
+
+              DateTime :created_at
+              DateTime :updated_at
+            end
+          end
+        end
+        FILE
+      end
     end
   end
 end

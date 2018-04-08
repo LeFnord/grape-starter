@@ -4,18 +4,12 @@ module Starter
   class Orms
     class << self
       def build(dest, orm)
-        @orm = orm
-        case orm.downcase
-        when 'sequel'
-          require 'starter/builder/templates/sequel'
-          extend(::Starter::Templates::Sequel)
-        when 'activerecord', 'ar'
-          require 'starter/builder/templates/activerecord'
-          extend(::Starter::Templates::ActiveRecord)
+        load_orm(orm: orm)
+        return if @orm.nil?
+
+        if @orm == 'ar' || @orm == 'activerecord'
           # Fixes pooling
           add_middleware(dest, 'ActiveRecord::Rack::ConnectionManagement')
-        else
-          return
         end
 
         build_initializer(File.join(dest, 'config', 'initializers'))
@@ -23,8 +17,6 @@ module Starter
         append_to_file(File.join(dest, 'Rakefile'), rakefile)
         append_to_file(File.join(dest, 'Gemfile'), gemfile)
         prepare_for_migrations(File.join(dest, 'db'))
-
-        Starter::Config.save(dest: dest, content: { orm: orm.downcase })
       end
 
       def config
@@ -54,6 +46,30 @@ module Starter
           username:
           password:
         FILE
+      end
+
+      def add_migration(klass_name, resource)
+        load_orm
+        return if @orm.nil?
+
+        file_name = "#{Time.now.strftime('%Y%m%d%H%m%S')}_Create#{klass_name}.rb"
+        migration_dest = File.join(Dir.pwd, 'db', 'migrations', file_name)
+        FileFoo.write_file(migration_dest, migration(klass_name, resource))
+      end
+
+      def load_orm(orm: ::Starter::Config.read[:orm])
+        @orm = orm
+
+        case @orm
+        when 'sequel'
+          require 'starter/builder/templates/sequel'
+          extend(::Starter::Templates::Sequel)
+        when 'activerecord', 'ar'
+          require 'starter/builder/templates/activerecord'
+          extend(::Starter::Templates::ActiveRecord)
+        else
+          @orm = nil
+        end
       end
 
       private
