@@ -97,8 +97,9 @@ This adds endpoint and lib file and belonging specs, and a mount entry in base.r
 
 Using it with following options:
 ```
--e, --entity # a grape entity file will also be created
--o, --orm    # sets the parent class of libe file (e.g: `Foo < Sequel::Model` for Sequel)
+-e, --entity    # a grape entity file will also be created
+-m, --migration # adds also a migration file, if an ORM is used
+-o, --orm       # sets the parent class of libe file (e.g: `Foo < Sequel::Model` for Sequel)
 ```
 to add CRUD endpoints for resource foo. By given http methods only this one would be generated.
 For available methods see: [`Templates::Endpoints`](https://github.com/LeFnord/grape-starter/blob/d7bb6c4946dc27fcafa5a75435b45bfe2b7277f0/lib/starter/builder/templates/endpoints.rb#L7-L26).
