@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 module Starter
-  VERSION = '0.8.7'
+  VERSION = '1.0.0'
 end

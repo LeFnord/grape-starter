@@ -2,6 +2,12 @@
 
 - contributions
 
+### 1.0.0
+
+- [67a5f](https://github.com/LeFnord/grape-starter/commit/b1f32801844ed9a98bc4d5f7c938451ef7667a5f) - supports creating a migration file
+- [de26b](https://github.com/LeFnord/grape-starter/commit/22ad2170176b9602cff2239a7d0469c823cde26b) - ci adoptions
+- [7ad69](https://github.com/LeFnord/grape-starter/commit/925fa5fb161c8cc26c96834e185d8299a207ad69) - spec improvements
+
 ### 0.8.7
 
 - [c7cb2](https://github.com/LeFnord/grape-starter/commit/4be5bd9b7c06611e096d6eaa23d7168136bc7cb2) - updates dependencies; makes rubocop happy
