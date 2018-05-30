@@ -2,6 +2,10 @@
 
 - contributions
 
+### 1.0.1
+
+-[00993](https://github.com/LeFnord/grape-starter/commit/6fef3812fd587ea61c29b9eacde1fb856ad00993)
+
 ### 1.0.0
 
 - [67a5f](https://github.com/LeFnord/grape-starter/commit/b1f32801844ed9a98bc4d5f7c938451ef7667a5f) - supports creating a migration file
