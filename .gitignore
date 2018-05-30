@@ -6,7 +6,6 @@
 log
 Gemfile.lock
 docker-compose.yml
-Dockerfile
 tmp/
 pkg/
 template/Gemfile.lock
