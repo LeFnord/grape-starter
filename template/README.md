@@ -1,3 +1,22 @@
+<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:0 orderedList:0 -->
+
+- [adept it to your needs](#adept-it-to-your-needs)
+  - [Your awesome API](#your-awesome-api)
+  - [Usage](#usage)
+    - [Setup](#setup)
+    - [Test](#test)
+    - [Run](#run)
+    - [Update](#update)
+    - [Stop](#stop)
+  - [Rake Tasks](#rake-tasks)
+    - [List Routes](#list-routes)
+    - [OpenApi Documentation and Validation](#openapi-documentation-and-validation)
+  - [Docker](#docker)
+  - [Contributing](#contributing)
+  - [License](#license)
+
+<!-- /TOC -->
+
 # adept it to your needs
 
 ## Your awesome API
@@ -64,6 +83,10 @@ rake oapi:validate
 ```
 comming from: [`grape-swagger` Rake Tasks](https://github.com/ruby-grape/grape-swagger#rake-tasks)
 
+## Docker
+
+- build: `docker build -t awesome_api .`
+- run: `docker run -it -p 9292:9292 --rm awesome_api`
 
 ## Contributing
 
