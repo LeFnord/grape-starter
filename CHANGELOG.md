@@ -4,7 +4,7 @@
 
 ### 1.0.1
 
--[00993](https://github.com/LeFnord/grape-starter/commit/6fef3812fd587ea61c29b9eacde1fb856ad00993)
+- [00993](https://github.com/LeFnord/grape-starter/commit/6fef3812fd587ea61c29b9eacde1fb856ad00993) - adds a rudimentary Dockerfile as starting point
 
 ### 1.0.0
 
