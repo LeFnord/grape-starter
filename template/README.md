@@ -3,14 +3,7 @@
 - [adept it to your needs](#adept-it-to-your-needs)
   - [Your awesome API](#your-awesome-api)
   - [Usage](#usage)
-    - [Setup](#setup)
-    - [Test](#test)
-    - [Run](#run)
-    - [Update](#update)
-    - [Stop](#stop)
   - [Rake Tasks](#rake-tasks)
-    - [List Routes](#list-routes)
-    - [OpenApi Documentation and Validation](#openapi-documentation-and-validation)
   - [Docker](#docker)
   - [Contributing](#contributing)
   - [License](#license)
@@ -26,21 +19,27 @@ A [Grape](http://github.com/ruby-grape/grape) API mounted on [Rack](https://gith
 
 ## Usage
 
-#### Setup
+All following commands can and should be adapted/replaced to your needs.
+
+- [Setup](#setup)
+- [Test](#test)
+- [Run](#run)
+- [Update](#update)
+- [Stop](#stop)
+
+#### `Setup`
 
 ```
-$ git clone git@github.com:LeFnord/grape-starter.git
-$ cd grape-starter
 $ ./script/setup
 ```
 
-#### Test
+#### `Test`
 
 ```
 $ ./script/test
 ```
 
-#### Run
+#### `Run`
 
 ```
 $ ./script/server *port (default: 9292)
@@ -53,14 +52,14 @@ For production, set `RACK_ENV=production`
 $ RACK_ENV=production ./script/server *port (default: 9292)
 ```
 
-#### Update
+#### `Update`
 
 … dependencies
 ```
 $ ./script/update
 ```
 
-#### Stop
+#### `Stop`
 
 … would only be used, if server started in production mode
 ```
@@ -68,6 +67,9 @@ $ ./script/stop
 ```
 
 ## Rake Tasks
+
+- [List Routes](#list-routes)
+- [OpenApi Documentation and Validation](#openapi-documentation-and-validation)
 
 #### List Routes
 
