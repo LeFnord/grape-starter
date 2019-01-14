@@ -9,6 +9,7 @@ module Starter
 
     def lib_klass_name
       return klass_name unless @orm
+
       case ::Starter::Config.read[:orm]
       when 'sequel'
         require 'starter/builder/templates/sequel'
