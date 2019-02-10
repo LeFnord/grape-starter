@@ -3,21 +3,16 @@ language: ruby
 sudo: false
 
 before_install:
-  - gem update --system
   - gem install bundler
 
 rvm:
-  - 2.6.0
+  - ruby-head
+  - 2.6.1
   - 2.5.3
   - 2.4.5
 
 matrix:
   fast_finish: true
 
-  include:
-    - rvm: ruby-head
-    - rvm: 2.3.7
-
   allow_failures:
     - rvm: ruby-head
-    - rvm: 2.3.7
