@@ -82,8 +82,8 @@ module Starter
       def gemfile
         <<-FILE.strip_heredoc
         # DB stack
-        gem 'activerecord', '~> 5.1'
-        gem 'sqlite3'
+        gem 'activerecord', '~> 5.2'
+        gem 'sqlite3', '~> 1.3', '< 1.4'
         FILE
       end
 
