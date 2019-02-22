@@ -81,11 +81,9 @@ module Starter
         @entity = options[:entity]
 
         file_list.map { |x| send("#{x}_name") }.each do |file_to_remove|
-          begin
-            FileUtils.rm file_to_remove
-          rescue StandardError => error
-            $stdout.puts error.to_s
-          end
+          FileUtils.rm file_to_remove
+        rescue StandardError => error
+          $stdout.puts error.to_s
         end
 
         remove_mount_point
