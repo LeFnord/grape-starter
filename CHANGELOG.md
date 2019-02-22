@@ -2,16 +2,15 @@
 
 - contributions
 
+### v1.1.0 / 2019-02-22
 - Replaces own migration tasks through [standalone-migrations](https://github.com/thuss/standalone-migrations)
 
 ### v1.0.3 / 2019-02-10
-
 - Loosens reuby version to 2.4
 - prepare release 1.0.2
 - Cleans up travis ci.
 
 ### 1.0.1
-
 - [00993](https://github.com/LeFnord/grape-starter/commit/6fef3812fd587ea61c29b9eacde1fb856ad00993) - adds a rudimentary Dockerfile as starting point
 
 ### 1.0.0
@@ -77,33 +76,3 @@
 **breaking changes** renames all api stuff under lib to models (includes, of course, the namespace):
   - `lib/api.rb` -> `lib/models.rb`
   - `lib/api/` -> `lib/models/`
-
-### < 0.5.4
-
-- simplyfies request specs, **breaking change**: takes route from spec description
-- adds option to set prefix, defaults to api
-- sets prefix after project name
-- refactores rack api mounting
-- adds ruby 2.4.0 support
-- server command supports port, thin tag would be named after project
-- adds redoc oapi documentation viewer
-- default rake task now only spec, rubocop would be done via hound
-- adds hound ci service
-- fix: add mount point to api base
-- adds inch.yml
-- improves specs
-- fix: removes mount point from api base
-- renames `remove` to `rm`
-- adds params to POST, PUT and PATCH specs
-- removes duplication and warning
-- allows entity removing
-- adds `remove` command
-- adds request specs shared examples
-- corrects path param for specific endpoints
-- corrects adding of endpoints, if no http verb was given
-- adds flag for entity creating
-- moves back dependencies to gemspec
-- adds rubygems badge
-- cleans up dependencies
-- adds `force` option to add
-- adds specifying http verbs
