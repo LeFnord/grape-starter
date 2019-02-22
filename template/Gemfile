@@ -2,11 +2,13 @@
 
 source 'http://rubygems.org'
 
+# Server stuff
 gem 'thin'
 
 gem 'rack'
 gem 'rack-cors'
 
+# API stuff
 gem 'grape'
 gem 'grape-entity'
 gem 'grape-swagger'

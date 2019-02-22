@@ -10,6 +10,7 @@ module Starter
         if @orm == 'ar' || @orm == 'activerecord'
           # Fixes pooling
           add_middleware(dest, 'ActiveRecord::Rack::ConnectionManagement')
+          build_standalone_migrations(File.join(dest, '.standalone_migrations'))
         end
 
         build_initializer(File.join(dest, 'config', 'initializers'))
@@ -19,32 +20,36 @@ module Starter
         prepare_for_migrations(File.join(dest, 'db'))
       end
 
+      def standalone_migrations
+        <<-FILE.strip_heredoc
+        config:
+          database: config/database.yml
+        FILE
+      end
+
       def config
         <<-FILE.strip_heredoc
         # ActiveRecord Database Configuration
         development:
-          adapter: '#{adapter}'
-          host: localhost
-          port: 27017
-          database: "db/development.sqlite3"
-          username:
-          password:
+          adapter: #{adapter}
+          encoding: unicode
+          timeout: 5000
+          user: postgres
+          database: name_development
 
         test:
-          adapter: '#{adapter}'
-          host: localhost
-          port: 27017
-          database: "db/test.sqlite3"
-          username:
-          password:
+          adapter: #{adapter}
+          encoding: unicode
+          timeout: 5000
+          user: postgres
+          database: name_test
 
         production:
-          adapter: '#{adapter}'
-          host: localhost
-          port: 27017
-          database: "db/production.sqlite3"
-          username:
-          password:
+          adapter: #{adapter}
+          encoding: unicode
+          timeout: 5000
+          user: postgres
+          database: name_production
         FILE
       end
 
@@ -53,7 +58,7 @@ module Starter
         return if @orm.nil?
 
         file_name = "#{Time.now.strftime('%Y%m%d%H%m%S')}_Create#{klass_name}.rb"
-        migration_dest = File.join(Dir.pwd, 'db', 'migrations', file_name)
+        migration_dest = File.join(Dir.pwd, 'db', 'migrate', file_name)
         FileFoo.write_file(migration_dest, migration(klass_name, resource))
       end
 
@@ -75,7 +80,7 @@ module Starter
       private
 
       def adapter
-        @orm == 'sequel' ? 'sqlite' : 'sqlite3'
+        'postgresql'
       end
 
       def build_initializer(dest)
@@ -85,6 +90,10 @@ module Starter
 
       def build_config(dest)
         FileFoo.write_file(File.join(dest, 'database.yml'), config)
+      end
+
+      def build_standalone_migrations(dest)
+        FileFoo.write_file(dest, standalone_migrations)
       end
 
       # adds a middleware to config.ru
@@ -99,9 +108,9 @@ module Starter
       end
 
       def prepare_for_migrations(dest)
-        migrations = File.join(dest, 'migrations')
-        FileUtils.mkdir_p(migrations)
-        `touch #{migrations}/.keep`
+        migrate = File.join(dest, 'migrate')
+        FileUtils.mkdir_p(migrate)
+        `touch #{migrate}/.keep`
       end
     end
   end

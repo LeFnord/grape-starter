@@ -9,7 +9,7 @@ AllCops:
     - '**/template/api/**'
     - grape-starter.gemspec
   UseCache: true
-  TargetRubyVersion: 2.4
+  TargetRubyVersion: 2.6
 
 Layout/IndentationWidth:
   Exclude:
@@ -22,6 +22,12 @@ Metrics/BlockLength:
 
 Metrics/LineLength:
   Max: 120
+
+Metrics/AbcSize:
+  Max: 20
+
+Metrics/MethodLength:
+  Max: 20
 
 Naming/AccessorMethodName:
   Exclude:

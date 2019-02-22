@@ -58,38 +58,27 @@ module Starter
 
       def rakefile
         <<-FILE.strip_heredoc
-        # ActiveRecord DB tasks
 
-        task :load_config do
-          config_dir = File.expand_path('../config', __FILE__)
-          config_content = File.read(File.join(config_dir, 'database.yml'))
-
-          DatabaseTasks.env = ENV['RACK_ENV'] || 'development'
-          DatabaseTasks.db_dir = db_dir
-          config = YAML.safe_load(ERB.new(config_content).result)
-          DatabaseTasks.database_configuration = config
-          DatabaseTasks.migrations_paths = File.join(db_dir, 'migrate')
-
-          ActiveRecord::Base.configurations = DatabaseTasks.database_configuration
-          ActiveRecord::Base.establish_connection DatabaseTasks.env.to_sym
-        end
-
-        # Loads AR tasks like db:create, db:drop etc..
-        load 'active_record/railties/databases.rake'
+        # ActiveRecord migration tasks
+        require 'standalone_migrations'
+        StandaloneMigrations::Tasks.load_tasks
         FILE
       end
 
       def gemfile
         <<-FILE.strip_heredoc
-        # DB stack
+        # BE stuff
+        gem 'standalone_migrations'
+
+        # DB stuff
         gem 'activerecord', '~> 5.2'
-        gem 'sqlite3', '~> 1.3', '< 1.4'
+        gem 'pg'
         FILE
       end
 
       def migration(klass_name, resource)
         <<-FILE.strip_heredoc
-        class Create#{klass_name} < ActiveRecord::Migration[5.1]
+        class Create#{klass_name} < ActiveRecord::Migration[5.2]
           def change
             create_table :#{resource} do |t|
 

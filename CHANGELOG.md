@@ -2,6 +2,14 @@
 
 - contributions
 
+- Replaces own migration tasks through [standalone-migrations](https://github.com/thuss/standalone-migrations)
+
+### v1.0.3 / 2019-02-10
+
+- Loosens reuby version to 2.4
+- prepare release 1.0.2
+- Cleans up travis ci.
+
 ### 1.0.1
 
 - [00993](https://github.com/LeFnord/grape-starter/commit/6fef3812fd587ea61c29b9eacde1fb856ad00993) - adds a rudimentary Dockerfile as starting point
