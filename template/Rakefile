@@ -23,5 +23,6 @@ task default: %i[spec rubocop]
 require 'grape-swagger/rake/oapi_tasks'
 GrapeSwagger::Rake::OapiTasks.new(::Api::Base)
 
+# starter tasks
 require 'starter/rake/grape_tasks'
 Starter::Rake::GrapeTasks.new(::Api::Base)
