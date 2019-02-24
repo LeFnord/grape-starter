@@ -1,10 +1,11 @@
 ### NEXT
 
 - contributions
+- [#19](https://github.com/LeFnord/grape-starter/pull/19) - Adds a module under lib as namespace. [LeFnord](https://github.com/LeFnord)
 
 ### ### v1.2.1 / 2019-02-24
 
-- [!17](https://github.com/LeFnord/grape-starter/pull/17) - fix script/server shebang for ubuntu - [rawongithub](https://github.com/rawongithub)
+- [#17](https://github.com/LeFnord/grape-starter/pull/17) - Fix script/server shebang for ubuntu. [rawongithub](https://github.com/rawongithub)
 
 ### ### v1.2.0 / 2019-02-24
 
