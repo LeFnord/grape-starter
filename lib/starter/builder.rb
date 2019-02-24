@@ -24,7 +24,8 @@ module Starter
       #
       # would be called from new command
       #
-      # name - A String as project name
+      # name - A String as project name,
+      #        it will also be the namespace in the lib folder
       # source - A String which provides the template path
       # destination - A String which provides the new project path
       # options - A Hash to provide some optional arguments (default: {})
@@ -40,13 +41,13 @@ module Starter
         config_static.each do |config|
           replace_static(File.join(config[:file]), config[:pattern])
         end
+        add_namespace_with_version
+        Orms.build(destination, options[:orm]) if options[:orm]
 
         Starter::Config.save(
           dest: destination,
           content: { prefix: prefix, orm: options[:orm].to_s }
         )
-
-        Orms.build(destination, options[:orm]) if options[:orm]
 
         self
       end
@@ -55,6 +56,7 @@ module Starter
       #
       # resource - A String as name
       # options - A Hash to provide some optional arguments (default: {})
+      #   :resource - the name of the resource to create
       #   :set – Whitespace separated list of http verbs
       #          (default: nil, possible: post get put patch delete)
       #   :force - A Boolean, if given existent files should be overwriten (default: false)
@@ -111,6 +113,13 @@ module Starter
           { file: %w[spec requests root_spec.rb], pattern: prefix ? "/#{prefix}" : nil },
           { file: %w[spec requests documentation_spec.rb], pattern: prefix ? "/#{prefix}" : nil }
         ]
+      end
+
+      #
+      # creates a new file in lib folder as namespace, includind the version
+      def add_namespace_with_version
+        new_lib = File.join(destination, 'lib', base_file_name)
+        FileFoo.write_file(new_lib, base_namespace_file.strip_heredoc)
       end
 
       #

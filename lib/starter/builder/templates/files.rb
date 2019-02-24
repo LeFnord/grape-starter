@@ -36,6 +36,16 @@ module Starter
       end
 
       # LIB template for resource
+      def base_namespace_file
+        <<-FILE.strip_heredoc
+        # frozen_string_literal: true
+
+        module #{klass_name}
+          VERSION  = '0.1.0'
+        end
+        FILE
+      end
+
       def lib_file
         <<-FILE.strip_heredoc
         # frozen_string_literal: true
