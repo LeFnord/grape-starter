@@ -5,3 +5,4 @@ files:
     - lib/starter/builder/templates/sequel.rb
     - lib/starter/builder/names.rb
     - lib/starter/rake/grape_tasks.rb
+    - template
