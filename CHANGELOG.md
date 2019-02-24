@@ -2,6 +2,10 @@
 
 - contributions
 
+### ### v1.2.1 / 2019-02-24
+
+- [!17](https://github.com/LeFnord/grape-starter/pull/17) - fix script/server shebang for ubuntu - [rawongithub](https://github.com/rawongithub)
+
 ### ### v1.2.0 / 2019-02-24
 
 - Code improvements, now `environment`, `application` and `boot` are used in a more expected way.
