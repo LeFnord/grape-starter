@@ -1,12 +1,9 @@
 # frozen_string_literal: true
 
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'api'))
-$LOAD_PATH.unshift(File.dirname(__FILE__))
+require_relative 'environment'
+require_relative 'boot'
 
-require 'boot'
 require 'base'
-require 'rack'
 
 # provides the documentation of the API
 class DocApp

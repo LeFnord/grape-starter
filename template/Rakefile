@@ -2,7 +2,7 @@
 
 require 'rake'
 
-require File.expand_path('config/environment', __dir__)
+require File.expand_path('config/application', __dir__)
 
 task :environment do
   ENV['RACK_ENV'] ||= 'development'
