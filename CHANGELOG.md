@@ -2,6 +2,10 @@
 
 - contributions
 
+### ### v1.2.0 / 2019-02-24
+
+- Code improvements, now `environment`, `application` and `boot` are used in a more expected way.
+
 ### v1.1.0 / 2019-02-22
 - Replaces own migration tasks through [standalone-migrations](https://github.com/thuss/standalone-migrations)
 
