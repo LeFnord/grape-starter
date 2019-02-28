@@ -4,10 +4,8 @@
 .irbrc
 .bundle
 log
-docker-compose.yml
+Gemfile.lock
 tmp/
 pkg/
 template/Gemfile.lock
 grape-starter.md
-.Ulysses-Group.plist
-.Ulysses-favorites.plist
