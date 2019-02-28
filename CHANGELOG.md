@@ -1,6 +1,8 @@
 ### NEXT
 
 - contributions
+
+- Fixes loading of `aaplication` instead of `evironment` in `config.ru`
 - [#19](https://github.com/LeFnord/grape-starter/pull/19) - Adds a module under lib as namespace. [LeFnord](https://github.com/LeFnord)
 
 ### v1.2.1 / 2019-02-24
