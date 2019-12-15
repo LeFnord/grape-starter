@@ -1,6 +1,11 @@
 ### NEXT
 
-- contributions
+### v1.2.3 / 2019-12-15
+
+- Removes require pry. [LeFnord](LeFnord) closes [!21](https://github.com/LeFnord/grape-starter/issues/21)
+- [#22](https://github.com/LeFnord/grape-starter/pull/22) - accomodate activerecord 6.0 (#22) [Ignacio Carrera](https://github.com/nachokb)
+
+### v1.2.2 / 2019-02-28
 
 - Fixes loading of `aaplication` instead of `evironment` in `config.ru`
 - [#19](https://github.com/LeFnord/grape-starter/pull/19) - Adds a module under lib as namespace. [LeFnord](https://github.com/LeFnord)
