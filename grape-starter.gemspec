@@ -26,6 +26,6 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'gli', '~> 2.18'
   spec.add_dependency 'activesupport', '>= 5.0.0', '< 7.0'
-  spec.add_dependency 'rubocop', '~> 0.65'
+  spec.add_dependency 'rubocop', '~> 0.77'
   spec.add_dependency 'awesome_print', '~> 1.7'
 end

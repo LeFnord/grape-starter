@@ -84,8 +84,8 @@ module Starter
 
         file_list.map { |x| send("#{x}_name") }.each do |file_to_remove|
           FileUtils.rm file_to_remove
-        rescue StandardError => error
-          $stdout.puts error.to_s
+        rescue StandardError => e
+          $stdout.puts e.to_s
         end
 
         remove_mount_point
