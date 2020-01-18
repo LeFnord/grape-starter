@@ -16,12 +16,12 @@ Layout/IndentationWidth:
     - 'lib/starter/builder/templates/files.rb'
     - 'lib/starter/builder/templates/endpoints.rb'
 
+Layout/LineLength:
+  Max: 120
+
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
-
-Metrics/LineLength:
-  Max: 120
 
 Metrics/AbcSize:
   Max: 20
