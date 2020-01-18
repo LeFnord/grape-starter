@@ -52,16 +52,14 @@ module Starter
       def build_path(route)
         path = route.path
 
-        path.sub!(/\(\.\w+?\)$/, '')
-        path.sub!('(.:format)', '')
+        path = path.sub(/\(\.\w+?\)$/, '')
+        path = path.sub('(.:format)', '')
 
         if route.version
-          path.sub!(':version', route.version.to_s)
+          path.sub(':version', route.version.to_s)
         else
-          path.sub!('/:version', '')
+          path.sub('/:version', '')
         end
-
-        path
       end
 
       def app
