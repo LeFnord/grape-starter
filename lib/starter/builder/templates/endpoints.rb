@@ -29,7 +29,9 @@ module Starter
       # POST
       def post
         "
-        desc 'create #{resource.singularize}'
+        desc 'create #{resource.singularize}' do
+          tags %w[#{resource.singularize}]
+        end
         params do
           # TODO: specify the parameters
         end
@@ -41,8 +43,10 @@ module Starter
       # GET
       def get_all
         "
-        desc 'get all of #{resource.pluralize}',
-        is_array: true
+        desc 'get all of #{resource.pluralize}' do
+          is_array true
+          tags %w[#{resource.singularize}]
+        end
         get do
           # your code goes here
         end"
@@ -51,7 +55,9 @@ module Starter
       %w[get put patch delete].each do |verb|
         define_method(:"#{verb}_one") do
           "
-          desc '#{verb} #{resource.singularize}'
+          desc '#{verb} #{resource.singularize}' do
+            tags %w[#{resource.singularize}]
+          end
           #{verb} do
             # your code goes here
           end"
@@ -61,7 +67,9 @@ module Starter
       %w[get put patch delete].each do |verb|
         define_method(:"#{verb}_specific") do
           "
-          desc '#{verb} specific #{resource.singularize}'
+          desc '#{verb} specific #{resource.singularize}' do
+            tags %w[#{resource.singularize}]
+          end
           params do
             requires :id
           end

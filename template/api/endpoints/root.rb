@@ -6,9 +6,10 @@ module Api
   module Endpoints
     class Root < Grape::API
       namespace :root do
-        desc 'Exposes all routes',
-             success: Entities::Route,
-             is_array: true
+        desc 'Exposes all routes' do
+          success Entities::Route
+          is_array true
+        end
         get do
           api_routes = Starter::Rake::GrapeTasks.new(::Api::Base).api_routes
 

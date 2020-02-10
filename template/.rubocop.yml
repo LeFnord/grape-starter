@@ -1,5 +1,3 @@
-inherit_from: .rubocop_todo.yml
-
 AllCops:
   Exclude:
     - '**/tmp/**/*'
@@ -15,8 +13,17 @@ Layout/LineLength:
 Metrics/AbcSize:
   Max: 20
 
+Metrics/BlockLength:
+  Exclude:
+    - 'api/endpoints/**/*'
 Metrics/MethodLength:
   Max: 20
 
 Style/AsciiComments:
   Enabled: false
+
+Style/Documentation:
+  Exclude:
+    - 'spec/**/*'
+    - 'api/**/*'
+    - 'lib/**/*'
