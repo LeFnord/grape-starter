@@ -3,9 +3,11 @@
 module Starter
   class Orms
     class << self
-      def build(dest, orm)
+      def build(name, dest, orm)
         load_orm(orm: orm)
         return if @orm.nil?
+
+        @name = name
 
         if @orm == 'ar' || @orm == 'activerecord'
           # Fixes pooling
@@ -35,21 +37,21 @@ module Starter
           encoding: unicode
           timeout: 5000
           user: postgres
-          database: name_development
+          database: #{@name}_development
 
         test:
           adapter: #{adapter}
           encoding: unicode
           timeout: 5000
           user: postgres
-          database: name_test
+          database: #{@name}_test
 
         production:
           adapter: #{adapter}
           encoding: unicode
           timeout: 5000
           user: postgres
-          database: name_production
+          database: #{@name}_production
         FILE
       end
 

@@ -83,7 +83,7 @@ module Starter
         <<-FILE.strip_heredoc
         # DB stack
         gem 'sequel'
-        gem 'sqlite3'
+        gem 'pg'
         FILE
       end
 

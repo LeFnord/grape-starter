@@ -1,5 +1,8 @@
 ### NEXT
 
+- Fixes gems for sequel. [LeFnord](https://github.com/LeFnord)
+- Minor template improvements. [LeFnord](https://github.com/LeFnord)
+
 ### v1.2.3 / 2019-12-15
 
 - Removes require pry. [LeFnord](LeFnord) closes [!21](https://github.com/LeFnord/grape-starter/issues/21)
@@ -7,7 +10,7 @@
 
 ### v1.2.2 / 2019-02-28
 
-- Fixes loading of `aaplication` instead of `evironment` in `config.ru`
+- Fixes loading of `aplication` instead of `environment` in `config.ru`
 - [#19](https://github.com/LeFnord/grape-starter/pull/19) - Adds a module under lib as namespace. [LeFnord](https://github.com/LeFnord)
 
 ### v1.2.1 / 2019-02-24

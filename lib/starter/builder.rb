@@ -18,6 +18,7 @@ module Starter
 
     class << self
       attr_reader :prefix, :resource, :set, :force, :entity, :destination, :orm
+
       #
       # public methods
       #
@@ -41,8 +42,10 @@ module Starter
         config_static.each do |config|
           replace_static(File.join(config[:file]), config[:pattern])
         end
+
         add_namespace_with_version
-        Orms.build(destination, options[:orm]) if options[:orm]
+
+        Orms.build(name, destination, options[:orm]) if options[:orm]
 
         Starter::Config.save(
           dest: destination,
@@ -125,9 +128,9 @@ module Starter
       #
       # replace something in static files
       def replace_static(file, replacement)
-        server_file = File.join(destination, file)
+        file_path = File.join(destination, file)
 
-        FileFoo.call!(server_file) { |content| content.gsub!('{{{grape-starter}}}', replacement.to_s) }
+        FileFoo.call!(file_path) { |content| content.gsub!('{{{grape-starter}}}', replacement.to_s) }
       end
 
       # #add! a new resource releated helper methods
