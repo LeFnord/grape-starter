@@ -9,6 +9,8 @@ module Starter
 
       def initializer
         <<-FILE.strip_heredoc
+        # frozen_string_literal: true
+
         require 'yaml'
         require 'erb'
         require 'active_record'
@@ -71,14 +73,14 @@ module Starter
         gem 'standalone_migrations'
 
         # DB stuff
-        gem 'activerecord', '~> 5.2'
+        gem 'activerecord', '>= 6'
         gem 'pg'
         FILE
       end
 
       def migration(klass_name, resource)
         <<-FILE.strip_heredoc
-        class Create#{klass_name} < ActiveRecord::Migration[5.2]
+        class Create#{klass_name} < ActiveRecord::Migration[6.0]
           def change
             create_table :#{resource} do |t|
 

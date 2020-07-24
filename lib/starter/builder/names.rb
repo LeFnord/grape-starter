@@ -24,9 +24,11 @@ module Starter
       end
     end
 
+    # rubocop:disable Style/StringConcatenation
     def base_file_name
       @resource.tr('/', '-').downcase + '.rb'
     end
+    # rubocop:enable Style/StringConcatenation
 
     def base_spec_name
       base_file_name.gsub(/.rb$/, '_spec.rb')

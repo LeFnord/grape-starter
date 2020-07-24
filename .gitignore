@@ -9,3 +9,4 @@ tmp/
 pkg/
 template/Gemfile.lock
 grape-starter.md
+tmp
