@@ -2,12 +2,12 @@
 
 - your contributions
 
-### v1.3.0 2020-09-15
+### v1.3.0 / 2020-09-15
 
 - Fixes migration name. [LeFnord](https://github.com/LeFnord)
 - Fixes rubocop new cops handling. [LeFnord](https://github.com/LeFnord)
 
-### v1.2.4--v1.2.6 2020-01-18--2020-08-13
+### v1.2.4–v1.2.6 / 2020-01-18–2020-08-13
 
 - Prepapre releaase 1.2.6 [LeFnord](https://github.com/LeFnord)
 - Updates used default rails deps versions. [LeFnord](https://github.com/LeFnord)
