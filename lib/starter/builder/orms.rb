@@ -59,7 +59,7 @@ module Starter
         load_orm
         return if @orm.nil?
 
-        file_name = "#{Time.now.strftime('%Y%m%d%H%m%S')}_Create#{klass_name}.rb"
+        file_name = "#{Time.now.strftime('%Y%m%d%H%m%S')}_create_#{klass_name.downcase}.rb"
         migration_dest = File.join(Dir.pwd, 'db', 'migrate', file_name)
         FileFoo.write_file(migration_dest, migration(klass_name, resource))
       end
