@@ -1,5 +1,27 @@
 ### NEXT
 
+- your contributions
+
+### v1.3.0 2020-09-15
+
+- Fixes migration name. [LeFnord](https://github.com/LeFnord)
+- Fixes rubocop new cops handling. [LeFnord](https://github.com/LeFnord)
+
+### v1.2.4--v1.2.6 2020-01-18--2020-08-13
+
+- Prepapre releaase 1.2.6 [LeFnord](https://github.com/LeFnord)
+- Updates used default rails deps versions. [LeFnord](https://github.com/LeFnord)
+- Create dependabot.yml [peter scholz](https://github.com/LeFnord)
+- Prepare release 1.2.5 [LeFnord](https://github.com/LeFnord)
+- Minor improvements. [LeFnord](https://github.com/LeFnord)
+- Lets run GH actions again. [LeFnord](https://github.com/LeFnord)
+- Minor template improvements. [LeFnord](https://github.com/LeFnord)
+- Changes ruby.yml to use 2.7 [LeFnord](https://github.com/LeFnord)
+- Prepare release 1.2.4 [LeFnord](https://github.com/LeFnord)
+- Respects froozen string stuff. [LeFnord](https://github.com/LeFnord)
+- Updates Ruby and deps. (#23) [LeFnord](https://github.com/LeFnord)
+- Create ruby.yml [LeFnord](https://github.com/LeFnord)
+
 - Fixes gems for sequel. [LeFnord](https://github.com/LeFnord)
 - Minor template improvements. [LeFnord](https://github.com/LeFnord)
 
