@@ -9,6 +9,7 @@ AllCops:
     - grape-starter.gemspec
     - template/spec/spec-helper.rb
   UseCache: true
+  NewCops: enable
   TargetRubyVersion: 2.7
 
 Layout/IndentationWidth:

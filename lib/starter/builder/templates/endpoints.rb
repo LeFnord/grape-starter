@@ -52,6 +52,7 @@ module Starter
         end"
       end
 
+      # rubocop:disable Style/CombinableLoops
       %w[get put patch delete].each do |verb|
         define_method(:"#{verb}_one") do
           "
@@ -78,6 +79,7 @@ module Starter
           end"
         end
       end
+      # rubocop:enable Style/CombinableLoops
 
       # request specs shared examples
       #
