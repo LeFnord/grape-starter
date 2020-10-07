@@ -13,7 +13,12 @@ rvm:
 
 jobs:
   fast_finish: true
+  include:
+    - rvm: truffleruby-head
+      env:
+      script: bundle exec rake spec
 
   allow_failures:
-    - rvm:
-      - ruby-head
+    - rvm: 3.0.0-preview1
+    - rvm: ruby-head
+    - rvm: truffleruby-head
