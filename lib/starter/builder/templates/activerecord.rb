@@ -27,7 +27,7 @@ module Starter
                    FileUtils.mkdir(log_dir) unless Dir.exist?(log_dir)
                    Logger.new(File.open(log_file, 'a'))
                  else
-                   Logger.new(STDOUT)
+                   Logger.new($stdout)
                  end
 
         ActiveRecord::Base.logger = logger
