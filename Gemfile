@@ -11,6 +11,6 @@ group :development, :test do
   gem 'rack-cors', require: false
   gem 'rack-test', require: false
   gem 'rake', '~> 13.0'
-  gem 'rspec', '~> 3.8'
+  gem 'rspec', '~> 3.10'
   gem 'rspec-command'
 end
