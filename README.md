@@ -1,3 +1,4 @@
+![Ruby](https://github.com/LeFnord/grape-starter/workflows/Ruby/badge.svg)
 [![Build Status](https://travis-ci.org/LeFnord/grape-starter.svg?branch=master)](https://travis-ci.org/LeFnord/grape-starter)
 [![Gem Version](https://badge.fury.io/rb/grape-starter.svg)](https://badge.fury.io/rb/grape-starter)
 [![Inline docs](http://inch-ci.org/github/LeFnord/grape-starter.svg?branch=master)](http://inch-ci.org/github/LeFnord/grape-starter)
