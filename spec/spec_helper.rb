@@ -6,7 +6,7 @@ require 'rspec_command'
 $LOAD_PATH.unshift File.expand_path('lib', __dir__)
 require 'starter'
 
-Dir['./spec/support/**/*.rb'].sort.each { |f| require f }
+Dir['./spec/support/**/*.rb'].each { |f| require f }
 
 RSpec.configure do |config|
   config.include RSpecCommand

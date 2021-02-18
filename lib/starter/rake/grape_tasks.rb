@@ -11,8 +11,7 @@ module Starter
     class GrapeTasks < ::Rake::TaskLib
       include Rack::Test::Methods
 
-      attr_reader :resource
-      attr_reader :api_class
+      attr_reader :resource, :api_class
 
       def initialize(api_class = nil)
         super()
