@@ -1,7 +1,5 @@
 ![Ruby](https://github.com/LeFnord/grape-starter/workflows/Ruby/badge.svg)
-[![Build Status](https://travis-ci.org/LeFnord/grape-starter.svg?branch=master)](https://travis-ci.org/LeFnord/grape-starter)
 [![Gem Version](https://badge.fury.io/rb/grape-starter.svg)](https://badge.fury.io/rb/grape-starter)
-[![Inline docs](http://inch-ci.org/github/LeFnord/grape-starter.svg?branch=master)](http://inch-ci.org/github/LeFnord/grape-starter)
 
 
 # Grape Starter
@@ -84,7 +82,7 @@ To run it, go into awesome_api folder, start the server
 $ cd awesome_api
 $ ./script/server *port
 ```
-the API is now accessible under: [http://localhost:9292/api/v1/root](http://localhost:9292/api/v1/root)  
+the API is now accessible under: [http://localhost:9292/api/v1/root](http://localhost:9292/api/v1/root)
 the documentation of it under: [http://localhost:9292/doc](http://localhost:9292/doc).
 
 More could be found in [README](template/README.md).
