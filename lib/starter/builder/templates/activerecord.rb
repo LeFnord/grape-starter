@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'active_record'
+
 module Starter
   module Templates
     module ActiveRecord
@@ -60,18 +62,25 @@ module Starter
 
       def rakefile
         <<-FILE.strip_heredoc
-
         # ActiveRecord migration tasks
-        require 'standalone_migrations'
-        StandaloneMigrations::Tasks.load_tasks
+        require 'active_record'
+        include ActiveRecord::Tasks
+        config_dir = File.expand_path('../config', __FILE__)
+        config_content = File.join(config_dir, 'database.yml')
+        DatabaseTasks.env = ENV['RACK_ENV'] || 'development'
+        DatabaseTasks.database_configuration = YAML.load_file(config_content)
+        DatabaseTasks.db_dir = 'db'
+        DatabaseTasks.migrations_paths = File.join('db', 'migrate')
+
+        ActiveRecord::Base.configurations = DatabaseTasks.database_configuration
+        ActiveRecord::Base.establish_connection DatabaseTasks.env.to_sym
+
+        load 'active_record/railties/databases.rake'
         FILE
       end
 
       def gemfile
         <<-FILE.strip_heredoc
-        # BE stuff
-        gem 'standalone_migrations'
-
         # DB stuff
         gem 'activerecord', '>= 6'
         gem 'pg'
@@ -79,8 +88,9 @@ module Starter
       end
 
       def migration(klass_name, resource)
+        version = "#{::ActiveRecord::VERSION::MAJOR}.#{::ActiveRecord::VERSION::MINOR}"
         <<-FILE.strip_heredoc
-        class Create#{klass_name} < ActiveRecord::Migration[6.0]
+        class Create#{klass_name} < ActiveRecord::Migration[#{version}]
           def change
             create_table :#{resource} do |t|
 
