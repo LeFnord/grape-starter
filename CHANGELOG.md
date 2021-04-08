@@ -2,6 +2,12 @@
 
 - your contributions
 
+### v1.4.0 / 2021-04-08
+
+- Removes `standalone_migration` in favour of AR tasks. [LeFnord](https://github.com/LeFnord)
+- Minor README improvements. [LeFnord](https://github.com/LeFnord)
+- Adds GH actions for rspec and rubocop. [LeFnord](https://github.com/LeFnord)
+
 ### v1.3.0 / 2020-09-15
 
 - Fixes migration name. [LeFnord](https://github.com/LeFnord)

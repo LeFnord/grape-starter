@@ -6,8 +6,8 @@ gemspec
 
 group :development, :test do
   gem 'grape', '~> 1.5'
-  gem 'pry', platforms: [:mri]
-  gem 'pry-byebug', platforms: [:mri]
+  gem 'pry', require: false
+  gem 'pry-byebug', require: false
   gem 'rack-cors', require: false
   gem 'rack-test', require: false
   gem 'rake', '~> 13.0'

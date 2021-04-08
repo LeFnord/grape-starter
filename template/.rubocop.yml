@@ -4,6 +4,7 @@ AllCops:
     - '**/script/**/*'
     - Rakefile
     - Gemfile
+  UseCache: true
   NewCops: enable
 
 Layout/LineLength:
