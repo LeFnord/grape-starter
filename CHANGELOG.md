@@ -2,6 +2,10 @@
 
 - your contributions
 
+### v1.4.1 / 2021-12-17
+
+- Upgrades active-support version. [LeFnord](https://github.com/LeFnord)
+
 ### v1.4.0 / 2021-04-08
 
 - Removes `standalone_migration` in favour of AR tasks. [LeFnord](https://github.com/LeFnord)
