@@ -1,4 +1,4 @@
-![Ruby](https://github.com/LeFnord/grape-starter/workflows/Ruby/badge.svg)
+[![Pipeline](https://github.com/LeFnord/grape-starter/actions/workflows/pipeline.yml/badge.svg?branch=master)](https://github.com/LeFnord/grape-starter/actions/workflows/pipeline.yml)
 [![Gem Version](https://badge.fury.io/rb/grape-starter.svg)](https://badge.fury.io/rb/grape-starter)
 
 
