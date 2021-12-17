@@ -12,5 +12,5 @@ group :development, :test do
   gem 'rack-test', require: false
   gem 'rake', '~> 13.0'
   gem 'rspec', '~> 3.10'
-  gem 'rspec-command'
+  # gem 'rspec-command', git: 'https://github.com/waltjones/rspec-command'
 end
