@@ -2,7 +2,11 @@
 
 - your contributions
 
-### v1.4.1 / 2021-12-17
+### v1.4.2 / 2021-12-20
+
+- Fixes active-support version to > 6 and < 7. [LeFnord](https://github.com/LeFnord)
+
+### v1.4.1 / 2021-12-17 -> yanked
 
 - Upgrades active-support version. [LeFnord](https://github.com/LeFnord)
 
