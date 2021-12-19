@@ -1,19 +1,14 @@
-FROM ruby:2.5
+FROM ruby:3
 
 # stes some Environment variables
-ENV NODE_ENV='production'
-ENV RACK_ENV='production'
-
-
-# throw errors if Gemfile has been modified since Gemfile.lock
-RUN bundle config --global frozen 1
+ENV NODE_ENV='development'
+ENV RACK_ENV='development'
 
 ADD . /dummy
 WORKDIR /dummy
 
 COPY Gemfile Gemfile.lock ./
-
-RUN bundle install
+RUN bundle install --path vendor/bundle
 
 COPY . .
 
