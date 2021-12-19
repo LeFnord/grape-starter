@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
-require 'active_support/isolated_execution_state'
 require 'grape'
-# require 'rspec_command'
+require 'rspec_command'
 
 $LOAD_PATH.unshift File.expand_path('lib', __dir__)
 require 'starter'
@@ -10,7 +9,7 @@ require 'starter'
 Dir['./spec/support/**/*.rb'].each { |f| require f }
 
 RSpec.configure do |config|
-  # config.include RSpecCommand
+  config.include RSpecCommand
 
   config.color = true
   config.formatter = :documentation

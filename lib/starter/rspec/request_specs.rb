@@ -45,7 +45,7 @@ RSpec.shared_examples 'DELETE one' do
   let(:route) { route_from_description }
 
   subject { delete route }
-  specify { expect(subject.status).to eql 204 }
+  specify { expect(subject.status).to eql 200 }
 end
 
 # plural forms
@@ -75,5 +75,5 @@ RSpec.shared_examples 'DELETE specific' do |key: nil|
   let(:specific_route) { "#{route_from_description}/#{key}" }
 
   subject { delete specific_route }
-  specify { expect(subject.status).to eql 204 }
+  specify { expect(subject).to to_have_status 200 }
 end
