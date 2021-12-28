@@ -22,10 +22,10 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.required_ruby_version = '>= 2.6'
+  spec.required_ruby_version = '>= 2.7'
 
-  spec.add_dependency 'gli', '~> 2.19'
+  spec.add_dependency 'gli', '~> 2.20'
   spec.add_dependency 'activesupport', '>= 6', '< 8'
-  spec.add_dependency 'rubocop', '~> 1.12'
-  spec.add_dependency 'awesome_print', '~> 1.8'
+  spec.add_dependency 'rubocop', '~> 1.24'
+  spec.add_dependency 'awesome_print', '~> 1.9'
 end
