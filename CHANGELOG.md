@@ -2,6 +2,10 @@
 
 - your contributions
 
+### v1.5.1 / 2021-12-28
+
+- Fixes ActiveSupport in template. [LeFnord](https://github.com/LeFnord)
+
 ### v1.5.0 / 2021-12-28
 
 - Sets minimum ruby version to 2.7 [LeFnord](https://github.com/LeFnord)
