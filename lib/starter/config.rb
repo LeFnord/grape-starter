@@ -18,7 +18,7 @@ module Starter
 
         existent = File.exist?(config_file) ? YAML.load_file(config_file) : {}
         content = existent.merge(content)
-        File.open(config_file, 'w') { |f| f.write(YAML.dump(content)) }
+        File.write(config_file, YAML.dump(content))
       end
 
       def config_file

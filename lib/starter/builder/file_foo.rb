@@ -19,7 +19,7 @@ module Starter
 
       # … write
       def write_file(file, content)
-        File.open(file, 'w') { |f| f.write(content) }
+        File.write(file, content)
       end
     end
   end

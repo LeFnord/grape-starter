@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'active_support/core_ext/string'
-
 module Starter
   module Templates
     module Files

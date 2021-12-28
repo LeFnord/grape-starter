@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require 'grape'
-require 'rspec_command'
-
 $LOAD_PATH.unshift File.expand_path('lib', __dir__)
 require 'starter'
+
+require 'grape'
+require 'rspec_command'
 
 Dir['./spec/support/**/*.rb'].each { |f| require f }
 
