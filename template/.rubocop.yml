@@ -6,6 +6,7 @@ AllCops:
     - Gemfile
   UseCache: true
   NewCops: enable
+  SuggestExtensions: false
 
 Layout/LineLength:
   Max: 120
