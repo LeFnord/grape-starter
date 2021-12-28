@@ -8,7 +8,8 @@ ADD . /dummy
 WORKDIR /dummy
 
 COPY Gemfile Gemfile.lock ./
-RUN bundle install --path vendor/bundle
+RUN bundle config set --local path 'vendor/bundle'
+RUN bundle install
 
 COPY . .
 
