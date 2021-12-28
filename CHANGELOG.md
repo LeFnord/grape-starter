@@ -2,9 +2,15 @@
 
 - your contributions
 
-### v1.4.2 / 2021-12-20
+### v1.5.0 / 2021-12-28
 
-- Fixes shared mexamples for delete.
+- Sets minimum ruby version to 2.7 [LeFnord](https://github.com/LeFnord)
+- Fixes: uninitialized constant ActiveSupport::XmlMini::IsolatedExecutionState. [LeFnord](https://github.com/LeFnord)
+- Sets path via config in Dockerfile. [LeFnord](https://github.com/LeFnord)
+
+### v1.4.3 / 2021-12-20
+
+- Fixes shared mexamples for delete. [LeFnord](https://github.com/LeFnord)
 
 ### v1.4.2 / 2021-12-20
 
