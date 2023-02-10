@@ -60,7 +60,7 @@ RSpec.describe Starter::BaseFile do
 
     describe 'prefix not given' do
       before(:each) do
-        FileUtils.rm(File.join(created_api, '.config')) if File.exist?(File.join(created_api, '.config'))
+        FileUtils.rm_f(File.join(created_api, '.config'))
       end
 
       subject do

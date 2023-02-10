@@ -14,7 +14,7 @@ AllCops:
     - template/spec/spec-helper.rb
   UseCache: true
   NewCops: enable
-  TargetRubyVersion: 3.0
+  TargetRubyVersion: 3.2
   SuggestExtensions: false
 
 Layout/IndentationWidth:
@@ -45,3 +45,6 @@ Style/AsciiComments:
 
 Style/Documentation:
   Enabled: false
+
+Style/HashSyntax:
+  Enabled: false # to support ruby 3.0

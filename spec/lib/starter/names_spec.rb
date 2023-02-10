@@ -10,7 +10,7 @@ RSpec.describe Starter::Names do
   describe 'child class of an ORM' do
     after(:each) do
       config_file = File.join(Dir.getwd, '.config')
-      FileUtils.rm(config_file) if File.exist?(config_file)
+      FileUtils.rm_f(config_file)
     end
 
     let(:resource) { 'foo' }

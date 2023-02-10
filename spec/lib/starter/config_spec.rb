@@ -14,12 +14,12 @@ RSpec.describe Starter::Config do
 
   describe 'SAVE' do
     after(:each) do
-      FileUtils.rm(config_file) if File.exist?(config_file)
+      FileUtils.rm_f(config_file)
     end
 
     describe 'did not create a config file' do
       specify 'no argument' do
-        FileUtils.rm(config_file) if File.exist?(config_file)
+        FileUtils.rm_f(config_file)
         subject.save
         expect(File.exist?(config_file)).to be false
       end
@@ -72,13 +72,13 @@ RSpec.describe Starter::Config do
 
     describe 'READ' do
       after(:each) do
-        FileUtils.rm(config_file) if File.exist?(config_file)
+        FileUtils.rm_f(config_file)
       end
 
       let(:return_value) { subject.read }
 
       describe 'returns empty hash, if not exist' do
-        before { FileUtils.rm(config_file) if File.exist?(config_file) }
+        before { FileUtils.rm_f(config_file) }
         specify do
           expect(return_value).to eql({})
         end
