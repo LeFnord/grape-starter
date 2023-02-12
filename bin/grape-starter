@@ -97,6 +97,16 @@ command :rm do |c|
   end
 end
 
+desc 'Creates from given OAPI spec'
+long_desc 'Import YAML or JSON OAPI specification given by path argument'
+arg_name 'path'
+command :import do |c|
+  c.action do |_global_options, _options, args|
+    path = args.first
+    ap path
+  end
+end
+
 
 pre do |_global, _command, _options, _args|
   # Pre logic here

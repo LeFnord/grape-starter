@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 RSpec.shared_examples 'help output' do |command|
-  if command
+  if command.presence == 'import'
+    command "grape-starter #{command} -h"
+    its(:stdout) { is_expected.to include 'NAME' }
+    its(:stdout) { is_expected.to include 'SYNOPSIS' }
+  elsif command
     command "grape-starter #{command} -h"
     its(:stdout) { is_expected.to include 'NAME' }
     its(:stdout) { is_expected.to include 'SYNOPSIS' }
