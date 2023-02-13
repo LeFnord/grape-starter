@@ -87,7 +87,7 @@ command :rm do |c|
   c.desc 'removes also entity file'
   c.switch [:e, :entity], negatable: false
 
-  c.action do |global_options, options, args|
+  c.action do |_global_options, options, args|
     exit_now! 'no resource given' if args.empty?
     resource = args.first
 
