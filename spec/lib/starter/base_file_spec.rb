@@ -1,13 +1,13 @@
 # frozen_string_literal: false
 
-RSpec.describe Starter::BaseFile do
+RSpec.describe Starter::Builder::BaseFile do
   let(:single) { 'foo' }
   let(:plural) { 'foos' }
 
   subject do
     Class.new do
-      extend Starter::Names
-      extend Starter::BaseFile
+      extend Starter::Builder::Names
+      extend Starter::Builder::BaseFile
     end
   end
 
@@ -66,7 +66,7 @@ RSpec.describe Starter::BaseFile do
       subject do
         starter_gem = Gem::Specification.find_by_name('grape-starter').gem_dir
         src = File.join(starter_gem, 'template', '.')
-        Starter::Builder.new!(plural, src, plural, p: nil)
+        Starter::Build.new!(plural, src, plural, p: nil)
       end
 
       describe 'base_prefix' do
@@ -80,7 +80,7 @@ RSpec.describe Starter::BaseFile do
       subject do
         starter_gem = Gem::Specification.find_by_name('grape-starter').gem_dir
         src = File.join(starter_gem, 'template', '.')
-        Starter::Builder.new!(plural, src, plural, p: 'awesome_api')
+        Starter::Build.new!(plural, src, plural, p: 'awesome_api')
       end
 
       describe 'base_version' do

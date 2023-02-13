@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-RSpec.describe Starter::Names do
+RSpec.describe Starter::Builder::Names do
   subject do
-    dummy = Class.new { extend Starter::Names }
+    dummy = Class.new { extend Starter::Builder::Names }
     dummy.instance_variable_set(:@resource, resource)
     dummy
   end

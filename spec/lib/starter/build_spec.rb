@@ -1,6 +1,6 @@
 # frozen_string_literal: false
 
-RSpec.describe Starter::Builder do
+RSpec.describe Starter::Build do
   let(:single) { 'foo' }
   let(:plural) { 'foos' }
 
