@@ -103,7 +103,10 @@ arg_name 'path'
 command :import do |c|
   c.action do |_global_options, _options, args|
     path = args.first
-    ap path
+    exit_now! 'no path given' if path.blank?
+    exit_now! "file under #{path} not exists" unless File.exist?(path)
+
+    Starter::Import.do_it!(path)
   end
 end
 

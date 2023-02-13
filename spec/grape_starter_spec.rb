@@ -23,7 +23,7 @@ describe 'grape-starter' do
   describe 'new' do
     it_behaves_like 'help output', 'new'
 
-    describe 'options' do
+    describe 'command help' do
       command 'grape-starter new -h'
 
       its(:stdout) { is_expected.to include '-o, --orm=arg' }
@@ -34,7 +34,7 @@ describe 'grape-starter' do
   describe 'add' do
     it_behaves_like 'help output', 'add'
 
-    describe 'options' do
+    describe 'command help' do
       command 'grape-starter add -h'
 
       its(:stdout) { is_expected.to include '-e, --entity' }
@@ -46,7 +46,7 @@ describe 'grape-starter' do
   describe 'rm' do
     it_behaves_like 'help output', 'rm'
 
-    describe 'options' do
+    describe 'command help' do
       command 'grape-starter rm -h'
 
       its(:stdout) { is_expected.to include '-e, --entity' }
@@ -56,7 +56,7 @@ describe 'grape-starter' do
   describe 'import' do
     it_behaves_like 'help output', 'import'
 
-    describe 'options' do
+    describe 'command help' do
       command 'grape-starter import -h'
 
       its(:stdout) { is_expected.to include 'import - Creates from given OAPI spec' }
