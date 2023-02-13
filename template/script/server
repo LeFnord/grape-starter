@@ -7,16 +7,4 @@ cd "$(dirname "$0")/.."
 test -z "$RACK_ENV" &&
   RACK_ENV='development'
 
-if [ $1 ]; then
-  PORT=$1
-else
-  PORT=9292
-fi
-
-export PORT=$PORT
-
-if [ "$RACK_ENV" = 'production' ]; then
-  bundle exec thin start -p $PORT -e $RACK_ENV --tag {{{grape-starter}}} -d --threaded
-else
-  bundle exec thin start -p $PORT -e $RACK_ENV --tag {{{grape-starter}}} -D
-fi
+bundle exec puma --tag API-Baz

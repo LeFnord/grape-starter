@@ -13,4 +13,4 @@ RUN bundle install
 
 COPY . .
 
-CMD bundle exec thin start -p 9292 -e production --tag API-dummy --threaded
+CMD bundle exec puma --tag API-dummy

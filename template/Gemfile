@@ -3,7 +3,7 @@
 source 'http://rubygems.org'
 
 # Server stuff
-gem 'thin'
+gem 'puma'
 
 gem 'rack'
 gem 'rack-cors'
