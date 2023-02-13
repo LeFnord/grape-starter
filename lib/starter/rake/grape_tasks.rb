@@ -6,8 +6,6 @@ require 'rack/test'
 
 module Starter
   module Rake
-    require 'starter/builder'
-
     class GrapeTasks < ::Rake::TaskLib
       include Rack::Test::Methods
 

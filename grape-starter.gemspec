@@ -28,4 +28,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'activesupport', '>= 6', '< 8'
   spec.add_dependency 'rubocop', '~> 1.24'
   spec.add_dependency 'awesome_print', '~> 1.9'
+  spec.add_dependency 'zeitwerk'
 end

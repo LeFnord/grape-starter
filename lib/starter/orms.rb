@@ -61,7 +61,7 @@ module Starter
 
         file_name = "#{Time.now.strftime('%Y%m%d%H%m%S')}_create_#{klass_name.downcase}.rb"
         migration_dest = File.join(Dir.pwd, 'db', 'migrate', file_name)
-        FileFoo.write_file(migration_dest, migration(klass_name, resource))
+        FileOps.write_file(migration_dest, migration(klass_name, resource))
       end
 
       def load_orm(orm: ::Starter::Config.read[:orm])
@@ -70,10 +70,10 @@ module Starter
         case @orm
         when 'sequel'
           require 'starter/builder/templates/sequel'
-          extend(::Starter::Templates::Sequel)
+          extend(Starter::Builder::Templates::Sequel)
         when 'activerecord', 'ar'
           require 'starter/builder/templates/activerecord'
-          extend(::Starter::Templates::ActiveRecord)
+          extend(Starter::Builder::Templates::ActiveRecord)
         else
           @orm = nil
         end
@@ -87,26 +87,26 @@ module Starter
 
       def build_initializer(dest)
         FileUtils.mkdir_p(dest)
-        FileFoo.write_file(File.join(dest, 'database.rb'), initializer)
+        FileOps.write_file(File.join(dest, 'database.rb'), initializer)
       end
 
       def build_config(dest)
-        FileFoo.write_file(File.join(dest, 'database.yml'), config)
+        FileOps.write_file(File.join(dest, 'database.yml'), config)
       end
 
       def build_standalone_migrations(dest)
-        FileFoo.write_file(dest, standalone_migrations)
+        FileOps.write_file(dest, standalone_migrations)
       end
 
       # adds a middleware to config.ru
       def add_middleware(dest, middleware)
         replacement = "use #{middleware}\n\n\\1"
-        FileFoo.call!(File.join(dest, 'config.ru')) { |content| content.sub!(/^(run.+)$/, replacement) }
+        FileOps.call!(File.join(dest, 'config.ru')) { |content| content.sub!(/^(run.+)$/, replacement) }
       end
 
       def append_to_file(file_name, content)
-        original = FileFoo.read_file(file_name)
-        FileFoo.write_file(file_name, "#{original}\n\n#{content}")
+        original = FileOps.read_file(file_name)
+        FileOps.write_file(file_name, "#{original}\n\n#{content}")
       end
 
       def prepare_for_migrations(dest)

@@ -1,18 +1,18 @@
 # frozen_string_literal: true
 
 module Starter
-  require 'starter/builder/orms'
-  require 'starter/builder/names'
-  require 'starter/builder/base_file'
-  require 'starter/builder/file_foo'
-  require 'starter/builder/templates/files'
-  require 'starter/builder/templates/endpoints'
+  # require 'starter/builder/orms'
+  # require 'starter/builder/names'
+  # require 'starter/builder/base_file'
+  # require 'starter/builder/file_foo'
+  # require 'starter/builder/templates/files'
+  # require 'starter/builder/templates/endpoints'
 
-  class Builder
-    extend Names
-    extend BaseFile
-    extend Templates::Files
-    extend Templates::Endpoints
+  class Build
+    extend Builder::Names
+    extend Builder::BaseFile
+    extend Builder::Templates::Files
+    extend Builder::Templates::Endpoints
 
     class << self
       attr_reader :prefix, :resource, :set, :force, :entity, :destination, :orm
@@ -120,7 +120,7 @@ module Starter
       # creates a new file in lib folder as namespace, includind the version
       def add_namespace_with_version
         new_lib = File.join(destination, 'lib', base_file_name)
-        FileFoo.write_file(new_lib, base_namespace_file.strip_heredoc)
+        FileOps.write_file(new_lib, base_namespace_file.strip_heredoc)
       end
 
       #
@@ -128,7 +128,7 @@ module Starter
       def replace_static(file, replacement)
         file_path = File.join(destination, file)
 
-        FileFoo.call!(file_path) { |content| content.gsub!('{{{grape-starter}}}', replacement.to_s) }
+        FileOps.call!(file_path) { |content| content.gsub!('{{{grape-starter}}}', replacement.to_s) }
       end
 
       # #add! a new resource releated helper methods
@@ -159,7 +159,7 @@ module Starter
       def save_file(new_file)
         new_file_name = send("#{new_file}_name")
         should_raise?(new_file_name)
-        FileFoo.write_file(new_file_name, send(new_file.strip_heredoc))
+        FileOps.write_file(new_file_name, send(new_file.strip_heredoc))
       end
 
       #

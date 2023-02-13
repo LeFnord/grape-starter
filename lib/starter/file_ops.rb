@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Starter
-  class FileFoo
+  class FileOps
     class << self
       # general file stuff
       #
