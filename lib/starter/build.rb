@@ -4,8 +4,8 @@ module Starter
   class Build
     extend Builder::Names
     extend Builder::BaseFile
-    extend Builder::Templates::Files
-    extend Builder::Templates::Endpoints
+    extend Templates::Files
+    extend Templates::Endpoints
 
     class << self
       attr_reader :prefix, :resource, :set, :force, :entity, :destination, :orm

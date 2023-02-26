@@ -37,8 +37,8 @@ Metrics/MethodLength:
 
 Naming/AccessorMethodName:
   Exclude:
-    - 'lib/starter/builder/templates/files.rb'
-    - 'lib/starter/builder/templates/endpoints.rb'
+    - 'lib/starter/templates/files.rb'
+    - 'lib/starter/templates/endpoints.rb'
 
 Style/AsciiComments:
   Enabled: false

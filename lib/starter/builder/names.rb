@@ -13,12 +13,10 @@ module Starter
 
         case Starter::Config.read[:orm]
         when 'sequel'
-          require 'starter/builder/templates/sequel'
-          extend(Starter::Builder::Templates::Sequel)
+          extend(Starter::Builder::Sequel)
           "#{klass_name} < #{model_klass}"
         when 'activerecord', 'ar'
-          require 'starter/builder/templates/activerecord'
-          extend(Starter::Builder::Templates::ActiveRecord)
+          extend(Starter::Builder::ActiveRecord)
           "#{klass_name} < #{model_klass}"
         else
           klass_name
