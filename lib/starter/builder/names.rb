@@ -7,6 +7,10 @@ module Starter
         @resource = resource
       end
 
+      def api_base_file_name
+        File.join(Dir.getwd, 'api', 'base.rb')
+      end
+
       def klass_name
         for_klass = prepare_klass
         singular? ? for_klass.classify : for_klass.classify.pluralize
@@ -17,10 +21,6 @@ module Starter
         @resource.tr('/', '-').downcase + '.rb'
       end
       # rubocop:enable Style/StringConcatenation
-
-      def api_base_file_name
-        File.join(Dir.getwd, 'api', 'base.rb')
-      end
 
       def base_spec_name
         base_file_name.gsub(/.rb$/, '_spec.rb')

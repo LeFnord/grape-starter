@@ -10,20 +10,35 @@ module Starter
 
       def initialize(raw)
         # mandatory
-        @openapi = raw.fetch(:openapi)
-        @info = raw.fetch(:info)
-        # optional, but one must be given
-        @paths = raw.fetch(:paths, false)
-        @components = raw.fetch(:components, false)
-        @webhooks = raw.fetch(:webhooks, false)
+        @openapi = raw.fetch('openapi')
+        @info = raw.fetch('info')
 
-        raise Error, 'one of `paths`, `components`, `webhooks` must be given' unless optional_valid?
+        # in contrast to the spec, paths are required
+        @paths = raw.fetch('paths').except('/').sort.to_h
+
+        # optional -> not used atm
+        @components = raw.fetch('components', false)
+        @webhooks = raw.fetch('webhooks', false)
+      end
+
+      def namespaces
+        validate_paths
+
+        @namespaces ||= paths.keys.each_with_object({}) do |path, memo|
+          segments = path.split('/').delete_if(&:empty?)
+          namespace = segments.shift
+          rest_path = "/#{segments.join('/')}"
+
+          memo[namespace] ||= {}
+          memo[namespace][rest_path] = paths[path]
+        end
       end
 
       private
 
-      def optional_valid?
-        paths || components || webhooks
+      def validate_paths
+        raise Error, '`paths` empty … nothings to do' if paths.empty?
+        raise Error, 'only template given' if paths.keys.one? && paths.keys.first.match?(%r{/\{\w*\}})
       end
     end
   end
