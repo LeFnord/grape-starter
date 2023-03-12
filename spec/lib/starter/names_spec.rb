@@ -1,11 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Starter::Builder::Names do
-  subject do
-    dummy = Class.new { extend Starter::Builder::Names }
-    dummy.instance_variable_set(:@resource, resource)
-    dummy
-  end
+  subject { described_class.new(resource) }
 
   describe 'child class of an ORM' do
     after(:each) do

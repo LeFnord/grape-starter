@@ -5,18 +5,20 @@ RSpec.describe Starter::Builder::BaseFile do
   let(:plural) { 'foos' }
 
   subject do
-    Class.new do
-      extend Starter::Builder::Names
-      extend Starter::Builder::BaseFile
-    end
+    starter_gem = Gem::Specification.find_by_name('grape-starter').gem_dir
+    src = File.join(starter_gem, 'template', '.')
+    dest = "tmp/#{single}"
+    Starter::Build.new!('Base', src, dest, p: 'awesome_api')
+  end
+
+  let!(:created_api) { File.join(Dir.getwd, subject.destination) }
+
+  after do
+    FileUtils.remove_dir(created_api, true)
   end
 
   describe 'on add! call' do
     describe 'add|remove mount_point' do
-      before do
-        allow(subject).to receive(:klass_name).and_return('bar')
-      end
-
       let(:base_without_resource) do
         "mount Endpoints::Root
 
@@ -28,19 +30,19 @@ RSpec.describe Starter::Builder::BaseFile do
         "mount Endpoints::Root
 
          mount Endpoints::Foo
-         mount Endpoints::#{subject.klass_name}
+         mount Endpoints::#{subject.naming.klass_name}
         "
       end
 
       describe '#add_to_base' do
         specify do
-          expect(subject.send(:add_to_base, base_without_resource)).to include subject.mount_point
+          expect(subject.send(:add_to_base, base_without_resource)).to include subject.naming.mount_point
         end
       end
 
       describe '#remove_from_base' do
         specify do
-          expect(subject.send(:remove_from_base, base_with_resource)).not_to include subject.mount_point
+          expect(subject.send(:remove_from_base, base_with_resource)).not_to include subject.naming.mount_point
         end
       end
     end

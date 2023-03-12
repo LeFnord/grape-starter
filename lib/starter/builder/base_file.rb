@@ -5,24 +5,24 @@ module Starter
     module BaseFile
       # add it in api base
       def add_mount_point
-        FileOps.call!(api_base_file_name) { |content| add_to_base(content) }
+        FileOps.call!(@naming.api_base_file_name) { |content| add_to_base(content) }
       end
 
       # adding mount point to base class
       def add_to_base(file)
         occurence = file.scan(/(\s+mount\s.*?\n)/).last.first
-        replacement = occurence + mount_point
+        replacement = occurence + @naming.mount_point
         file.sub!(occurence, replacement)
       end
 
       # removes in api base
       def remove_mount_point
-        FileOps.call!(api_base_file_name) { |content| remove_from_base(content) }
+        FileOps.call!(@naming.api_base_file_name) { |content| remove_from_base(content) }
       end
 
       # removes mount point from base class
       def remove_from_base(file)
-        file.sub!(mount_point, '')
+        file.sub!(@naming.mount_point, '')
       end
 
       # parses out the prefix from base api file

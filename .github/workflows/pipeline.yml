@@ -34,5 +34,7 @@ jobs:
       with:
         ruby-version: ${{ matrix.ruby-version }}
         bundler-cache: true
+    - name: create tmp dir
+      run: mkdir tmp
     - name: Run rspec
       run: bundle exec rspec
