@@ -10,7 +10,7 @@ module Starter
 
         module Api
           module Endpoints
-            class #{klass_name} < Grape::API
+            class #{@naming.klass_name} < Grape::API
               namespace :#{resource.downcase} do
                 #{endpoints}
               end
@@ -26,7 +26,7 @@ module Starter
 
         module Api
           module Entities
-            class #{klass_name} < Grape::Entity
+            class #{@naming.klass_name} < Grape::Entity
             end
           end
         end
@@ -38,7 +38,7 @@ module Starter
         <<-FILE.strip_heredoc
         # frozen_string_literal: true
 
-        module #{klass_name}
+        module #{@naming.klass_name}
           VERSION  = '0.1.0'
         end
         FILE
@@ -49,7 +49,7 @@ module Starter
         # frozen_string_literal: true
 
         module Models
-          class #{lib_klass_name}
+          class #{@naming.lib_klass_name}
           end
         end
         FILE
@@ -74,7 +74,7 @@ module Starter
 
         require 'spec_helper'
 
-        RSpec.describe Models::#{klass_name} do
+        RSpec.describe Models::#{@naming.klass_name} do
           pending 'write specs'
         end
         FILE

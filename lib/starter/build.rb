@@ -2,13 +2,14 @@
 
 module Starter
   class Build
-    extend Builder::Names
     extend Builder::BaseFile
     extend Templates::Files
     extend Templates::Endpoints
 
     class << self
-      attr_reader :prefix, :resource, :set, :force, :entity, :destination, :orm
+      attr_reader :prefix, :resource, :entity,
+                  :set, :force, :destination, :orm,
+                  :naming
 
       #
       # public methods
@@ -27,6 +28,7 @@ module Starter
         @resource = name
         @destination = destination
         @prefix = options[:p] # can be nil
+        @naming = Starter::Builder::Names.new(@resource)
 
         FileUtils.copy_entry source, destination
 
@@ -62,8 +64,9 @@ module Starter
         @force = options[:force]
         @entity = options[:entity]
         @orm = options[:orm]
+        @naming = Starter::Builder::Names.new(@resource)
 
-        Orms.add_migration(klass_name, resource.downcase) if @orm
+        Orms.add_migration(@naming.klass_name, resource.downcase) if @orm
         save_resource
       end
 
@@ -112,7 +115,7 @@ module Starter
       #
       # creates a new file in lib folder as namespace, includind the version
       def add_namespace_with_version
-        new_lib = File.join(destination, 'lib', base_file_name)
+        new_lib = File.join(destination, 'lib', @naming.base_file_name)
         FileOps.write_file(new_lib, base_namespace_file.strip_heredoc)
       end
 
@@ -128,7 +131,7 @@ module Starter
       #
       # provides an array of endpoints for the new resource
       def endpoint_set
-        crud_set = singular? ? singular_one : crud
+        crud_set = @naming.singular? ? singular_one : crud
         return crud_set if set.blank?
 
         crud_set.each_with_object([]) { |x, memo| set.map { |y| memo << x if x.to_s.start_with?(y) } }
@@ -138,7 +141,7 @@ module Starter
       # saves all resource related files
       def save_resource
         created_files = file_list.each_with_object([]) do |new_file, memo|
-          memo << send("#{new_file}_name")
+          memo << @naming.send("#{new_file}_name")
           save_file(new_file)
         end
 
@@ -150,7 +153,7 @@ module Starter
       #
       # saves new resource files
       def save_file(new_file)
-        new_file_name = send("#{new_file}_name")
+        new_file_name = @naming.send("#{new_file}_name")
         should_raise?(new_file_name)
         FileOps.write_file(new_file_name, send(new_file.strip_heredoc))
       end

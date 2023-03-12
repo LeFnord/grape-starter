@@ -6,8 +6,6 @@ RSpec.describe Starter::Build do
 
   subject { described_class }
 
-  before { subject.instance_variable_set(:@resource, single) }
-
   specify { expect(subject).to respond_to :resource }
   specify { expect(subject).to respond_to :set }
   specify { expect(subject).to respond_to :force }
@@ -20,16 +18,28 @@ RSpec.describe Starter::Build do
     it { is_expected.to respond_to :remove! }
   end
 
-  describe '#add call' do
-    describe 'Names methods' do
-      specify { expect(subject.send(:singular?)).to be true }
-      specify { expect(subject.klass_name).to eql 'Foo' }
-      specify { expect(subject.base_file_name).to eql 'foo.rb' }
+  describe '#new call' do
+    subject do
+      starter_gem = Gem::Specification.find_by_name('grape-starter').gem_dir
+      src = File.join(starter_gem, 'template', '.')
+      dest = "tmp/#{single}"
+      described_class.new!(single, src, dest, p: 'awesome_api')
+    end
 
-      specify { expect(subject.api_file_name).to include 'api/endpoints/foo.rb' }
-      specify { expect(subject.lib_file_name).to include 'lib/models/foo.rb' }
-      specify { expect(subject.api_spec_name).to include 'spec/requests/foo_spec.rb' }
-      specify { expect(subject.lib_spec_name).to include 'spec/lib/models/foo_spec.rb' }
+    let!(:created_api) { File.join(Dir.getwd, subject.destination) }
+
+    after do
+      FileUtils.remove_dir(created_api, true)
+    end
+
+    describe 'Names methods' do
+      specify { expect(subject.naming.klass_name).to eql 'Foo' }
+      specify { expect(subject.naming.base_file_name).to eql 'foo.rb' }
+
+      specify { expect(subject.naming.api_file_name).to include 'api/endpoints/foo.rb' }
+      specify { expect(subject.naming.lib_file_name).to include 'lib/models/foo.rb' }
+      specify { expect(subject.naming.api_spec_name).to include 'spec/requests/foo_spec.rb' }
+      specify { expect(subject.naming.lib_spec_name).to include 'spec/lib/models/foo_spec.rb' }
     end
 
     describe '#file_list' do
@@ -84,13 +94,14 @@ RSpec.describe Starter::Build do
 
   describe '#replace_static' do
     describe 'on new! call' do
-      let!(:created_api) { File.join(Dir.getwd, subject.destination) }
-
       subject do
         starter_gem = Gem::Specification.find_by_name('grape-starter').gem_dir
         src = File.join(starter_gem, 'template', '.')
-        described_class.new!(plural, src, plural, p: 'awesome_api')
+        dest = 'tmp/base'
+        described_class.new!('Base', src, dest, p: 'awesome_api')
       end
+
+      let!(:created_api) { File.join(Dir.getwd, subject.destination) }
 
       after do
         FileUtils.remove_dir(created_api, true)
@@ -132,70 +143,95 @@ RSpec.describe Starter::Build do
   end
 
   describe '#endpoint_set' do
+    subject(:awesome_api) do
+      starter_gem = Gem::Specification.find_by_name('grape-starter').gem_dir
+      src = File.join(starter_gem, 'template', '.')
+      dest = 'tmp/base'
+      described_class.new!('Base', src, dest, p: 'awesome_api')
+    end
+
+    let!(:created_api) { File.join(Dir.getwd, awesome_api.destination) }
+
+    after do
+      FileUtils.remove_dir(created_api, true)
+    end
+
     let(:set) { subject.send(:endpoint_set) }
 
     describe 'single' do
+      subject do
+        Dir.chdir(awesome_api.destination) do
+          awesome_api.add!(single, options)
+        end
+        awesome_api
+      end
+
       describe 'POST' do
-        before { subject.instance_variable_set(:@set, ['post']) }
+        let(:options) { { set: ['post'] } }
         specify { expect(set).to eql [:post] }
       end
 
       describe 'GET' do
-        before { subject.instance_variable_set(:@set, ['get']) }
+        let(:options) { { set: ['get'] } }
         specify { expect(set).to eql [:get_one] }
       end
 
       describe 'PUT' do
-        before { subject.instance_variable_set(:@set, ['put']) }
+        let(:options) { { set: ['put'] } }
         specify { expect(set).to eql [:put_one] }
       end
 
       describe 'PATCH' do
-        before { subject.instance_variable_set(:@set, ['patch']) }
+        let(:options) { { set: ['patch'] } }
         specify { expect(set).to eql [:patch_one] }
       end
 
       describe 'DELETE' do
-        before { subject.instance_variable_set(:@set, ['delete']) }
+        let(:options) { { set: ['delete'] } }
         specify { expect(set).to eql [:delete_one] }
       end
 
       describe 'multinple given' do
-        before { subject.instance_variable_set(:@set, %w[post get delete]) }
+        let(:options) { { set: %w[post get delete] } }
         specify { expect(set).to eql %i[post get_one delete_one] }
       end
     end
 
     describe 'plural' do
-      before { subject.instance_variable_set(:@resource, plural) }
+      subject do
+        Dir.chdir(awesome_api.destination) do
+          awesome_api.add!(plural, options)
+        end
+        awesome_api
+      end
 
       describe 'POST' do
-        before { subject.instance_variable_set(:@set, ['post']) }
+        let(:options) { { set: ['post'] } }
         specify { expect(set).to eql [:post] }
       end
 
       describe 'GET' do
-        before { subject.instance_variable_set(:@set, ['get']) }
+        let(:options) { { set: ['get'] } }
         specify { expect(set).to eql %i[get_all get_specific] }
       end
 
       describe 'PUT' do
-        before { subject.instance_variable_set(:@set, ['put']) }
+        let(:options) { { set: ['put'] } }
         specify { expect(set).to eql [:put_specific] }
       end
 
       describe 'PATCH' do
-        before { subject.instance_variable_set(:@set, ['patch']) }
+        let(:options) { { set: ['patch'] } }
         specify { expect(set).to eql [:patch_specific] }
       end
 
       describe 'DELETE' do
-        before { subject.instance_variable_set(:@set, ['delete']) }
+        let(:options) { { set: ['delete'] } }
         specify { expect(set).to eql [:delete_specific] }
       end
 
       describe 'multinple given' do
-        before { subject.instance_variable_set(:@set, %w[post get delete]) }
+        let(:options) { { set: %w[post get delete] } }
         specify { expect(set).to eql %i[post get_all get_specific delete_specific] }
       end
     end
