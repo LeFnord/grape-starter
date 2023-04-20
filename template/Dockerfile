@@ -4,7 +4,7 @@ FROM ruby:3
 ENV NODE_ENV='development'
 ENV RACK_ENV='development'
 
-ADD . /dummy
+COPY . /dummy
 WORKDIR /dummy
 
 COPY Gemfile Gemfile.lock ./
