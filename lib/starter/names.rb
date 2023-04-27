@@ -12,13 +12,13 @@ module Starter
     end
 
     # rubocop:disable Style/StringConcatenation
-    def base_file_name
+    def resource_file
       @resource.tr('/', '-').downcase + '.rb'
     end
     # rubocop:enable Style/StringConcatenation
 
-    def base_spec_name
-      base_file_name.gsub(/.rb$/, '_spec.rb')
+    def resource_spec
+      resource_file.gsub(/.rb$/, '_spec.rb')
     end
 
     # entry in api/base.rb
@@ -28,17 +28,17 @@ module Starter
 
     # endpoints file
     def api_file_name
-      File.join(Dir.getwd, 'api', 'endpoints', base_file_name)
+      File.join(Dir.getwd, 'api', 'endpoints', resource_file)
     end
 
     # entities file
     def entity_file_name
-      File.join(Dir.getwd, 'api', 'entities', base_file_name)
+      File.join(Dir.getwd, 'api', 'entities', resource_file)
     end
 
     # lib file
     def lib_file_name
-      File.join(Dir.getwd, 'lib', 'models', base_file_name)
+      File.join(Dir.getwd, 'lib', 'models', resource_file)
     end
 
     # model entry in lib file
@@ -59,12 +59,12 @@ module Starter
 
     # resource spec
     def api_spec_name
-      File.join(Dir.getwd, 'spec', 'requests', base_spec_name)
+      File.join(Dir.getwd, 'spec', 'requests', resource_spec)
     end
 
     # lib spec
     def lib_spec_name
-      File.join(Dir.getwd, 'spec', 'lib', 'models', base_spec_name)
+      File.join(Dir.getwd, 'spec', 'lib', 'models', resource_spec)
     end
 
     def singular?

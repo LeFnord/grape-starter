@@ -41,7 +41,7 @@ RSpec.describe Starter::Names do
       let(:resource) { 'foos' }
       specify { expect(subject.send(:singular?)).to be false }
       specify { expect(subject.klass_name).to eql 'Foos' }
-      specify { expect(subject.base_file_name).to eql 'foos.rb' }
+      specify { expect(subject.resource_file).to eql 'foos.rb' }
 
       specify { expect(subject.api_file_name).to end_with '/api/endpoints/foos.rb' }
       specify { expect(subject.lib_file_name).to end_with '/lib/models/foos.rb' }
@@ -53,7 +53,7 @@ RSpec.describe Starter::Names do
       let(:resource) { 'foo_bars' }
       specify { expect(subject.send(:singular?)).to be false }
       specify { expect(subject.klass_name).to eql 'FooBars' }
-      specify { expect(subject.base_file_name).to eql 'foo_bars.rb' }
+      specify { expect(subject.resource_file).to eql 'foo_bars.rb' }
 
       specify { expect(subject.api_file_name).to end_with '/api/endpoints/foo_bars.rb' }
       specify { expect(subject.lib_file_name).to end_with '/lib/models/foo_bars.rb' }
@@ -65,7 +65,7 @@ RSpec.describe Starter::Names do
       let(:resource) { 'foo-bars' }
       specify { expect(subject.send(:singular?)).to be false }
       specify { expect(subject.klass_name).to eql 'Foo::Bars' }
-      specify { expect(subject.base_file_name).to eql 'foo-bars.rb' }
+      specify { expect(subject.resource_file).to eql 'foo-bars.rb' }
 
       specify { expect(subject.api_file_name).to end_with '/api/endpoints/foo-bars.rb' }
       specify { expect(subject.lib_file_name).to end_with '/lib/models/foo-bars.rb' }
@@ -77,7 +77,7 @@ RSpec.describe Starter::Names do
       let(:resource) { 'foo/bars' }
       specify { expect(subject.send(:singular?)).to be false }
       specify { expect(subject.klass_name).to eql 'Foo::Bars' }
-      specify { expect(subject.base_file_name).to eql 'foo-bars.rb' }
+      specify { expect(subject.resource_file).to eql 'foo-bars.rb' }
 
       specify { expect(subject.api_file_name).to end_with '/api/endpoints/foo-bars.rb' }
       specify { expect(subject.lib_file_name).to end_with '/lib/models/foo-bars.rb' }
@@ -91,7 +91,7 @@ RSpec.describe Starter::Names do
       let(:resource) { 'foo' }
       specify { expect(subject.send(:singular?)).to be true }
       specify { expect(subject.klass_name).to eql 'Foo' }
-      specify { expect(subject.base_file_name).to eql 'foo.rb' }
+      specify { expect(subject.resource_file).to eql 'foo.rb' }
 
       specify { expect(subject.api_file_name).to end_with '/api/endpoints/foo.rb' }
       specify { expect(subject.lib_file_name).to end_with '/lib/models/foo.rb' }
@@ -103,7 +103,7 @@ RSpec.describe Starter::Names do
       let(:resource) { 'foo_bar' }
       specify { expect(subject.send(:singular?)).to be true }
       specify { expect(subject.klass_name).to eql 'FooBar' }
-      specify { expect(subject.base_file_name).to eql 'foo_bar.rb' }
+      specify { expect(subject.resource_file).to eql 'foo_bar.rb' }
 
       specify { expect(subject.api_file_name).to end_with '/api/endpoints/foo_bar.rb' }
       specify { expect(subject.lib_file_name).to end_with '/lib/models/foo_bar.rb' }
@@ -115,7 +115,7 @@ RSpec.describe Starter::Names do
       let(:resource) { 'foo-bar' }
       specify { expect(subject.send(:singular?)).to be true }
       specify { expect(subject.klass_name).to eql 'Foo::Bar' }
-      specify { expect(subject.base_file_name).to eql 'foo-bar.rb' }
+      specify { expect(subject.resource_file).to eql 'foo-bar.rb' }
 
       specify { expect(subject.api_file_name).to end_with '/api/endpoints/foo-bar.rb' }
       specify { expect(subject.lib_file_name).to end_with '/lib/models/foo-bar.rb' }
@@ -127,7 +127,7 @@ RSpec.describe Starter::Names do
       let(:resource) { 'foo/bar' }
       specify { expect(subject.send(:singular?)).to be true }
       specify { expect(subject.klass_name).to eql 'Foo::Bar' }
-      specify { expect(subject.base_file_name).to eql 'foo-bar.rb' }
+      specify { expect(subject.resource_file).to eql 'foo-bar.rb' }
 
       specify { expect(subject.api_file_name).to end_with '/api/endpoints/foo-bar.rb' }
       specify { expect(subject.lib_file_name).to end_with '/lib/models/foo-bar.rb' }
@@ -141,7 +141,7 @@ RSpec.describe Starter::Names do
       let(:resource) { 'Foos' }
       specify { expect(subject.send(:singular?)).to be false }
       specify { expect(subject.klass_name).to eql 'Foos' }
-      specify { expect(subject.base_file_name).to eql 'foos.rb' }
+      specify { expect(subject.resource_file).to eql 'foos.rb' }
 
       specify { expect(subject.api_file_name).to end_with '/api/endpoints/foos.rb' }
       specify { expect(subject.lib_file_name).to end_with '/lib/models/foos.rb' }
@@ -153,7 +153,7 @@ RSpec.describe Starter::Names do
       let(:resource) { 'Foo' }
       specify { expect(subject.send(:singular?)).to be true }
       specify { expect(subject.klass_name).to eql 'Foo' }
-      specify { expect(subject.base_file_name).to eql 'foo.rb' }
+      specify { expect(subject.resource_file).to eql 'foo.rb' }
 
       specify { expect(subject.api_file_name).to end_with '/api/endpoints/foo.rb' }
       specify { expect(subject.lib_file_name).to end_with '/lib/models/foo.rb' }

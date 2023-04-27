@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Starter
-  module Builder
+  module Shared
     module BaseFile
       # add it in api base
       def add_mount_point

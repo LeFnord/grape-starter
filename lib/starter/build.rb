@@ -2,7 +2,7 @@
 
 module Starter
   class Build
-    extend Builder::BaseFile
+    extend Shared::BaseFile
     extend Builder::Files
     extend Builder::Endpoints
 
@@ -115,7 +115,7 @@ module Starter
       #
       # creates a new file in lib folder as namespace, includind the version
       def add_namespace_with_version
-        new_lib = File.join(destination, 'lib', @naming.base_file_name)
+        new_lib = File.join(destination, 'lib', @naming.resource_file)
         FileOps.write_file(new_lib, base_namespace_file.strip_heredoc)
       end
 

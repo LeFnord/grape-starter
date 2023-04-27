@@ -34,7 +34,7 @@ RSpec.describe Starter::Build do
 
     describe 'Names methods' do
       specify { expect(subject.naming.klass_name).to eql 'Foo' }
-      specify { expect(subject.naming.base_file_name).to eql 'foo.rb' }
+      specify { expect(subject.naming.resource_file).to eql 'foo.rb' }
 
       specify { expect(subject.naming.api_file_name).to include 'api/endpoints/foo.rb' }
       specify { expect(subject.naming.lib_file_name).to include 'lib/models/foo.rb' }

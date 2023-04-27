@@ -106,7 +106,9 @@ command :import do |c|
     exit_now! 'no path given' if path.blank?
     exit_now! "file under #{path} not exists" unless File.exist?(path)
 
-    Starter::Import.do_it!(path)
+    created_files = Starter::Import.do_it!(path)
+
+    `bundle exec rubocop -a #{created_files.join(' ')}`
   end
 end
 
