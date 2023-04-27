@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Starter::Builder::Names do
+RSpec.describe Starter::Names do
   subject { described_class.new(resource) }
 
   describe 'child class of an ORM' do

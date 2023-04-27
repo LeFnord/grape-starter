@@ -3,8 +3,8 @@
 module Starter
   class Build
     extend Builder::BaseFile
-    extend Templates::Files
-    extend Templates::Endpoints
+    extend Builder::Files
+    extend Builder::Endpoints
 
     class << self
       attr_reader :prefix, :resource, :entity,
@@ -28,7 +28,7 @@ module Starter
         @resource = name
         @destination = destination
         @prefix = options[:p] # can be nil
-        @naming = Starter::Builder::Names.new(@resource)
+        @naming = Starter::Names.new(@resource)
 
         FileUtils.copy_entry source, destination
 
@@ -64,7 +64,7 @@ module Starter
         @force = options[:force]
         @entity = options[:entity]
         @orm = options[:orm]
-        @naming = Starter::Builder::Names.new(@resource)
+        @naming = Starter::Names.new(@resource)
 
         Orms.add_migration(@naming.klass_name, resource.downcase) if @orm
         save_resource

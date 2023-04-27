@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Starter
-  module Templates
+  module Builder
     module Files
       # API template for resource
       def api_file

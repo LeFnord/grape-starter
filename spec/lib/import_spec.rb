@@ -1,7 +1,17 @@
 # frozen_string_literal: false
 
 RSpec.describe Starter::Import do
-  describe 'load_file' do
+  describe '.do_it!' do
+    let(:path) { './spec/fixtures/tictactoe.json' }
+
+    subject { described_class.do_it!(path) }
+
+    specify do
+      subject
+    end
+  end
+
+  describe '.load_spec' do
     subject { described_class.load_spec(path) }
 
     describe 'handles blank' do

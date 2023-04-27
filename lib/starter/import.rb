@@ -5,7 +5,9 @@ module Starter
     class << self
       def do_it!(path)
         # your code comes here
-        load_spec(path)
+
+        spec = load_spec(path)
+        create_files_from(spec)
       end
 
       def load_spec(path)
@@ -19,6 +21,12 @@ module Starter
                end
 
         Importer::Specification.new(spec)
+      end
+
+      def create_files_from(spec)
+        spec.namespaces.each do |namespace, paths|
+          # do it
+        end
       end
     end
   end
