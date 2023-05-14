@@ -127,5 +127,21 @@ RSpec.describe Starter::Importer::Specification do
         )
       end
     end
+
+    describe 'unusual endpoints' do
+      let(:spec) do
+        default_specification[:paths] = { '/' => {}, '/2.0/{c}' => {}, '/a-c' => {}, '/2.0/u' => {} }
+        default_specification.deep_stringify_keys
+      end
+
+      specify do
+        expect(subject).to eql(
+          {
+            '2.0' => { '/u' => {}, '/{c}' => {} },
+            'a-c' => { '/' => {} }
+          }
+        )
+      end
+    end
   end
 end

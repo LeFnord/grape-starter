@@ -2,7 +2,7 @@
 
 RSpec.describe Starter::Import do
   describe '.do_it!' do
-    let(:path) { './spec/fixtures/tictactoe.json' }
+    let(:path) { './spec/fixtures/links.json' }
 
     subject { described_class.do_it!(path) }
 

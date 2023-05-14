@@ -32,8 +32,9 @@ module Starter
         spec.namespaces.each_with_object([]) do |(name_of, paths), memo|
           @naming = Starter::Names.new(name_of)
           #   1. build content for file
+
           namespace = Starter::Importer::Namespace.new(
-            resource: @naming.klass_name,
+            naming: @naming,
             paths: paths,
             components: spec.components
           )
@@ -42,7 +43,7 @@ module Starter
           # FileOps.write_file(@naming.api_file_name, namespace.file)
           memo << @naming.api_file_name
           #   3. add mountpoint
-          # add_mount_point
+          add_mount_point
         end
       end
     end

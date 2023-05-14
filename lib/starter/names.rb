@@ -2,11 +2,24 @@
 
 module Starter
   class Names
+    attr_accessor :resource, :origin, :version_klass
+
     def initialize(resource)
-      @resource = resource
+      @version_klass = false
+      @origin = resource
+      @resource = if resource.match?(/([[:digit:]][[:punct:]])+/)
+                    @version_klass = true
+                    digit = resource.scan(/\d/).first.to_i - 1
+                    letter = ('a'..'z').to_a[digit]
+                    "#{letter}_#{resource.tr('.', '_')}"
+                  else
+                    resource
+                  end
     end
 
     def klass_name
+      return @resource.classify if version_klass
+
       for_klass = @resource.tr('-', '/')
       singular? ? for_klass.classify : for_klass.classify.pluralize
     end

@@ -14,7 +14,7 @@ describe 'grape-starter' do
 
       its(:stdout) { is_expected.to include 'add    - Adds given new resource' }
       its(:stdout) { is_expected.to include 'help   - Shows a list of commands or help for one command' }
-      its(:stdout) { is_expected.to include 'import - Creates from given OAPI spec' }
+      its(:stdout) { is_expected.to include 'import - Adds resources from given OAPI spec' }
       its(:stdout) { is_expected.to include 'new    - Creates initial api skeleton' }
       its(:stdout) { is_expected.to include 'rm     - Removes given resource' }
     end
@@ -59,7 +59,7 @@ describe 'grape-starter' do
     describe 'command help' do
       command 'grape-starter import -h'
 
-      its(:stdout) { is_expected.to include 'import - Creates from given OAPI spec' }
+      its(:stdout) { is_expected.to include 'import - Adds resources from given OAPI spec' }
     end
   end
 end

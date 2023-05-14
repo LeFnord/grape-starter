@@ -3,10 +3,10 @@
 module Starter
   module Importer
     class Namespace
-      attr_accessor :resource, :paths, :components
+      attr_accessor :naming, :paths, :components
 
-      def initialize(resource:, paths:, components:)
-        @resource = resource
+      def initialize(naming:, paths:, components:)
+        @naming = naming
         @paths = paths
         @components = components
       end
@@ -17,8 +17,8 @@ module Starter
 
         module Api
           module Endpoints
-            class #{@resource} < Grape::API
-              namespace :#{@resource.downcase} do
+            class #{@naming.klass_name} < Grape::API
+              namespace #{namespace} do
                 #{endpoints.join("\n")}
               end
             end
@@ -28,6 +28,10 @@ module Starter
       end
 
       private
+
+      def namespace
+        naming.version_klass ? "'#{naming.origin}'" : ":#{naming.resource.downcase}"
+      end
 
       def endpoints
         paths.map do |path, verbs|

@@ -2,11 +2,12 @@
 
 RSpec.describe Starter::Importer::Namespace do
   let(:resource) { 'Foo' }
+  let(:naming) { Starter::Names.new('Foo') }
   let(:paths) { { '/' => {} } }
   let(:components) { {} }
 
   describe 'sets class and namespace' do
-    subject { described_class.new(resource: resource, paths: paths, components: components).file }
+    subject { described_class.new(naming: naming, paths: paths, components: components).file }
 
     specify do
       expect(subject).to include 'class Foo < Grape::API'
@@ -16,7 +17,7 @@ RSpec.describe Starter::Importer::Namespace do
 
   describe '#prepare_route' do
     subject do
-      ns = described_class.new(resource: resource, paths: {}, components: {})
+      ns = described_class.new(naming: naming, paths: {}, components: {})
       ns.send(:prepare_route, path)
     end
 
@@ -89,7 +90,7 @@ RSpec.describe Starter::Importer::Namespace do
     let(:params) { %w[b d] }
 
     subject do
-      ns = described_class.new(resource: resource, paths: {}, components: {})
+      ns = described_class.new(naming: naming, paths: {}, components: {})
       ns.send(:route_params, params)
     end
 

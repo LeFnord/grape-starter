@@ -97,7 +97,7 @@ command :rm do |c|
   end
 end
 
-desc 'Creates from given OAPI spec'
+desc 'Adds resources from given OAPI spec'
 long_desc 'Import YAML or JSON OAPI specification given by path argument'
 arg_name 'path'
 command :import do |c|
