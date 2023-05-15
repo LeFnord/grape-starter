@@ -1,7 +1,8 @@
 name: Pipeline
 on:
   pull_request:
-    types: [assigned, opened, edited, synchronize, reopened]
+    branches:
+      - 'master'
   push:
     branches:
       - 'master'
