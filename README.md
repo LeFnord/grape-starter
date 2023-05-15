@@ -9,20 +9,22 @@ Is a tool to help you to build up a skeleton for a [Grape](http://github.com/rub
 
 ![ReDoc demo](doc/re-doc.png)
 
+
 ## Why the next one?
 
 - build up a playground for your ideas, prototypes, testing behaviour … whatever
 - ~~no assumtions about~~ you can choose, if you want to use a backend/ORM, ergo no restrictions, only a pure grape/rack skeleton with a nice documentation
 
+
 ## Usage
 
-#### Install it
+### Install it
 ```
 $ gem install grape-starter
 ```
 
 
-#### Create a new project
+### Create a new project
 ```
 $ grape-starter new awesome_api
 ```
@@ -32,9 +34,7 @@ with following options:
 -p foobar, --prefix=foobar # sets the prefix of the API (default: none)
 -o sequel, --orm=sequel    # create files for the specified ORM, available: sequel, activerecord (ar) (default: none)
 ```
-
 This command creates a folder named `awesome_api` containing the skeleton. With following structure:
-
 ```
 ├── <Standards>
 ├── api
@@ -88,7 +88,7 @@ the documentation of it under: [http://localhost:9292/doc](http://localhost:9292
 More could be found in [README](template/README.md).
 
 
-#### Add resources
+### Add resources
 ```
 $ grape-starter add foo [http methods]
 ```
@@ -117,7 +117,14 @@ If the `orm` switch `true`, the lib class would be created as child class of a s
 so for example for Sequel, it would be wirtten: `Foo < Sequel::Model` instead of `Foo`, hereby the using ORM would be taken from the configuration, which was stored by project creation.
 
 
-#### Remove a resource
+### Import OAPI spec [WIP]
+```
+$ grape-starter import path/to/spec
+```
+to create an API based on the spec.
+
+
+### Remove a resource
 ```
 $ grape-starter rm foo
 ```
@@ -127,6 +134,7 @@ to remove previous generated files for a resource.
 ## Contributing
 
 Any contributions are welcome on GitHub at https://github.com/LeFnord/grape-starter.
+
 
 ### Adding a new ORM template
 
@@ -167,6 +175,7 @@ To add an new ORM, it needs following steps:
 
 2. An additional switch in the [`Starter::Orms.build`](https://github.com/LeFnord/grape-starter/blob/ef45133e6d2254efee06ae4f17ede2fc5c06bebb/lib/starter/builder/orms.rb#L7-L18) and [`Starter::Names.lib_klass_name`](https://github.com/LeFnord/grape-starter/blob/ef45133e6d2254efee06ae4f17ede2fc5c06bebb/lib/starter/builder/names.rb#L13-L24) methods to choose the right template.
 3. An entry in the description of the [`new` command](https://github.com/LeFnord/grape-starter/blob/fa62c8a2ff72f984144b2336859d3e0b397398bd/bin/grape-starter#L28), when it would be called with `-h`
+
 
 ## License
 

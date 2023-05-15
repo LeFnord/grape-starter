@@ -1,6 +1,6 @@
 # frozen_string_literal: false
 
-RSpec.describe Starter::Builder::BaseFile do
+RSpec.describe Starter::Shared::BaseFile do
   let(:single) { 'foo' }
   let(:plural) { 'foos' }
 

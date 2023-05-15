@@ -97,6 +97,21 @@ command :rm do |c|
   end
 end
 
+desc 'Adds resources from given OAPI spec'
+long_desc 'Import YAML or JSON OAPI specification given by path argument'
+arg_name 'path'
+command :import do |c|
+  c.action do |_global_options, _options, args|
+    path = args.first
+    exit_now! 'no path given' if path.blank?
+    exit_now! "file under #{path} not exists" unless File.exist?(path)
+
+    created_files = Starter::Import.do_it!(path)
+
+    `bundle exec rubocop -a #{created_files.join(' ')}`
+  end
+end
+
 
 pre do |_global, _command, _options, _args|
   # Pre logic here

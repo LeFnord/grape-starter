@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 module Starter
-  module Builder
+  module Shared
     module BaseFile
       # add it in api base
       def add_mount_point
-        FileOps.call!(@naming.api_base_file_name) { |content| add_to_base(content) }
+        FileOps.call!(base_file_path) { |content| add_to_base(content) }
       end
 
       # adding mount point to base class
@@ -17,7 +17,7 @@ module Starter
 
       # removes in api base
       def remove_mount_point
-        FileOps.call!(@naming.api_base_file_name) { |content| remove_from_base(content) }
+        FileOps.call!(base_file_path) { |content| remove_from_base(content) }
       end
 
       # removes mount point from base class
@@ -39,8 +39,11 @@ module Starter
 
       # get api base file as string
       def base_file
-        file = File.join(Dir.getwd, 'api', 'base.rb')
-        FileOps.read_file(file)
+        FileOps.read_file(base_file_path)
+      end
+
+      def base_file_path
+        File.join(Dir.getwd, 'api', 'base.rb')
       end
     end
   end

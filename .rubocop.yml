@@ -12,6 +12,7 @@ AllCops:
     - '**/template/api/**'
     - grape-starter.gemspec
     - template/spec/spec-helper.rb
+    - api/**/*
   UseCache: true
   NewCops: enable
   TargetRubyVersion: 3.2
@@ -37,8 +38,8 @@ Metrics/MethodLength:
 
 Naming/AccessorMethodName:
   Exclude:
-    - 'lib/starter/templates/files.rb'
-    - 'lib/starter/templates/endpoints.rb'
+    - 'lib/starter/builder/files.rb'
+    - 'lib/starter/builder/endpoints.rb'
 
 Style/AsciiComments:
   Enabled: false

@@ -2,9 +2,9 @@
 
 module Starter
   class Build
-    extend Builder::BaseFile
-    extend Templates::Files
-    extend Templates::Endpoints
+    extend Shared::BaseFile
+    extend Builder::Files
+    extend Builder::Endpoints
 
     class << self
       attr_reader :prefix, :resource, :entity,
@@ -28,7 +28,7 @@ module Starter
         @resource = name
         @destination = destination
         @prefix = options[:p] # can be nil
-        @naming = Starter::Builder::Names.new(@resource)
+        @naming = Starter::Names.new(@resource)
 
         FileUtils.copy_entry source, destination
 
@@ -64,7 +64,7 @@ module Starter
         @force = options[:force]
         @entity = options[:entity]
         @orm = options[:orm]
-        @naming = Starter::Builder::Names.new(@resource)
+        @naming = Starter::Names.new(@resource)
 
         Orms.add_migration(@naming.klass_name, resource.downcase) if @orm
         save_resource
@@ -115,7 +115,7 @@ module Starter
       #
       # creates a new file in lib folder as namespace, includind the version
       def add_namespace_with_version
-        new_lib = File.join(destination, 'lib', @naming.base_file_name)
+        new_lib = File.join(destination, 'lib', @naming.resource_file)
         FileOps.write_file(new_lib, base_namespace_file.strip_heredoc)
       end
 
