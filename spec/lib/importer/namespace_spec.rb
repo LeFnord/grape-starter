@@ -7,7 +7,7 @@ RSpec.describe Starter::Importer::Namespace do
   let(:components) { {} }
 
   describe 'sets class and namespace' do
-    subject { described_class.new(naming: naming, paths: paths, components: components).file }
+    subject { described_class.new(naming: naming, paths: paths, components: components).content }
 
     specify do
       expect(subject).to include 'class Foo < Grape::API'

@@ -38,12 +38,11 @@ module Starter
             paths: paths,
             components: spec.components
           )
-          puts namespace.file
 
           break if ENV['RACK_ENV'] == 'test'
 
           #   2. create endpoint file
-          FileOps.write_file(@naming.api_file_name, namespace.file)
+          FileOps.write_file(@naming.api_file_name, namespace.content)
           memo << @naming.api_file_name
 
           #   3. add mountpoint

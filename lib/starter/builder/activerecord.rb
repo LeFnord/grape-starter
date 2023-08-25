@@ -9,7 +9,7 @@ module Starter
         'ActiveRecord::Base'
       end
 
-      def initializer
+      def initializer # rubocop:disable Metrics/MethodLength
         <<-FILE.strip_heredoc
         # frozen_string_literal: true
 

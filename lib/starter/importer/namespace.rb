@@ -11,7 +11,7 @@ module Starter
         @components = components
       end
 
-      def file
+      def content
         <<-FILE.strip_heredoc
         # frozen_string_literal: true
 

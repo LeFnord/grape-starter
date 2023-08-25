@@ -37,7 +37,7 @@ module Starter
         FILE
       end
 
-      def rakefile
+      def rakefile # rubocop:disable Metrics/MethodLength
         <<-FILE.strip_heredoc
         # Sequel migration tasks
         namespace :db do
