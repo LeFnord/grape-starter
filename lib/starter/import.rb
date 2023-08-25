@@ -9,8 +9,6 @@ module Starter
 
     class << self
       def do_it!(path)
-        # your code comes here
-
         spec = load_spec(path)
         create_files_from(spec)
       end

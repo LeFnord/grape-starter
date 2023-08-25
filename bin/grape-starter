@@ -73,7 +73,7 @@ command :add do |c|
       builder_options = global_options.merge(set: set).merge(options)
       created_files = Starter::Build.add!(resource, builder_options)
 
-      `bundle exec rubocop -a #{created_files.join(' ')}`
+      `bundle exec rubocop --only Layout -a #{created_files.join(' ')}`
       $stdout.puts "added resource: #{resource}"
     rescue => e
       exit_now! e
@@ -108,7 +108,7 @@ command :import do |c|
 
     created_files = Starter::Import.do_it!(path)
 
-    `bundle exec rubocop -a #{created_files.join(' ')}`
+    `bundle exec rubocop --only Layout -a #{created_files.join(' ')}`
   end
 end
 

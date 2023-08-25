@@ -10,7 +10,9 @@ module Starter
 
       # adding mount point to base class
       def add_to_base(file)
-        occurence = file.scan(/(\s+mount\s.*?\n)/).last.first
+        occurence = file.scan(/(\s+mount\s.*?\n)/).map(&:first).join
+        return if occurence.include?(@naming.mount_point.strip)
+
         replacement = occurence + @naming.mount_point
         file.sub!(occurence, replacement)
       end
