@@ -1,7 +1,7 @@
 # frozen_string_literal: false
 
 RSpec.describe Starter::Importer::Parameter do
-  describe 'valid parameters -sets kind' do
+  describe 'valid parameters -> sets kind' do
     describe 'name in definition' do
       subject { described_class.new(definition:) }
 
@@ -17,8 +17,7 @@ RSpec.describe Starter::Importer::Parameter do
       subject { described_class.new(definition:, components:) }
 
       let(:definition) { { '$ref' => '#/components/parameters/rowParam' } }
-
-      let(:components) { { 'parameters' => { 'rowParam' => {} } } }
+      let(:components) { { 'parameters' => { 'rowParam' => { 'name' => 'row' } } } }
 
       specify do
         expect { subject }.not_to raise_error
@@ -138,6 +137,7 @@ RSpec.describe Starter::Importer::Parameter do
       expect(subject.definition.keys).to match_array %w[
         description in required schema
       ]
+      expect(subject.definition['schema']['type']).to eql 'integer'
     end
   end
 end

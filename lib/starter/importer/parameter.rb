@@ -12,14 +12,6 @@ module Starter
         prepare_attributes(definition:, components:)
       end
 
-      # def name
-      #   @name ||= if definition.key?('$ref')
-      #               definition['$ref'].split('/').last
-      #             elsif definition.key?('name')
-      #               definition['name']
-      #             end
-      # end
-
       private
 
       def validate_parameters(definition:, components:)
@@ -35,9 +27,12 @@ module Starter
           @name = definition.delete('name')
           @definition = definition
         when :ref
-          key = definition['$ref'].split('/').last
-          @definition = components['parameters'][key]
+          @definition = components.dig(*definition['$ref'].split('/')[2..])
           @name = @definition.delete('name')
+
+          if (value = @definition.dig('schema', '$ref').presence)
+            @definition['schema'] = components.dig(*value.split('/')[2..])
+          end
         end
       end
     end
