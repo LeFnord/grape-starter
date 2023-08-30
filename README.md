@@ -1,6 +1,17 @@
 [![Pipeline](https://github.com/LeFnord/grape-starter/actions/workflows/pipeline.yml/badge.svg?branch=master)](https://github.com/LeFnord/grape-starter/actions/workflows/pipeline.yml)
 [![Gem Version](https://badge.fury.io/rb/grape-starter.svg)](https://badge.fury.io/rb/grape-starter)
 
+- [Why the next one?](#why-the-next-one)
+- [Usage](#usage)
+  - [Install it](#install-it)
+  - [Create a new project](#create-a-new-project)
+  - [Add resources](#add-resources)
+  - [Import OAPI spec \[WIP\]](#import-oapi-spec-wip)
+  - [Remove a resource](#remove-a-resource)
+- [Contributing](#contributing)
+  - [Adding a new ORM template](#adding-a-new-orm-template)
+- [License](#license)
+
 
 # Grape Starter
 
@@ -8,6 +19,8 @@ Is a tool to help you to build up a skeleton for a [Grape](http://github.com/rub
 [grape-swagger](http://github.com/ruby-grape/grape-swagger) would be used to generate a  [OAPI](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md) compatible documentation, which could be shown with [ReDoc](https://github.com/Rebilly/ReDoc).
 
 ![ReDoc demo](doc/re-doc.png)
+
+
 
 
 ## Why the next one?
@@ -122,6 +135,15 @@ so for example for Sequel, it would be wirtten: `Foo < Sequel::Model` instead of
 $ grape-starter import path/to/spec
 ```
 to create an API based on the spec.
+
+##### To Dos:
+
+- [x] read spec an create per namespace a file with defined endpoint
+- [x] read path parameter
+  - [x] requires it in param block
+  - [x] specify it
+- [ ] handle query parameter -> check it
+- [ ] handle body parameter -> check it
 
 
 ### Remove a resource

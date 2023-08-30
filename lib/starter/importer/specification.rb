@@ -29,8 +29,9 @@ module Starter
           namespace = segments.shift
           rest_path = "/#{segments.join('/')}"
 
+          # TODO: build additional stuff from `paths[path]`
           memo[namespace] ||= {}
-          memo[namespace][rest_path] = paths[path]
+          memo[namespace][rest_path] = prepare_verbs(paths[path])
         end
       end
 
@@ -39,6 +40,26 @@ module Starter
       def validate_paths
         raise Error, '`paths` empty … nothings to do' if paths.empty?
         raise Error, 'only template given' if paths.keys.one? && paths.keys.first.match?(%r{/\{\w*\}})
+      end
+
+      def prepare_verbs(spec)
+        path_params = nil
+        spec.each_with_object({}) do |(verb, content), memo|
+          if verb == 'parameters'
+            path_params = content
+            next
+          end
+
+          memo[verb] = content
+          next unless content.key?('parameters') || path_params
+
+          parameters = content['parameters'] || path_params
+
+          memo[verb]['parameters'] = parameters.each_with_object({}) do |definition, para|
+            parameter = Parameter.new(definition:, components:)
+            para[parameter.name] = parameter
+          end
+        end
       end
     end
   end
