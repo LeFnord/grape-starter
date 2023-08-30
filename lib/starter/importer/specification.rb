@@ -31,7 +31,6 @@ module Starter
 
           # TODO: build additional stuff from `paths[path]`
           memo[namespace] ||= {}
-          ap rest_path
           memo[namespace][rest_path] = prepare_verbs(paths[path])
         end
       end

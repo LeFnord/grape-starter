@@ -68,6 +68,9 @@ RSpec.describe Starter::Importer::Parameter do
         expect(subject.definition.keys).to match_array %w[
           description in required schema
         ]
+        expect(subject.to_s).to eql(
+          "optional :limit, type: Integer, documentation: { desc: 'maximum number of results to return', in: 'query' }"
+        )
       end
     end
 
@@ -88,6 +91,9 @@ RSpec.describe Starter::Importer::Parameter do
         expect(subject.definition.keys).to match_array %w[
           description in required style schema
         ]
+        expect(subject.to_s).to eql(
+          "optional :tags, type: Array, documentation: { desc: 'tags to filter by', in: 'query' }"
+        )
       end
     end
   end
@@ -138,6 +144,9 @@ RSpec.describe Starter::Importer::Parameter do
         description in required schema
       ]
       expect(subject.definition['schema']['type']).to eql 'integer'
+      expect(subject.to_s).to eql(
+        "requires :row, type: Integer, documentation: { desc: 'Board row (vertical coordinate)', in: 'path' }"
+      )
     end
   end
 end

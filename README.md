@@ -141,9 +141,9 @@ to create an API based on the spec.
 - [x] read spec an create per namespace a file with defined endpoint
 - [x] read path parameter
   - [x] requires it in param block
-  - [ ] specify it
-- [ ] handle query parameter
-- [ ] handle body parameter
+  - [x] specify it
+- [ ] handle query parameter -> check it
+- [ ] handle body parameter -> check it
 
 
 ### Remove a resource

@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+# frozen_string_literal: false
 
 module Starter
   module Importer
@@ -35,12 +35,14 @@ module Starter
 
       def endpoints
         paths.map do |path, verbs|
-          segment, params = prepare_route(path)
-          params_block = route_params(params) if params
+          segment = prepare_route(path)
           verbs.keys.each_with_object([]) do |verb, memo|
             next unless allowed_verbs.include?(verb)
 
-            memo << params_block if params
+            if (parameters = verbs[verb]['parameters'].presence)
+              params_block = params_block(parameters)
+              memo << params_block
+            end
             memo << "#{verb} '#{segment}' do\n  # your code comes here\nend\n"
           end
         end
@@ -49,18 +51,18 @@ module Starter
       def prepare_route(path)
         params = path.scan(/\{(\w+)\}/)
         if params.empty?
-          [path, false]
+          path
         else
-          [path.gsub('{', ':').gsub('}', ''), params.flatten]
+          path.gsub('{', ':').gsub('}', '')
         end
       end
 
-      def route_params(params)
-        params_block = ['params do']
-        params.each { |x| params_block << "  requires :#{x}" }
+      def params_block(params)
+        params_block = "params do\n"
+        params.each_value do |param|
+          params_block << "  #{param.to_s}\n" # rubocop:disable Lint/RedundantStringCoercion
+        end
         params_block << 'end'
-
-        params_block.join("\n")
       end
 
       def allowed_verbs

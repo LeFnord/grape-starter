@@ -26,7 +26,7 @@ RSpec.describe Starter::Importer::Namespace do
         let(:path) { '/' }
 
         specify do
-          expect(subject).to match_array ['/', false]
+          expect(subject).to eql '/'
         end
       end
 
@@ -34,7 +34,7 @@ RSpec.describe Starter::Importer::Namespace do
         let(:path) { '/a' }
 
         specify do
-          expect(subject).to match_array ['/a', false]
+          expect(subject).to eql '/a'
         end
       end
 
@@ -42,7 +42,7 @@ RSpec.describe Starter::Importer::Namespace do
         let(:path) { '/a/b' }
 
         specify do
-          expect(subject).to match_array ['/a/b', false]
+          expect(subject).to eql '/a/b'
         end
       end
     end
@@ -52,8 +52,7 @@ RSpec.describe Starter::Importer::Namespace do
         let(:path) { '/{a}' }
 
         specify do
-          expect(subject.first).to eql '/:a'
-          expect(subject.last).to match_array ['a']
+          expect(subject).to eql '/:a'
         end
       end
 
@@ -61,8 +60,7 @@ RSpec.describe Starter::Importer::Namespace do
         let(:path) { '/a/{b}' }
 
         specify do
-          expect(subject.first).to eql '/a/:b'
-          expect(subject.last).to match_array ['b']
+          expect(subject).to eql '/a/:b'
         end
       end
 
@@ -70,8 +68,7 @@ RSpec.describe Starter::Importer::Namespace do
         let(:path) { '/a/{b}/c' }
 
         specify do
-          expect(subject.first).to eql '/a/:b/c'
-          expect(subject.last).to match_array ['b']
+          expect(subject).to eql '/a/:b/c'
         end
       end
 
@@ -79,27 +76,9 @@ RSpec.describe Starter::Importer::Namespace do
         let(:path) { '/a/{b}/c/{d}' }
 
         specify do
-          expect(subject.first).to eql '/a/:b/c/:d'
-          expect(subject.last).to match_array %w[b d]
+          expect(subject).to eql '/a/:b/c/:d'
         end
       end
-    end
-  end
-
-  describe '#route_params' do
-    let(:params) { %w[b d] }
-
-    subject do
-      ns = described_class.new(naming: naming, paths: {}, components: {})
-      ns.send(:route_params, params)
-    end
-
-    specify do
-      lines = subject.split("\n")
-      expect(lines[0]).to include 'params do'
-      expect(lines[1]).to include 'requires :b'
-      expect(lines[2]).to include 'requires :d'
-      expect(lines[3]).to include 'end'
     end
   end
 end

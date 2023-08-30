@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+# frozen_string_literal: false
 
 module Starter
   module Importer
@@ -10,6 +10,17 @@ module Starter
       def initialize(definition:, components: {})
         @kind = validate_parameters(definition:, components:)
         prepare_attributes(definition:, components:)
+      end
+
+      def to_s
+        entry = definition['required'] ? 'requires' : 'optional'
+        entry << " :#{name}"
+        entry << ", type: #{definition['schema']['type'].capitalize}"
+
+        doc = documentation
+        entry << ", #{doc}" if doc
+
+        entry
       end
 
       private
@@ -24,16 +35,35 @@ module Starter
       def prepare_attributes(definition:, components:)
         case kind
         when :direct
-          @name = definition.delete('name')
-          @definition = definition
+          @name = definition['name']
+          @definition = definition.except('name')
         when :ref
-          @definition = components.dig(*definition['$ref'].split('/')[2..])
-          @name = @definition.delete('name')
+          found = components.dig(*definition['$ref'].split('/')[2..])
+          @name = found['name']
+          @definition = found.except('name')
 
           if (value = @definition.dig('schema', '$ref').presence)
             @definition['schema'] = components.dig(*value.split('/')[2..])
           end
         end
+      end
+
+      def documentation
+        tmp = {}
+        tmp['desc'] = definition['description'] if definition.key?('description')
+        tmp['in'] = definition['in'] if definition.key?('in')
+
+        return nil if tmp.empty?
+
+        documentation = 'documentation:'
+        documentation.tap do |doc|
+          doc << ' { '
+          content = tmp.map { |k, v| "#{k}: '#{v}'" }
+          doc << content.join(', ')
+          doc << ' }'
+        end
+
+        documentation
       end
     end
   end
