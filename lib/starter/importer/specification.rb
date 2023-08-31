@@ -8,28 +8,25 @@ module Starter
       attr_accessor :openapi, :info,
                     :paths, :components, :webhooks
 
-      def initialize(raw)
+      def initialize(spec:)
         # mandatory
-        @openapi = raw.fetch('openapi')
-        @info = raw.fetch('info')
+        @openapi = spec.fetch('openapi')
+        @info = spec.fetch('info')
 
         # in contrast to the spec, paths are required
-        @paths = raw.fetch('paths').except('/').sort.to_h
+        @paths = spec.fetch('paths').except('/').sort.to_h
 
         # optional -> not used atm
-        @components = raw.fetch('components', false)
-        @webhooks = raw.fetch('webhooks', false)
+        @components = spec.fetch('components', false)
+        @webhooks = spec.fetch('webhooks', false)
       end
 
       def namespaces
         validate_paths
 
         @namespaces ||= paths.keys.each_with_object({}) do |path, memo|
-          segments = path.split('/').delete_if(&:empty?)
-          namespace = segments.shift
-          rest_path = "/#{segments.join('/')}"
+          namespace, rest_path = segmentize(path)
 
-          # TODO: build additional stuff from `paths[path]`
           memo[namespace] ||= {}
           memo[namespace][rest_path] = prepare_verbs(paths[path])
         end
@@ -40,6 +37,14 @@ module Starter
       def validate_paths
         raise Error, '`paths` empty … nothings to do' if paths.empty?
         raise Error, 'only template given' if paths.keys.one? && paths.keys.first.match?(%r{/\{\w*\}})
+      end
+
+      def segmentize(path)
+        segments = path.split('/').delete_if(&:empty?)
+        ignore = segments.take_while { |x| x =~ /(v)*(\.\d)+/ || x =~ /(v\d)+/ || x == 'api' }
+        rest = segments - ignore
+
+        [rest.shift, rest.empty? ? '/' : "/#{rest.join('/')}"]
       end
 
       def prepare_verbs(spec)

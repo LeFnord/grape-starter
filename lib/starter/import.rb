@@ -23,7 +23,7 @@ module Starter
                  JSON.load_file(path)
                end
 
-        Importer::Specification.new(spec)
+        Importer::Specification.new(spec:)
       end
 
       def create_files_from(spec)
