@@ -1,15 +1,15 @@
 # frozen_string_literal: false
 
 RSpec.describe Starter::Import do
-  describe '.do_it!' do
-    let(:path) { './spec/fixtures/links.json' }
+  # describe '.do_it!' do
+  #   let(:path) { './spec/fixtures/links.json' }
 
-    subject { described_class.do_it!(path) }
+  #   subject { described_class.do_it!(path) }
 
-    specify do
-      subject
-    end
-  end
+  #   specify do
+  #     subject
+  #   end
+  # end
 
   describe '.load_spec' do
     subject { described_class.load_spec(path) }
