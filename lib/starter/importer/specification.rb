@@ -47,7 +47,7 @@ module Starter
         [rest.shift, rest.empty? ? '/' : "/#{rest.join('/')}"]
       end
 
-      def prepare_verbs(spec)
+      def prepare_verbs(spec) # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
         path_params = nil
         spec.each_with_object({}) do |(verb, content), memo|
           if verb == 'parameters'
@@ -56,9 +56,9 @@ module Starter
           end
 
           memo[verb] = content
-          next unless content.key?('parameters') || path_params
+          next unless content.key?('parameters') || content.key?('requestBody') || path_params
 
-          parameters = content['parameters'] || path_params
+          parameters = ((content['parameters'] || path_params || []) + [content['requestBody']]).compact
 
           memo[verb]['parameters'] = parameters.each_with_object({}) do |definition, para|
             parameter = Parameter.new(definition:, components:)

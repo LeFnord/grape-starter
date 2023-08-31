@@ -30,7 +30,7 @@ module Starter
       private
 
       def namespace
-        naming.version_klass ? "'#{naming.origin}'" : ":#{naming.resource.downcase}"
+        @namespace ||= naming.version_klass ? "'#{naming.origin}'" : ":#{naming.resource.downcase}"
       end
 
       def endpoints

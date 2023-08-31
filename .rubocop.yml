@@ -26,12 +26,18 @@ Layout/IndentationWidth:
 Layout/LineLength:
   Max: 120
 
+Lint/MissingSuper:
+  Enabled: false
+
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
 
 Metrics/AbcSize:
   Max: 20
+
+Metrics/ClassLength:
+  Max: 120
 
 Metrics/MethodLength:
   Max: 20

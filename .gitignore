@@ -11,3 +11,5 @@ template/Gemfile.lock
 grape-starter.md
 tmp
 api/
+.vscode
+spec/fixtures/pmm.json
