@@ -1,6 +1,32 @@
 ### NEXT
 
-- your contributions
+- Ignores possible version segments in path. (#37) [LeFnord](https://github.com/LeFnord)
+- Sets min ruby to 3.1 [LeFnord](https://github.com/LeFnord)
+- Handle Parameters. (#36) [LeFnord](https://github.com/LeFnord)
+- Avoids duplicated mount points. [LeFnord](https://github.com/LeFnord)
+- Small code smells [LeFnord](https://github.com/LeFnord)
+- Sets next version to 2.0.0 [LeFnord](https://github.com/LeFnord)
+- Import OAPI spec. (#31) [LeFnord](https://github.com/LeFnord)
+- Fix for Dockerfile smell DL3020 (#35) [Giovanni Rosa](https://github.com/grosa1)
+
+### v1.6.2 / 2023-03-12
+
+- Makes Names a class. (#34) [LeFnord](https://github.com/LeFnord)
+- Re-organises libe files. [LeFnord](https://github.com/LeFnord)
+- Minor clean up. [LeFnord](https://github.com/LeFnord)
+
+### v1.6.1 / 2023-02-17 -> yanked
+
+### v1.6.0 / 2023-02-13
+
+- Replaces Thin by Puma. (#33) [LeFnord](https://github.com/LeFnord)
+- Minor lint fix. [LeFnord](https://github.com/LeFnord)
+- Uses Zeitwerk for loading. (#32) [LeFnord](https://github.com/LeFnord)
+
+### v1.5.2 / 2023-02-11
+
+- Upgrades action. [LeFnord](https://github.com/LeFnord)
+- Uses ruby 3.2 [LeFnord](https://github.com/LeFnord)
 
 ### v1.5.1 / 2021-12-28
 
@@ -55,7 +81,7 @@
 
 ### v1.2.3 / 2019-12-15
 
-- Removes require pry. [LeFnord](LeFnord) closes [!21](https://github.com/LeFnord/grape-starter/issues/21)
+- Removes require pry. [LeFnord](https://github.com/LeFnord) closes [!21](https://github.com/LeFnord/grape-starter/issues/21)
 - [#22](https://github.com/LeFnord/grape-starter/pull/22) - accomodate activerecord 6.0 (#22) [Ignacio Carrera](https://github.com/nachokb)
 
 ### v1.2.2 / 2019-02-28
