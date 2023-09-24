@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 # frozen_string_literal: false
 
 module Starter
@@ -5,34 +6,37 @@ module Starter
     class Parameter
       class Error < StandardError; end
 
-      attr_accessor :kind, :name, :definition
+      attr_accessor :kind, :name, :definition, :nested
 
       def initialize(definition:, components: {})
+        @nested = []
         @kind = validate_parameters(definition:, components:)
         prepare_attributes(definition:, components:)
       end
 
       def to_s
-        entry = definition['required'] ? 'requires' : 'optional'
-        entry << " :#{name}"
-        entry << ", type: #{definition['schema']['type'].capitalize}"
+        return serialized_object if nested.present?
 
-        doc = documentation
-        entry << ", #{doc}" if doc
+        serialized
+      end
 
-        entry
+      def nested?
+        @nested.present?
       end
 
       private
 
+      # initialize helper
+      #
       def validate_parameters(definition:, components:)
         return :direct if definition.key?('name')
         return :ref if definition.key?('$ref') && components.key?('parameters')
+        return :body if definition.key?('content')
 
         raise Error, 'no valid combination given'
       end
 
-      def prepare_attributes(definition:, components:)
+      def prepare_attributes(definition:, components:) # rubocop:disable Metrics/MethodLength
         case kind
         when :direct
           @name = definition['name']
@@ -45,26 +49,111 @@ module Starter
           if (value = @definition.dig('schema', '$ref').presence)
             @definition['schema'] = components.dig(*value.split('/')[2..])
           end
+        when :body
+          definition['in'] = 'body'
+          schema = definition['content'].values.first['schema']
+          if schema.key?('$ref')
+            path = schema['$ref'].split('/')[2..]
+
+            @name, @definition = handle_body(definition:, properties: components.dig(*path))
+            @name ||= path.last
+          else
+            @name, @definition = handle_body(definition:, properties: schema)
+            @name = nested.map(&:name).join('_') if @name.nil? && nested?
+          end
         end
       end
 
-      def documentation
-        tmp = {}
-        tmp['desc'] = definition['description'] if definition.key?('description')
-        tmp['in'] = definition['in'] if definition.key?('in')
+      def handle_body(definition:, properties:)
+        if simple_object?(properties:)
+          name = properties['properties'].keys.first
+          type = properties.dig('properties', name, 'type') || 'array'
+          subtype = properties.dig('properties', name, 'items', 'type')
+          definition['type'] = subtype.nil? ? type : "#{type}[#{subtype}]"
 
-        return nil if tmp.empty?
+          properties.dig('properties', name).except('type').each { |k, v| definition[k] = v }
+          definition['type'] = 'file' if definition['format'].presence == 'binary'
 
-        documentation = 'documentation:'
-        documentation.tap do |doc|
-          doc << ' { '
-          content = tmp.map { |k, v| "#{k}: '#{v}'" }
-          doc << content.join(', ')
-          doc << ' }'
+          [name, definition]
+        elsif object?(definition:) # a nested object -> JSON
+          definition['type'] = properties['type'].presence || 'JSON'
+          return [nil, definition] if properties.nil? || properties['properties'].nil?
+
+          properties['properties'].each do |nested_name, definition|
+            definition['required'] = properties['required']&.include?(nested_name) || false
+            @nested << NestedParams.new(name: nested_name, definition:)
+          end
+          [nil, definition]
+        else # others
+          [nil, definition.merge(properties)]
+        end
+      end
+
+      # handle_body helper, check/find/define types
+      #
+      def object?(definition:)
+        definition['content'].keys.first.include?('application/json')
+      end
+
+      def simple_object?(properties:)
+        properties.key?('properties') &&
+          properties['properties'].length == 1
+      end
+
+      # to_s helper
+      #
+      def serialized_object
+        definition.tap do |foo|
+          foo['type'] = foo['type'] == 'object' ? 'JSON' : foo['type']
         end
 
-        documentation
+        parent = NestedParams.new(name: name, definition: definition)
+
+        entry = "#{parent} do\n"
+        nested.each { |n| entry << "    #{n}\n" }
+        entry << '  end'
+      end
+
+      def serialized
+        type = definition['type'] || definition['schema']['type']
+        type.scan(/\w+/).each { |x| type.match?('JSON') ? type : type.sub!(x, x.capitalize) }
+
+        if type == 'Array' && definition.key?('items')
+          sub = definition.dig('items', 'type').to_s.capitalize
+          type = "#{type}[#{sub}]"
+        end
+
+        entry = definition['required'] ? 'requires' : 'optional'
+        entry << " :#{name}"
+        entry << ", type: #{type}"
+        doc = documentation
+        entry << ", #{doc}" if doc
+
+        entry
+      end
+
+      def documentation
+        @documentation ||= begin
+          tmp = {}
+          tmp['desc'] = definition['description'] if definition.key?('description')
+          tmp['in'] = definition['in'] if definition.key?('in')
+
+          if definition.key?('format')
+            tmp['format'] = definition['format']
+            tmp['type'] = 'File' if definition['format'] == 'binary'
+          end
+
+          documentation = 'documentation:'
+          documentation.tap do |doc|
+            doc << ' { '
+            content = tmp.map { |k, v| "#{k}: '#{v}'" }
+            doc << content.join(', ')
+            doc << ' }'
+          end
+        end
       end
     end
   end
 end
+
+# rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
