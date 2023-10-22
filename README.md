@@ -142,8 +142,8 @@ to create an API based on the spec.
 - [x] read path parameter
   - [x] requires it in param block
   - [x] specify it
-- [ ] handle query parameter -> check it
-- [ ] handle body parameter -> check it
+- [x] handle query parameter -> check it
+- [x] handle body parameter -> check it
 - [ ] add description block
 
 
