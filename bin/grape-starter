@@ -109,6 +109,8 @@ command :import do |c|
     created_files = Starter::Import.do_it!(path)
 
     `bundle exec rubocop --only Layout -a #{created_files.join(' ')}`
+  rescue => e
+    exit_now! e
   end
 end
 

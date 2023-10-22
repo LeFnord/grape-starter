@@ -2,7 +2,7 @@
 
 require 'rubygems'
 require 'bundler/setup'
-require 'active_support'
+require 'active_support/all'
 
 Bundler.require :default, ENV.fetch('RACK_ENV', nil)
 
