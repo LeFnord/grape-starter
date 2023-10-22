@@ -1,17 +1,23 @@
 ### NEXT
 
-- Ignores possible version segments in path. (#37) [LeFnord](https://github.com/LeFnord)
+- contributions
+
+### v2.0.0 / 2023-10-21 Imports OApi specs
+
+- [(#38)](https://github.com/LeFnord/grape-starter/pull/38) Handles nested body [LeFnord](https://github.com/LeFnord)
+- [(#38)](https://github.com/LeFnord/grape-starter/pull/38) Handle parameters from request body [LeFnord](https://github.com/LeFnord)
+- [(#37)](https://github.com/LeFnord/grape-starter/pull/37) Ignores possible version segments in path [LeFnord](https://github.com/LeFnord)
 - Sets min ruby to 3.1 [LeFnord](https://github.com/LeFnord)
-- Handle Parameters. (#36) [LeFnord](https://github.com/LeFnord)
+- [(#36)](https://github.com/LeFnord/grape-starter/pull/36) Handle Parameters [LeFnord](https://github.com/LeFnord)
 - Avoids duplicated mount points. [LeFnord](https://github.com/LeFnord)
 - Small code smells [LeFnord](https://github.com/LeFnord)
 - Sets next version to 2.0.0 [LeFnord](https://github.com/LeFnord)
-- Import OAPI spec. (#31) [LeFnord](https://github.com/LeFnord)
-- Fix for Dockerfile smell DL3020 (#35) [Giovanni Rosa](https://github.com/grosa1)
+- [(#31)](https://github.com/LeFnord/grape-starter/pull/31) Import OAPI spec [LeFnord](https://github.com/LeFnord)
+- Fix for Dockerfile smell DL3020 [#35](https://github.com/LeFnord/grape-starter/pull/35) [Giovanni Rosa](https://github.com/grosa1)
 
 ### v1.6.2 / 2023-03-12
 
-- Makes Names a class. (#34) [LeFnord](https://github.com/LeFnord)
+- [(#34)](https://github.com/LeFnord/grape-starter/pull/34) Makes Names a class [LeFnord](https://github.com/LeFnord)
 - Re-organises libe files. [LeFnord](https://github.com/LeFnord)
 - Minor clean up. [LeFnord](https://github.com/LeFnord)
 
@@ -19,9 +25,9 @@
 
 ### v1.6.0 / 2023-02-13
 
-- Replaces Thin by Puma. (#33) [LeFnord](https://github.com/LeFnord)
+- [(#33)](https://github.com/LeFnord/grape-starter/pull/33) Replaces Thin by Puma [LeFnord](https://github.com/LeFnord)
 - Minor lint fix. [LeFnord](https://github.com/LeFnord)
-- Uses Zeitwerk for loading. (#32) [LeFnord](https://github.com/LeFnord)
+- [(#32)](https://github.com/LeFnord/grape-starter/pull/32) Uses Zeitwerk for loading [LeFnord](https://github.com/LeFnord)
 
 ### v1.5.2 / 2023-02-11
 
@@ -73,7 +79,7 @@
 - Changes ruby.yml to use 2.7 [LeFnord](https://github.com/LeFnord)
 - Prepare release 1.2.4 [LeFnord](https://github.com/LeFnord)
 - Respects froozen string stuff. [LeFnord](https://github.com/LeFnord)
-- Updates Ruby and deps. (#23) [LeFnord](https://github.com/LeFnord)
+- [(#23)](https://github.com/LeFnord/grape-starter/pull/23) Updates Ruby and deps [LeFnord](https://github.com/LeFnord)
 - Create ruby.yml [LeFnord](https://github.com/LeFnord)
 
 - Fixes gems for sequel. [LeFnord](https://github.com/LeFnord)
@@ -82,7 +88,7 @@
 ### v1.2.3 / 2019-12-15
 
 - Removes require pry. [LeFnord](https://github.com/LeFnord) closes [!21](https://github.com/LeFnord/grape-starter/issues/21)
-- [#22](https://github.com/LeFnord/grape-starter/pull/22) - accomodate activerecord 6.0 (#22) [Ignacio Carrera](https://github.com/nachokb)
+- [#22](https://github.com/LeFnord/grape-starter/pull/22) - accomodate activerecord 6.0 [#22](https://github.com/LeFnord/grape-starter/pull/22) [Ignacio Carrera](https://github.com/nachokb)
 
 ### v1.2.2 / 2019-02-28
 
