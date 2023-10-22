@@ -25,3 +25,6 @@ Style/AsciiComments:
 
 Style/Documentation:
   Enabled: false
+
+Style/RedundantArrayConstructor:
+  Enabled: false

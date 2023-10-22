@@ -15,7 +15,7 @@ module Starter
       end
 
       def to_s
-        return serialized_object if nested.present?
+        return serialized_object if nested?
 
         serialized
       end
@@ -121,10 +121,16 @@ module Starter
         end
 
         parent = NestedParams.new(name: name, definition: definition)
-
         entry = "#{parent} do\n"
         nested.each { |n| entry << "    #{n}\n" }
         entry << '  end'
+        if entry.include?("format: 'binary', type: 'File'")
+          entry.sub!('type: JSON', 'type: Hash')
+          entry.sub!(", documentation: { in: 'body' }", '')
+          entry.gsub!(", in: 'body'", '')
+        end
+
+        entry
       end
 
       def serialized
@@ -149,7 +155,9 @@ module Starter
         @documentation ||= begin
           tmp = {}
           tmp['desc'] = definition['description'] if definition.key?('description')
-          tmp['in'] = definition['in'] if definition.key?('in') && !definition['format'] == 'binary'
+          if definition.key?('in') && !(definition['type'] == 'File' && definition['format'] == 'binary')
+            tmp['in'] = definition['in']
+          end
 
           if definition.key?('format')
             tmp['format'] = definition['format']
