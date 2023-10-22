@@ -13,4 +13,4 @@ tmp
 api/
 .vscode
 spec/fixtures/pmm.json
-spec/fixtures/arena.json
+spec/fixtures/nested.json

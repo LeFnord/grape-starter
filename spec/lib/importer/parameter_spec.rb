@@ -291,46 +291,141 @@ RSpec.describe Starter::Importer::Parameter do
         "requires :postApiV1CalibrationsCreating, type: JSON, documentation: { in: 'body' } do"
       )
       expect(subject.to_s).to include(
-        "requires :crop, type: String, documentation: { desc: 'The Crop of it.' }"
+        "requires :crop, type: String, documentation: { desc: 'The Crop of it.', in: 'body' }"
       )
       expect(subject.to_s).to include(
-        "requires :name, type: String, documentation: { desc: 'The Name of it.' }"
+        "requires :name, type: String, documentation: { desc: 'The Name of it.', in: 'body' }"
       )
       expect(subject.to_s).to include(
-        "optional :projects, type: Array[String], documentation: { desc: 'The project(s) of it.' }"
+        "optional :projects, type: Array[String], documentation: { desc: 'The project(s) of it.', in: 'body' }"
       )
       expect(subject.to_s).to include(
-        "optional :pools, type: Array[String], documentation: { desc: 'The pool(s) of it.' }"
+        "optional :pools, type: Array[String], documentation: { desc: 'The pool(s) of it.', in: 'body' }"
       )
       expect(subject.to_s).to include(
-        "optional :material_level, type: Array[String], documentation: { desc: 'The material level(s) of it.' }"
+        "optional :material_level, type: Array[String], documentation: { desc: 'The material level(s) of it.', in: 'body' }"
       )
       expect(subject.to_s).to include(
-        "optional :material_groups, type: Array[String], documentation: { desc: 'The material group(s) of it.' }"
+        "optional :material_groups, type: Array[String], documentation: { desc: 'The material group(s) of it.', in: 'body' }"
       )
       expect(subject.to_s).to include(
-        "optional :path, type: String, documentation: { desc: 'The path of it.' }"
+        "optional :path, type: String, documentation: { desc: 'The path of it.', in: 'body' }"
       )
       expect(subject.to_s).to include(
-        "optional :testers, type: Array[String], documentation: { desc: 'The tester(s) of it.' }"
+        "optional :testers, type: Array[String], documentation: { desc: 'The tester(s) of it.', in: 'body' }"
       )
       expect(subject.to_s).to include(
-        "optional :locations, type: Array[String], documentation: { desc: 'The location(s) of it.' }"
+        "optional :locations, type: Array[String], documentation: { desc: 'The location(s) of it.', in: 'body' }"
       )
       expect(subject.to_s).to include(
-        "optional :years, type: Array[Integer], documentation: { desc: 'The year(s) of it.' }"
+        "optional :years, type: Array[Integer], documentation: { desc: 'The year(s) of it.', in: 'body' }"
       )
       expect(subject.to_s).to include(
-        "optional :tags, type: Array[String], documentation: { desc: 'The tag(s) of it.' }"
+        "optional :tags, type: Array[String], documentation: { desc: 'The tag(s) of it.', in: 'body' }"
       )
       expect(subject.to_s).to include(
-        "optional :treatments, type: Array[String], documentation: { desc: 'The treatment(s) of it.' }"
+        "optional :treatments, type: Array[String], documentation: { desc: 'The treatment(s) of it.', in: 'body' }"
       )
       expect(subject.to_s).to include(
-        "optional :id, type: Integer, documentation: { desc: 'The ID of it (possible on back step, so editing is possible).', format: 'int32' }"
+        "optional :id, type: Integer, documentation: { desc: 'The ID of it (possible on back step, so editing is possible).', in: 'body', format: 'int32' }"
+      )
+    end
+  end
+
+  describe 'request body: nested object' do
+    let(:definition) do
+      {
+        'content' => {
+          'application/json' => {
+            'schema' => {
+              '$ref' => '#/components/schemas/ordered'
+            }
+          }
+        },
+        'required' => true
+      }
+    end
+
+    let(:components) do
+      {
+        'schemas' => {
+          'ordered' => {
+            'type' => 'object',
+            'properties' => {
+              'order' => {
+                'type' => 'object',
+                'properties' => {
+                  'facet' => {
+                    'type' => 'string',
+                    'default' => 'score',
+                    'enum' => %w[
+                      created_at
+                      updated_at
+                      random
+                    ]
+                  },
+                  'dir' => {
+                    'type' => 'string',
+                    'default' => 'asc',
+                    'enum' => %w[
+                      asc
+                      desc
+                    ]
+                  }
+                },
+                'description' => 'Specify result order'
+              },
+              'per_page' => {
+                'type' => 'integer',
+                'format' => 'int32',
+                'default' => 24
+              },
+              'page' => {
+                'type' => 'integer',
+                'format' => 'int32',
+                'default' => 1
+              },
+              'choose' => {
+                'type' => 'array',
+                'items' => {
+                  'type' => 'string',
+                  'enum' => %w[a b]
+                }
+              }
+            },
+            'description' => 'something nested body request'
+          }
+        }
+      }
+    end
+
+    specify do
+      expect(subject.name).to eql 'ordered'
+      expect(subject.definition.keys).to match_array %w[
+        required content in type
+      ]
+      expect(subject.definition['type']).to eql 'object'
+
+      expect(subject.to_s).to include(
+        "requires :ordered, type: JSON, documentation: { in: 'body' } do"
       )
       expect(subject.to_s).to include(
-        'end'
+        "optional :order, type: JSON, documentation: { desc: 'Specify result order', in: 'body' } do"
+      )
+      expect(subject.to_s).to include(
+        "optional :facet, type: String, documentation: { in: 'body' }"
+      )
+      expect(subject.to_s).to include(
+        "optional :dir, type: String, documentation: { in: 'body' }"
+      )
+      expect(subject.to_s).to include(
+        "optional :per_page, type: Integer, documentation: { in: 'body', format: 'int32' }"
+      )
+      expect(subject.to_s).to include(
+        "optional :page, type: Integer, documentation: { in: 'body', format: 'int32' }"
+      )
+      expect(subject.to_s).to include(
+        "optional :choose, type: Array[String], documentation: { in: 'body' }"
       )
     end
   end
