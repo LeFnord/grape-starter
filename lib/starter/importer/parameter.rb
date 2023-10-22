@@ -1,4 +1,4 @@
-# rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+# rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/ClassLength
 # frozen_string_literal: false
 
 module Starter
@@ -23,8 +23,6 @@ module Starter
       def nested?
         @nested.present?
       end
-
-      private
 
       # initialize helper
       #
@@ -51,7 +49,7 @@ module Starter
           end
         when :body
           definition['in'] = 'body'
-          schema = definition['content'].values.first['schema']
+          schema = definition['content'] ? definition['content'].values.first['schema'] : definition
           if schema.key?('$ref')
             path = schema['$ref'].split('/')[2..]
 
@@ -64,7 +62,7 @@ module Starter
         end
       end
 
-      def handle_body(definition:, properties:)
+      def handle_body(definition:, properties:) # rubocop:disable Metrics/MethodLength
         if simple_object?(properties:)
           name = properties['properties'].keys.first
           type = properties.dig('properties', name, 'type') || 'array'
@@ -79,25 +77,35 @@ module Starter
           definition['type'] = properties['type'].presence || 'JSON'
           return [nil, definition] if properties.nil? || properties['properties'].nil?
 
-          properties['properties'].each do |nested_name, definition|
-            definition['required'] = properties['required']&.include?(nested_name) || false
-            @nested << NestedParams.new(name: nested_name, definition:)
+          properties['properties'].each do |nested_name, nested_definition|
+            nested_definition['required'] =
+              properties['required'] ? properties['required'].include?(nested_name) : false
+            nested = NestedParams.new(name: nested_name, definition: nested_definition)
+            nested.prepare_attributes(definition: nested.definition, components: {})
+            nested.name = nested_name
+            @nested << nested
           end
-          [nil, definition]
+
+          [self.name, definition]
         else # others
-          [nil, definition.merge(properties)]
+          [nil, properties ? definition.merge(properties) : definition]
         end
       end
 
       # handle_body helper, check/find/define types
       #
       def object?(definition:)
-        definition['content'].keys.first.include?('application/json')
+        definition['type'] == 'object' ||
+          definition['content']&.keys&.first&.include?('application/json')
       end
 
       def simple_object?(properties:)
-        properties.key?('properties') &&
+        list_of_object?(properties:) &&
           properties['properties'].length == 1
+      end
+
+      def list_of_object?(properties:)
+        properties&.key?('properties')
       end
 
       # to_s helper
@@ -156,4 +164,4 @@ module Starter
   end
 end
 
-# rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+# rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/ClassLength
