@@ -1,7 +1,10 @@
 ### NEXT
 
-- [(#41)](https://github.com/LeFnord/grape-starter/pull/41) Adds generating of desc block [LeFnord](https://github.com/LeFnord)
 - contributions
+
+### v2.1.0 / 2023-10-21 Imports OApi specs
+
+- [(#41)](https://github.com/LeFnord/grape-starter/pull/41) Adds generating of desc block [LeFnord](https://github.com/LeFnord)
 
 ### v2.0.0 / 2023-10-21 Imports OApi specs
 
