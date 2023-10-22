@@ -145,6 +145,8 @@ module Starter
         entry = definition['required'] ? 'requires' : 'optional'
         entry << " :#{name}"
         entry << ", type: #{type}"
+        entry << ", default: '#{definition['default']}'" if definition.key?('default') && definition['default'].present?
+        entry << ", values: #{definition['enum'].map(&:to_s)}" if definition.key?('enum')
         doc = documentation
         entry << ", #{doc}" if doc
 

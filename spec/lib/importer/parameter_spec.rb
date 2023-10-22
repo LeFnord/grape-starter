@@ -232,8 +232,8 @@ RSpec.describe Starter::Importer::Parameter do
       expect(subject.definition.keys).to match_array %w[
         required content in type enum description example
       ]
-      expect(subject.to_s).to eql(
-        "requires :mark, type: String, documentation: { desc: 'Possible values for a board square. `.` means empty square.', in: 'body' }"
+      expect(subject.to_s).to include(
+        "requires :mark, type: String, values: [\".\", \"X\", \"O\"], documentation: { desc: 'Possible values for a board square. `.` means empty square.', in: 'body' }"
       )
     end
   end
@@ -413,16 +413,16 @@ RSpec.describe Starter::Importer::Parameter do
         "optional :order, type: JSON, documentation: { desc: 'Specify result order', in: 'body' } do"
       )
       expect(subject.to_s).to include(
-        "optional :facet, type: String, documentation: { in: 'body' }"
+        "optional :facet, type: String, default: 'score', values: [\"created_at\", \"updated_at\", \"random\"], documentation: { in: 'body' }"
       )
       expect(subject.to_s).to include(
-        "optional :dir, type: String, documentation: { in: 'body' }"
+        "optional :dir, type: String, default: 'asc', values: [\"asc\", \"desc\"], documentation: { in: 'body' }"
       )
       expect(subject.to_s).to include(
-        "optional :per_page, type: Integer, documentation: { in: 'body', format: 'int32' }"
+        "optional :per_page, type: Integer, default: '24', documentation: { in: 'body', format: 'int32' }"
       )
       expect(subject.to_s).to include(
-        "optional :page, type: Integer, documentation: { in: 'body', format: 'int32' }"
+        "optional :page, type: Integer, default: '1', documentation: { in: 'body', format: 'int32' }"
       )
       expect(subject.to_s).to include(
         "optional :choose, type: Array[String], documentation: { in: 'body' }"
