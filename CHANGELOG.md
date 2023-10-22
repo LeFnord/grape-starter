@@ -1,10 +1,11 @@
 ### NEXT
 
+- [(#41)](https://github.com/LeFnord/grape-starter/pull/41) Adds generating of desc block [LeFnord](https://github.com/LeFnord)
 - contributions
 
 ### v2.0.0 / 2023-10-21 Imports OApi specs
 
-- [(#38)](https://github.com/LeFnord/grape-starter/pull/38) Handles nested body [LeFnord](https://github.com/LeFnord)
+- [(#39)](https://github.com/LeFnord/grape-starter/pull/39) Handles nested body [LeFnord](https://github.com/LeFnord)
 - [(#38)](https://github.com/LeFnord/grape-starter/pull/38) Handle parameters from request body [LeFnord](https://github.com/LeFnord)
 - [(#37)](https://github.com/LeFnord/grape-starter/pull/37) Ignores possible version segments in path [LeFnord](https://github.com/LeFnord)
 - Sets min ruby to 3.1 [LeFnord](https://github.com/LeFnord)

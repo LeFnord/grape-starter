@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/AbcSize
 # frozen_string_literal: false
 
 module Starter
@@ -39,10 +40,13 @@ module Starter
           verbs.keys.each_with_object([]) do |verb, memo|
             next unless allowed_verbs.include?(verb)
 
+            memo << verbs[verb]['describe'].to_s if verbs[verb]['describe'].present?
+
             if (parameters = verbs[verb]['parameters'].presence)
               params_block = params_block(parameters)
               memo << params_block
             end
+
             memo << "#{verb} '#{segment}' do\n  # your code comes here\nend\n"
           end
         end
@@ -71,3 +75,5 @@ module Starter
     end
   end
 end
+
+# rubocop:enable Metrics/AbcSize

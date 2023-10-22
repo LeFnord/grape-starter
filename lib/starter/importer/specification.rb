@@ -58,7 +58,9 @@ module Starter
           memo[verb] = content
           next unless content.key?('parameters') || content.key?('requestBody') || path_params
 
-          parameters = ((content['parameters'] || path_params || []) + [content['requestBody']]).compact
+          parameters = ((content.delete('parameters') || path_params || []) + [content.delete('requestBody')]).compact
+
+          memo[verb]['describe'] = Description.new(content: content.except('responses'))
 
           memo[verb]['parameters'] = parameters.each_with_object({}) do |definition, para|
             parameter = Parameter.new(definition:, components:)
