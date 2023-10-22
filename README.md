@@ -144,7 +144,7 @@ to create an API based on the spec.
   - [x] specify it
 - [x] handle query parameter -> check it
 - [x] handle body parameter -> check it
-- [ ] add description block
+- [x] add description block
 
 
 ### Remove a resource
