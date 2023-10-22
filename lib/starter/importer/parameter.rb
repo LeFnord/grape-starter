@@ -78,8 +78,7 @@ module Starter
           return [nil, definition] if properties.nil? || properties['properties'].nil?
 
           properties['properties'].each do |nested_name, nested_definition|
-            nested_definition['required'] =
-              properties['required'] ? properties['required'].include?(nested_name) : false
+            nested_definition['required'] = required?(properties, nested_name)
             nested = NestedParams.new(name: nested_name, definition: nested_definition)
             nested.prepare_attributes(definition: nested.definition, components: {})
             nested.name = nested_name
@@ -106,6 +105,12 @@ module Starter
 
       def list_of_object?(properties:)
         properties&.key?('properties')
+      end
+
+      def required?(property, name)
+        return false unless property['required']
+
+        property['required'].is_a?(Array) ? property['required'].include?(name) : property['required']
       end
 
       # to_s helper
@@ -144,7 +149,7 @@ module Starter
         @documentation ||= begin
           tmp = {}
           tmp['desc'] = definition['description'] if definition.key?('description')
-          tmp['in'] = definition['in'] if definition.key?('in')
+          tmp['in'] = definition['in'] if definition.key?('in') && !definition['format'] == 'binary'
 
           if definition.key?('format')
             tmp['format'] = definition['format']
