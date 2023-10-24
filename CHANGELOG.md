@@ -2,6 +2,10 @@
 
 - contributions
 
+### v2.1.1 / 2023-10-24
+
+- [(#43)](https://github.com/LeFnord/grape-starter/pull/43) Fixes desc generation if now useful prop is in content [LeFnord](https://github.com/LeFnord)
+
 ### v2.1.0 / 2023-10-21 Imports OApi specs
 
 - [(#41)](https://github.com/LeFnord/grape-starter/pull/41) Adds generating of desc block [LeFnord](https://github.com/LeFnord)
