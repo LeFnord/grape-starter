@@ -2,6 +2,11 @@
 
 - contributions
 
+### v2.1.2 / 2023-10-30
+
+- [(#45)](https://github.com/LeFnord/grape-starter/pull/45) Corrects AR file name, to load correct. [LeFnord](https://github.com/LeFnord)
+
+
 ### v2.1.1 / 2023-10-24
 
 - [(#43)](https://github.com/LeFnord/grape-starter/pull/43) Fixes desc generation if now useful prop is in content [LeFnord](https://github.com/LeFnord)
