@@ -36,21 +36,18 @@ module Starter
           adapter: #{adapter}
           encoding: unicode
           timeout: 5000
-          user: postgres
           database: #{@name}_development
 
         test:
           adapter: #{adapter}
           encoding: unicode
           timeout: 5000
-          user: postgres
           database: #{@name}_test
 
         production:
           adapter: #{adapter}
           encoding: unicode
           timeout: 5000
-          user: postgres
           database: #{@name}_production
         FILE
       end

@@ -46,12 +46,12 @@ module Starter
               def call(env)
                 response = @app.call(env)
                 response[2] = ::Rack::BodyProxy.new(response[2]) do
-                  ActiveRecord::Base.clear_active_connections!
+                  ActiveRecord::Base.connection_handler.clear_active_connections!
                 end
 
                 return response
               rescue StandardError
-                ActiveRecord::Base.clear_active_connections!
+                ActiveRecord::Base.connection_handler.clear_active_connections!
                 raise
               end
             end
