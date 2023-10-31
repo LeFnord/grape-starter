@@ -26,7 +26,7 @@ module Starter
         logger = if %w[development test].include? env
                   log_dir = File.join(Dir.getwd, 'log')
                   log_file = File.join(log_dir, 'db.log')
-                  FileUtils.mkdir(log_dir) unless Dir.exist?(log_dir)
+                  FileUtils.mkdir_p(log_dir)
                   Logger.new(File.open(log_file, 'a'))
                 else
                   Logger.new($stdout)
@@ -46,12 +46,12 @@ module Starter
               def call(env)
                 response = @app.call(env)
                 response[2] = ::Rack::BodyProxy.new(response[2]) do
-                  ActiveRecord::Base.clear_active_connections!
+                  ActiveRecord::Base.connection_handler.clear_active_connections!
                 end
 
                 return response
               rescue StandardError
-                ActiveRecord::Base.clear_active_connections!
+                ActiveRecord::Base.connection_handler.clear_active_connections!
                 raise
               end
             end
