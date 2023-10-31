@@ -26,7 +26,7 @@ module Starter
         logger = if %w[development test].include? env
                   log_dir = File.join(Dir.getwd, 'log')
                   log_file = File.join(log_dir, 'db.log')
-                  FileUtils.mkdir(log_dir) unless Dir.exist?(log_dir)
+                  FileUtils.mkdir_p(log_dir)
                   Logger.new(File.open(log_file, 'a'))
                 else
                   Logger.new($stdout)
