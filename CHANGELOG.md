@@ -2,6 +2,10 @@
 
 - contributions
 
+### v2.1.3 / 2023-10-31
+
+- [(#47)](https://github.com/LeFnord/grape-starter/pull/47) Minor Fixes. [LeFnord](https://github.com/LeFnord)
+
 ### v2.1.2 / 2023-10-30
 
 - [(#45)](https://github.com/LeFnord/grape-starter/pull/45) Corrects AR file name, to load correct. [LeFnord](https://github.com/LeFnord)
