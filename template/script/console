@@ -1,4 +1,9 @@
 #!/usr/bin/env ruby
+
+ENV['RACK_ENV'] = 'development'
+
+require File.expand_path('../config/application', __dir__)
+
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 
 require 'bundler/setup'
