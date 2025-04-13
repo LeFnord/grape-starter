@@ -5,7 +5,7 @@ source 'http://rubygems.org'
 gemspec
 
 group :development, :test do
-  gem 'grape', '~> 1.5'
+  gem 'grape'
   gem 'pry', require: false
   gem 'pry-byebug', require: false
   gem 'rack-cors', require: false

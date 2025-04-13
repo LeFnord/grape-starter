@@ -95,7 +95,7 @@ module Starter
       #
       def object?(definition:)
         definition['type'] == 'object' ||
-          definition['content']&.keys&.first&.include?('application/json')
+          definition['content']&.keys&.first&.include?('application/json') # rubocop:disable Style/SafeNavigationChainLength
       end
 
       def simple_object?(properties:)
@@ -135,7 +135,7 @@ module Starter
 
       def serialized
         type = definition['type'] || definition['schema']['type']
-        type.scan(/\w+/).each { |x| type.match?('JSON') ? type : type.sub!(x, x.capitalize) }
+        type.scan(/\w+/).each { |x| type.match?('JSON') ? type : type.sub!(x, x.capitalize) } # rubocop:disable Lint/Void
 
         if type == 'Array' && definition.key?('items')
           sub = definition.dig('items', 'type').to_s.capitalize
