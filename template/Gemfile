@@ -12,7 +12,7 @@ gem 'rack'
 gem 'rack-cors'
 
 # API stuff
-gem 'grape'
+gem 'grape', '~> 2.0'
 gem 'grape-entity'
 gem 'grape-swagger'
 gem 'grape-swagger-entity'
