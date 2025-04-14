@@ -2,6 +2,12 @@
 
 - contributions
 
+### v3.0.0 / 2025-04-14
+
+
+- [(bb23d)](https://github.com/LeFnord/grape-starter/commit/bb23d62cbd04b445c616565c6788b28cde03507c) Updates grape requirement to ~> 2.0 [LeFnord](https://github.com/LeFnord)
+- [(#50)](https://github.com/LeFnord/grape-starter/pull/50) Adds Ruby 3.4, drops 3.1 [LeFnord](https://github.com/LeFnord)
+
 ### v2.1.3 / 2023-10-31
 
 - [(#47)](https://github.com/LeFnord/grape-starter/pull/47) Minor Fixes. [LeFnord](https://github.com/LeFnord)
