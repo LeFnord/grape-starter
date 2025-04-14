@@ -2,10 +2,13 @@
 
 source 'http://rubygems.org'
 
+# moved from StdLib to gems
+gem 'ostruct', require: false
+
 # Server stuff
 gem 'puma'
 
-gem 'rack', '< 3.0'
+gem 'rack'
 gem 'rack-cors'
 
 # API stuff

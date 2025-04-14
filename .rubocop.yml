@@ -15,8 +15,8 @@ AllCops:
     - api/**/*
   UseCache: true
   NewCops: enable
-  TargetRubyVersion: 3.2
   SuggestExtensions: false
+  TargetRubyVersion: 3.4
 
 Layout/IndentationWidth:
   Exclude:

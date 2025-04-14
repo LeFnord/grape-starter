@@ -2,7 +2,6 @@
 
 require 'starter'
 
-require 'grape'
 require 'rspec_command'
 
 Dir['./spec/support/**/*.rb'].each { |f| require f }
