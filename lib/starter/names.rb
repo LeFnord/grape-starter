@@ -61,9 +61,11 @@ module Starter
       case Starter::Config.read[:orm]
       when 'sequel'
         extend(Starter::Builder::Sequel)
+
         "#{klass_name} < #{model_klass}"
       when 'activerecord', 'ar'
         extend(Starter::Builder::ActiveRecord)
+
         "#{klass_name} < #{model_klass}"
       else
         klass_name
