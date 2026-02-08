@@ -10,6 +10,7 @@ Dir["#{grape_starter_gem}/lib/starter/rspec/**/*.rb"].each { |f| require f }
 
 RSpec.configure do |config|
   include Rack::Test::Methods
+
   config.color = true
   config.formatter = :documentation
 
